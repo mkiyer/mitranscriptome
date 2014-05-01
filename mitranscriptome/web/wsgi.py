@@ -1,6 +1,11 @@
 # load enthought python distribution
 PYTHON_ENV = '/mitranscriptome/venv/bin/activate_this.py'
-execfile(PYTHON_ENV, dict(__file__=PYTHON_ENV))
+
+lines = []
+for line in open(PYTHON_ENV):
+    lines.append(line)
+
+#execfile(PYTHON_ENV, dict(__file__=PYTHON_ENV))
 
 # prepend website python packages to python path
 import sys
@@ -12,7 +17,8 @@ for pkg in PACKAGES:
 
 def application(environ, start_response):
     status = '200 OK'
-    output = 'Hello World!'
+    output = '\n'.join(lines)
+    #output = 'Hello World!'
 
     response_headers = [('Content-type', 'text/plain'),
                         ('Content-Length', str(len(output)))]
