@@ -13,14 +13,14 @@ import sys
 for pkg in PACKAGES:
     sys.path.insert(0, pkg)
 
-#from web import app as application
+from web import app as application
 
-def application(environ, start_response):
-    status = '200 OK'
-    output = 'Hello World!'
-
-    response_headers = [('Content-type', 'text/plain'),
-                        ('Content-Length', str(len(output)))]
-    start_response(status, response_headers)
-
-    return [output]
+#def application(environ, start_response):
+#    status = '200 OK'
+#    output = 'Hello World!'
+#
+#    response_headers = [('Content-type', 'text/plain'),
+#                        ('Content-Length', str(len(output)))]
+#    start_response(status, response_headers)
+#
+#    return [output]
