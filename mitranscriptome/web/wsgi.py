@@ -1,12 +1,12 @@
-# prepend to system path
-#import sys
+# load enthought python distribution
+PYTHON_ENV = '/mitranscriptome/venv/bin/activate_this.py'
+execfile(PYTHON_ENV, dict(__file__=PYTHON_ENV))
 
-#CANOPY_DIR = '/mitranscriptome/sw/canopy'
-#PROJECT_DIR = '/mitranscriptome/www/mitranscriptome'
-
-#sys.path.insert(0, PROJECT_DIR)
-
-#print >>sys.stderr, 'TEST TEST TEST'
+# prepend website python packages to python path
+import sys
+PACKAGES = ['/var/www/html/mitranscriptome/mitranscriptome']
+for pkg in PACKAGES:
+    sys.path.insert(0, pkg)
 
 #from web import app as application
 
