@@ -1,15 +1,18 @@
-# load enthought python distribution
-PYTHON_ENV = '/mitranscriptome/venv/bin/activate_this.py'
 
+# user must set these values
+PYTHON_ENV = '/var/www/html/venv/bin/activate_this.py'
+PACKAGES = ['/var/www/html/mitranscriptome/mitranscriptome']
+
+###############################################
+
+# load enthought python distribution
 lines = []
 for line in open(PYTHON_ENV):
     lines.append(line)
-
 #execfile(PYTHON_ENV, dict(__file__=PYTHON_ENV))
 
 # prepend website python packages to python path
 import sys
-PACKAGES = ['/var/www/html/mitranscriptome/mitranscriptome']
 for pkg in PACKAGES:
     sys.path.insert(0, pkg)
 
