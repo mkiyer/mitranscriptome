@@ -1,3 +1,11 @@
+'''
+MiTranscriptome web server
+
+@author: mkiyer
+@author: yniknafs
+
+@version: 0.0.1
+'''
 from flask import Flask
 app = Flask(__name__)
 
