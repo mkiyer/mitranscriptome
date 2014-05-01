@@ -6,10 +6,7 @@ PACKAGES = ['/var/www/html/mitranscriptome/mitranscriptome']
 ###############################################
 
 # load enthought python distribution
-lines = []
-for line in open(PYTHON_ENV):
-    lines.append(line)
-#execfile(PYTHON_ENV, dict(__file__=PYTHON_ENV))
+execfile(PYTHON_ENV, dict(__file__=PYTHON_ENV))
 
 # prepend website python packages to python path
 import sys
@@ -20,8 +17,7 @@ for pkg in PACKAGES:
 
 def application(environ, start_response):
     status = '200 OK'
-    output = '\n'.join(lines)
-    #output = 'Hello World!'
+    output = 'Hello World!'
 
     response_headers = [('Content-type', 'text/plain'),
                         ('Content-Length', str(len(output)))]
