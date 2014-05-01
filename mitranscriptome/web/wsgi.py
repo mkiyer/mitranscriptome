@@ -5,7 +5,7 @@ import os
 PYTHON_ROOT = '/var/www/html/sw/epd-7.3-2-rh5-x86_64'
 PYTHON_BIN = os.path.join(PYTHON_ROOT, 'bin')
 PYTHON_SITE_PACKAGES = os.path.join(PYTHON_ROOT, 'lib/python2.7/site-packages')
-APP_ROOT = ['/var/www/html/mitranscriptome/mitranscriptome']
+APP_ROOT = '/var/www/html/mitranscriptome/mitranscriptome'
 
 ###############################################
 
