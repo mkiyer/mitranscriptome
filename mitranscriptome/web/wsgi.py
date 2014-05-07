@@ -1,18 +1,13 @@
 import sys
 import os
 
-def application(environ, start_response):
-    status = '200 OK'
-    output = 'Hello World!'
+# prepend website python packages to python path
+APP_ROOT = '/var/www/html/mitranscriptome/mitranscriptome'
+sys.path.insert(0, APP_ROOT)
 
-    response_headers = [('Content-type', 'text/plain'),
-                        ('Content-Length', str(len(output)))]
-    start_response(status, response_headers)
-
-    print >> sys.stderr, 'sys.prefix = %s' % repr(sys.prefix)
-    print >> sys.stderr, 'sys.path = %s' % repr(sys.path)
-
-    return [output]
+# load application module
+from web.app import application
+#from web import app as application
 
 # def application(environ, start_response):
 #     status = '200 OK'
@@ -28,7 +23,6 @@ def application(environ, start_response):
 # PYTHON_ROOT = '/var/www/html/sw/epd-7.3-2-rh5-x86_64'
 # PYTHON_BIN = os.path.join(PYTHON_ROOT, 'bin')
 # PYTHON_SITE_PACKAGES = os.path.join(PYTHON_ROOT, 'lib/python2.7/site-packages')
-# APP_ROOT = '/var/www/html/mitranscriptome/mitranscriptome'
 # 
 # ###############################################
 # 
@@ -48,9 +42,5 @@ def application(environ, start_response):
 #         sys.path.remove(item)
 # sys.path[:0] = new_sys_path
 
-# prepend website python packages to python path
-#sys.path.insert(0, APP_ROOT)
 
-# load application module
-#from web import app as application
 
