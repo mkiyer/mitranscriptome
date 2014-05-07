@@ -7,7 +7,7 @@ sys.path.insert(0, APP_ROOT)
 
 # load application module
 #from web.app import application
-from web import app as application
+from web.app import app as application
 
 # def application(environ, start_response):
 #     status = '200 OK'
