@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/BlockM.ico') }}">
+    <title>MiTranscriptome</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap-responsive.css') }}" rel="stylesheet">
+
+    <!-- Custom CSS for this template-->
+    <link href="{{ url_for('static', filename='css/navbar-fixed-top.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
+
+     <!-- data-main attribute tells require.js to load
+          scripts/main.js after require.js loads. -->
+     <script data-main="{{ url_for('static', filename='scripts/main') }}" src="{{ url_for('static', filename='scripts/libs/require.js') }}"></script>
+     
+     <!-- anirban toggle functions -->
+     <script src="{{ url_for('static', filename='scripts/custom.js') }}"></script>
+  </head>
+  <body>
+
+    <!-- Fixed horizontal navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="glyphicon glyphicon-home" href="/"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" data-toggle="modal" data-target="#myModal_Help">Help</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#myModal_About">About</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#myModal_Contact">Contact</a></li>
+        </div>
+      </div><!--/.container -->
+    </div><!--/.navbar -->
+
+    <div class="modal fade" id="myModal_Help" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_Help" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel_Help">Help</h4>
+          </div>
+          <div class="modal-body">
+            We are sorry you are having trouble. Please try one of the following links for assistance:
+          </div>
+            <ul>
+              <li><a href="#">Google Forum</a></li>
+              <li><a href="#">SSEA Source Code</a></li>
+              <li><a href="#">AssemblyLine Source Code</a></li>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="myModal_About" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_About" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel_About">About</h4>
+          </div>
+          <div class="modal-body">
+            MiTranscriptome was developed at the Michigan Center for Translational Pathology at the University of Michigan.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="myModal_Contact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_Contact" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel_Contact">Contact</h4>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <li>Arul Chinnaiyan: arul@umich.edu</a></li>
+              <li>Matthew Iyer: mkiyer@umich.edu</a></li>
+              <li>Yashar Niknafs: yniknafs@umich.edu</a></li>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Fixed vertical navbar -->
+    <div class="container bs-docs-container">
+      <div class="row">
+        <div class="col-md-2" id="fix" >
+          <div class="bs-sidebar hidden-print" role="complementary">
+            <ul class="nav bs-sidenav">
+              <li id="Choose_Study_Btn"><a href="#Choose_Study" onclick="toggle_off('Home');toggle_off('Methods');toggle_off('Downloads');toggle_off('LATs');toggle_off('CATs');toggle_off('CLATs');toggle_on('Choose_Study')">Choose Study</a></li>
+              <li id="Methods_Btn"><a href="#Methods" onclick="toggle_off('Home');toggle_off('Choose_Study');toggle_off('Downloads');toggle_off('LATs');toggle_off('CATs');toggle_off('CLATs');toggle_on('Methods')">Methods</a></li>
+              <li id="Downloads_Btn"><a href="#Downloads" onclick="toggle_off('Home');toggle_off('Choose_Study');toggle_off('Methods');toggle_off('LATs');toggle_off('CATs');toggle_off('CLATs');toggle_on('Downloads')">Downloads</a></li>
+          </div>
+        </div>
+      </div>
+    </div><!--/Vertical Nav Bar -->
+
+    <!-- Main Component -->
+    <div class="container">
+      <div class="col-md-10 col-md-offset-2" role="main">
+        <div id="Home" class="jumbotron">
+          <h1>Welcome to MiTranscriptome!</h1>
+          <p>MiTranscriptome is a comprehensive tool that allows researchers to study gene expression across multiple cancer-related sample sets, providing powerful insight into the cancer transcriptome.
+          </p>
+          <p><a class="btn btn-lg btn-primary" href="#" role="button" onclick="toggle_off('Home');toggle_on('Choose_Study')">Get Started &raquo;</a></p>
+        </div><!-- /Home Screen -->
+
+
+        <div id="Choose_Study" class="toshow jumbotron">
+          <a type="button" class="close" onclick="toggle_off('Choose_Study');toggle_on('Home')">&times;</a>
+          <h1>Choose a study:</h1>
+          <p>Our analysis has identified Lineage-Associated Transcripts (LATs), Cancer-Associated Transcripts (CATs), and a combination of Cancer- and Lineage-Associated Transcripts (CLATs). Please choose the transcript type you would like to study.
+          </p>
+          <p1>
+            <a class="btn btn-lg btn-primary" href="#" role="button" onclick="toggle_off('Choose_Study');toggle_on('LATs')">LATs &raquo;</a>
+            <a class="btn btn-lg btn-primary" href="#" role="button" onclick="toggle_off('Choose_Study');toggle_on('CATs')">CATs &raquo;</a>
+            <a class="btn btn-lg btn-primary" href="#" role="button" onclick="toggle_off('Choose_Study');toggle_on('CLATs')">CLATs &raquo;</a>
+          </p1>
+        </div><!-- /Choose Study -->
+
+
+        <div id="Methods" class="toshow jumbotron">
+          <a type="button" class="close" onclick="toggle_off('Methods');toggle_on('Home')">&times;</a>
+          <h1>Methods</h1>
+          <p>Show methods here.
+          </p>
+        </div><!-- /Search by sample set -->
+
+        <div id="Downloads" class="toshow jumbotron">
+          <a type="button" class="close" onclick="toggle_off('Downloads');toggle_on('Home')">&times;</a>
+          <h1>Downloads</h1>
+          <p>Downloads available here.
+          </p>
+        </div><!-- /View Downloads -->
+
+        <div id="LATs" class="toshow jumbotron">
+          <a type="button" class="close" onclick="toggle_off('LATs');toggle_on('Choose_Study')">&times;</a>
+          <h1>Lineage-associated transcripts (LATs)</h1>
+          <p>Choose a lineage below:
+          </p>
+            <div class="btn-group btn-group-justified">
+              <a href="#" class="btn btn-primary">Breast</a>
+              <a href="#" class="btn btn-primary">Middle</a>
+              <a href="#" class="btn btn-success">Right</a>
+              <a href="#" class="btn btn-info">Left</a>
+              <a href="#" class="btn btn-warning">Middle</a>
+              <a href="#" class="btn btn-danger">Right</a>
+            </div>
+            <div class="btn-group btn-group-justified">
+              <a href="#" class="btn btn-default">Left</a>
+              <a href="#" class="btn btn-default">Middle</a>
+              <a href="#" class="btn btn-default">Right</a>
+              <a href="#" class="btn btn-default">Left</a>
+              <a href="#" class="btn btn-default">Middle</a>
+              <a href="#" class="btn btn-default">Right</a>
+            </div>
+            <div class="btn-group btn-group-justified">
+              <a href="#" class="btn btn-default">Left</a>
+              <a href="#" class="btn btn-default">Middle</a>
+              <a href="#" class="btn btn-default">Right</a>
+              <a href="#" class="btn btn-default">Left</a>
+              <a href="#" class="btn btn-default">Middle</a>
+              <a href="#" class="btn btn-default">Right</a>
+            </div>
+        </div><!-- /Search by LATs -->
+
+        <div id="CATs" class="toshow jumbotron">
+          <a type="button" class="close" onclick="toggle_off('CATs');toggle_on('Choose_Study')">&times;</a>
+          <h1>CATs</h1>
+          <p>CAT-Associated Stuff
+          </p>
+        </div><!-- /Search by CATs -->
+
+        <div id="CLATs" class="toshow jumbotron">
+          <a type="button" class="close" onclick="toggle_off('CLATs');toggle_on('Choose_Study')">&times;</a>
+          <h1>CLATs</h1>
+          <p>CLAT-Associated Stuff
+          </p>
+        </div><!-- /Search by CLATs -->                
+
+      </div><!-- /col-md-10 -->
+    </div> <!-- /container -->
+
+  </body>
+</html>
