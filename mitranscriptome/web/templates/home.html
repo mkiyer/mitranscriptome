@@ -105,9 +105,9 @@
         <div class="col-md-2" id="fix" >
           <div class="bs-sidebar hidden-print" role="complementary">
             <ul class="nav bs-sidenav">
-              <li id="Choose_Study_Btn"><a href="#Choose_Study" onclick="toggle_off('Home');toggle_off('Methods');toggle_off('Downloads');toggle_off('LATs');toggle_off('CATs');toggle_off('CLATs');toggle_on('Choose_Study')">Choose Study</a></li>
-              <li id="Methods_Btn"><a href="#Methods" onclick="toggle_off('Home');toggle_off('Choose_Study');toggle_off('Downloads');toggle_off('LATs');toggle_off('CATs');toggle_off('CLATs');toggle_on('Methods')">Methods</a></li>
-              <li id="Downloads_Btn"><a href="#Downloads" onclick="toggle_off('Home');toggle_off('Choose_Study');toggle_off('Methods');toggle_off('LATs');toggle_off('CATs');toggle_off('CLATs');toggle_on('Downloads')">Downloads</a></li>
+              <li id="Choose_Study_Btn"><a href="#Choose_Study">Choose Study</a></li>
+              <li id="Methods_Btn"><a href="#Methods">Methods</a></li>
+              <li id="Downloads_Btn"><a href="#Downloads">Downloads</a></li>
           </div>
         </div>
       </div>
@@ -118,11 +118,9 @@
       <div class="col-md-10 col-md-offset-2" role="main">
         <div id="Home" class="jumbotron">
           <h1>Welcome to MiTranscriptome!</h1>
-          <p>MiTranscriptome is a comprehensive tool that allows researchers to study gene expression across multiple cancer-related sample sets, providing powerful insight into the cancer transcriptome.
-          </p>
+          <p>MiTranscriptome is a comprehensive tool that allows researchers to study gene expression across multiple cancer-related sample sets, providing powerful insight into the cancer transcriptome.</p>
           <p><a class="btn btn-lg btn-primary" href="#" role="button" onclick="toggle_off('Home');toggle_on('Choose_Study')">Get Started &raquo;</a></p>
         </div><!-- /Home Screen -->
-
 
         <div id="Choose_Study" class="toshow jumbotron">
           <a type="button" class="close" onclick="toggle_off('Choose_Study');toggle_on('Home')">&times;</a>
@@ -135,7 +133,6 @@
             <a class="btn btn-lg btn-primary" href="#" role="button" onclick="toggle_off('Choose_Study');toggle_on('CLATs')">CLATs &raquo;</a>
           </p1>
         </div><!-- /Choose Study -->
-
 
         <div id="Methods" class="toshow jumbotron">
           <a type="button" class="close" onclick="toggle_off('Methods');toggle_on('Home')">&times;</a>
@@ -195,6 +192,13 @@
           <p>CLAT-Associated Stuff
           </p>
         </div><!-- /Search by CLATs -->                
+
+        <div id="div-selected-transcripts" class="jumbotron">
+          <a id="btn-close-transcripts" type="button" class="close">&times;</a>
+          <h3>Selected Transcripts:</h3>
+          <div id="div-transcript-table"></div>
+          <p></p>
+        </div><!-- /Display table of transcripts -->
 
       </div><!-- /col-md-10 -->
     </div> <!-- /container -->

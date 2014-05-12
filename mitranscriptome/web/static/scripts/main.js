@@ -10,7 +10,9 @@ requirejs.config({
         'underscore': 'libs/underscore-min',
         'backbone': 'libs/backbone-min',
         'd3': 'libs/d3.v3.min',
-        'bootstrap': '../bootstrap/js/bootstrap.min'
+        'bootstrap': '../bootstrap/js/bootstrap.min',
+        'domReady': 'libs/domReady',
+        'text': 'libs/text'
     },
     
     shim: {
@@ -27,7 +29,8 @@ requirejs.config({
         	exports: 'd3'
         },
         'bootstrap': {
-            deps: ['jquery']
+            deps: ['jquery'],
+            exports: "$.fn.popover"
         }
     }    
 });

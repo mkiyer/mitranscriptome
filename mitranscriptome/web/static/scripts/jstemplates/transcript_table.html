@@ -1,0 +1,29 @@
+<table class="table table-hover">
+<thead>
+<tr>
+<td>Transcript ID</td>
+<td>Gene ID</td>
+<td>Chrom</td>
+<td>Start</td>
+<td>End</td>
+<td>Strand</td>
+<td>Annotated / Unannotated</td>
+<td>Intergenic / Intragenic</td>
+</tr>
+</thead>
+<tbody>
+<% for(var i=0; i < transcriptCollection.length; i++) { %>
+<% var t = transcriptCollection.at(i); %>
+<tr>
+  <td><%= t.get('transcript_id') %></td>
+  <td><%= t.get('gene_id') %></td>
+  <td><%= t.get('chrom') %></td>
+  <td><%= t.get('start') %></td>
+  <td><%= t.get('end') %></td>
+  <td><%= t.get('strand') %></td>
+  <td><%= t.get('tstatus') %></td>
+  <td><%= t.get('tgenic') %></td>
+</tr>
+<% } %>
+</tbody>
+</table>
