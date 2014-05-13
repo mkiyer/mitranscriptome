@@ -103,8 +103,9 @@
     <div class="container bs-docs-container">
       <div class="row">
         <div class="col-md-2" id="fix" >
-          <div class="bs-sidebar hidden-print" role="complementary">
-            <ul class="nav bs-sidenav">
+          <!--  <div class="bs-sidebar hidden-print" role="complementary">-->
+          <ul class="nav nav-pills nav-stacked">
+            <!-- <ul class="nav bs-sidenav">  -->
               <li id="Choose_Study_Btn"><a href="#Choose_Study">Choose Study</a></li>
               <li id="Methods_Btn"><a href="#Methods">Methods</a></li>
               <li id="Downloads_Btn"><a href="#Downloads">Downloads</a></li>
@@ -124,7 +125,7 @@
 
         <div id="Choose_Study" class="toshow jumbotron">
           <a type="button" class="close" onclick="toggle_off('Choose_Study');toggle_on('Home')">&times;</a>
-          <h1>Choose a study:</h1>
+          <h2><strong>Choose a study:</strong></h2>
           <p>Our analysis has identified Lineage-Associated Transcripts (LATs), Cancer-Associated Transcripts (CATs), and a combination of Cancer- and Lineage-Associated Transcripts (CLATs). Please choose the transcript type you would like to study.
           </p>
           <p1>
@@ -150,47 +151,137 @@
 
         <div id="LATs" class="toshow jumbotron">
           <a type="button" class="close" onclick="toggle_off('LATs');toggle_on('Choose_Study')">&times;</a>
-          <h1>Lineage-associated transcripts (LATs)</h1>
+          <h2><strong>Lineage-associated transcripts (LATs)</strong></h2>
           <p>Choose a lineage below:
           </p>
             <div class="btn-group btn-group-justified">
-              <a href="#" class="btn btn-primary">Breast</a>
-              <a href="#" class="btn btn-primary">Middle</a>
-              <a href="#" class="btn btn-success">Right</a>
-              <a href="#" class="btn btn-info">Left</a>
-              <a href="#" class="btn btn-warning">Middle</a>
-              <a href="#" class="btn btn-danger">Right</a>
+              <a href="#" class="btn btn-default">AML</a>
+              <a href="#" class="btn btn-default">Bladder (Ca)</a>
+              <a href="#" class="btn btn-default">Bladder</a>
+              <a href="#" class="btn btn-default">Breast (Ca)</a>
+              <a href="#" class="btn btn-default">Breast</a>
+              <a href="#" class="btn btn-default">Cervix (Ca)</a>
             </div>
             <div class="btn-group btn-group-justified">
-              <a href="#" class="btn btn-default">Left</a>
-              <a href="#" class="btn btn-default">Middle</a>
-              <a href="#" class="btn btn-default">Right</a>
-              <a href="#" class="btn btn-default">Left</a>
-              <a href="#" class="btn btn-default">Middle</a>
-              <a href="#" class="btn btn-default">Right</a>
+              <a href="#" class="btn btn-default">CML</a>
+              <a href="#" class="btn btn-default">Colorect. (Ca)</a>
+              <a href="#" class="btn btn-default">GBM</a>
+              <a href="#" class="btn btn-default">H & N (Ca)</a>
+              <a href="#" class="btn btn-default">H & N</a>
+              <a href="#" class="btn btn-default">Heart</a>
             </div>
             <div class="btn-group btn-group-justified">
-              <a href="#" class="btn btn-default">Left</a>
-              <a href="#" class="btn btn-default">Middle</a>
-              <a href="#" class="btn btn-default">Right</a>
-              <a href="#" class="btn btn-default">Left</a>
-              <a href="#" class="btn btn-default">Middle</a>
-              <a href="#" class="btn btn-default">Right</a>
+              <a href="#" class="btn btn-default">hESC</a>
+              <a href="#" class="btn btn-default">KICH</a>
+              <a href="#" class="btn btn-default">Kidney</a>
+              <a href="#" class="btn btn-default">KIRC</a>
+              <a href="#" class="btn btn-default">KIRP</a>
+              <a href="#" class="btn btn-default">LGG</a>
             </div>
+            <div class="btn-group btn-group-justified">
+              <a href="#" class="btn btn-default">Liver (Ca)</a>
+              <a href="#" class="btn btn-default">Liver</a>
+              <a href="#" class="btn btn-default">LUAD</a>
+              <a href="#" class="btn btn-default">Lung</a>
+              <a href="#" class="btn btn-default">LUSC</a>
+              <a href="#" class="btn btn-default">Medullo.</a>
+            </div>
+            <div class="btn-group btn-group-justified">
+              <a href="#" class="btn btn-default">Melanoma</a>
+              <a href="#" class="btn btn-default">MPN</a>
+              <a href="#" class="btn btn-default">Ovarian (Ca)</a>
+              <a href="#" class="btn btn-default">Panc. (Ca)</a>
+              <a href="#" class="btn btn-default">Prostate (Ca)</a>
+              <a href="#" class="btn btn-default">Prostate</a>
+            </div>
+            <div class="btn-group btn-group-justified">
+              <a href="#" class="btn btn-default">Skel. Musc.</a>
+              <a href="#" class="btn btn-default">Stomach (Ca)</a>
+              <a href="#" class="btn btn-default">Stomach</a>
+              <a href="#" class="btn btn-default">Thyroid (Ca)</a>
+              <a href="#" class="btn btn-default">Thyroid</a>
+              <a href="#" class="btn btn-default">Uterus (Ca)</a>
+            </div>
+            <br>
+            <ul class="list-unstyled">
+			  	<li><strong>Ca</strong>  Cancer</li>
+			  	<li><strong>AML</strong>  Acute Myeloid Leukemia</li>
+			  	<li><strong>CML</strong>  Chronic Myelogenous Leukemia</li>
+			  	<li><strong>GBM</strong>  Glioblastoma Multiforme</li>
+			  	<li><strong>H & N</strong>  Head and Neck</li>
+			  	<li><strong>hESC</strong>  Human Embryonic Stem Cell</li>
+			  	<li><strong>KICH</strong>  Kidney Chromophobe</li>
+			  	<li><strong>KIRC</strong>  Kidney Renal Clear Cell</li>
+			  	<li><strong>KIRP</strong>  Kidney Renal Papillary Cell</li>
+			  	<li><strong>LGG</strong>  Lower Grade Glioma</li>
+			  	<li><strong>LUAD</strong>  Lung Adenocarcinoma</li>
+			  	<li><strong>LUSC</strong>  Lung Squamous Cell Carcinoma</li>
+			  	<li><strong>MPN</strong>  Myeloproliferative Neoplasm</li>
+				</ul>
         </div><!-- /Search by LATs -->
 
         <div id="CATs" class="toshow jumbotron">
           <a type="button" class="close" onclick="toggle_off('CATs');toggle_on('Choose_Study')">&times;</a>
-          <h1>CATs</h1>
-          <p>CAT-Associated Stuff
+          <h2><strong>CATs</strong></h2>
+          <p>Choose a cancer type below:
           </p>
+          <div class="btn-group btn-group-justified">
+              <a href="#" class="btn btn-default">Bladder</a>
+              <a href="#" class="btn btn-default">Breast</a>
+              <a href="#" class="btn btn-default">H & N</a>
+              <a href="#" class="btn btn-default">KICH</a>
+              <a href="#" class="btn btn-default">KIRC</a>
+              <a href="#" class="btn btn-default">KIRP</a>
+            </div>
+            <div class="btn-group btn-group-justified">
+              <a href="#" class="btn btn-default">Liver</a>
+              <a href="#" class="btn btn-default">LUAD</a>
+              <a href="#" class="btn btn-default">LUSC</a>
+              <a href="#" class="btn btn-default">Prostate</a>
+              <a href="#" class="btn btn-default">Thyroid</a>
+              <a href="#" class="btn btn-default">Stomach</a>
+            </div>
+            <br>
+            <ul class="list-unstyled">
+			  	<li><strong>H & N</strong>  Head and Neck</li>
+			  	<li><strong>KICH</strong>  Kidney Chromophobe</li>
+			  	<li><strong>KIRC</strong>  Kidney Renal Clear Cell</li>
+			  	<li><strong>KIRP</strong>  Kidney Renal Papillary Cell</li>
+			  	<li><strong>LUAD</strong>  Lung Adenocarcinoma</li>
+			  	<li><strong>LUSC</strong>  Lung Squamous Cell Carcinoma</li>
+				</ul>
         </div><!-- /Search by CATs -->
 
         <div id="CLATs" class="toshow jumbotron">
           <a type="button" class="close" onclick="toggle_off('CLATs');toggle_on('Choose_Study')">&times;</a>
-          <h1>CLATs</h1>
-          <p>CLAT-Associated Stuff
+          <h2><strong>Cancer- and Lineage- associated transcripts (CLATs)</strong></h2>
+          <p>Choose a cancer/lineage from below:
           </p>
+          <div class="btn-group btn-group-justified">
+              <a href="#" class="btn btn-default">Bladder</a>
+              <a href="#" class="btn btn-default">Breast</a>
+              <a href="#" class="btn btn-default">H & N</a>
+              <a href="#" class="btn btn-default">KICH</a>
+              <a href="#" class="btn btn-default">KIRC</a>
+              <a href="#" class="btn btn-default">KIRP</a>
+            </div>
+            <div class="btn-group btn-group-justified">
+              <a href="#" class="btn btn-default">Liver</a>
+              <a href="#" class="btn btn-default">LUAD</a>
+              <a href="#" class="btn btn-default">LUSC</a>
+              <a href="#" class="btn btn-default">Prostate</a>
+              <a href="#" class="btn btn-default">Thyroid</a>
+              <a href="#" class="btn btn-default">Stomach</a>
+            </div>
+            <br>
+            <ul class="list-unstyled">
+			  	<li><strong>H & N</strong>  Head and Neck</li>
+			  	<li><strong>KICH</strong>  Kidney Chromophobe</li>
+			  	<li><strong>KIRC</strong>  Kidney Renal Clear Cell</li>
+			  	<li><strong>KIRP</strong>  Kidney Renal Papillary Cell</li>
+			  	<li><strong>LUAD</strong>  Lung Adenocarcinoma</li>
+			  	<li><strong>LUSC</strong>  Lung Squamous Cell Carcinoma</li>
+				</ul>
         </div><!-- /Search by CLATs -->                
 
         <div id="div-selected-transcripts" class="jumbotron">
