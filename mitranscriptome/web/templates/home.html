@@ -25,6 +25,1019 @@
      <script src="{{ url_for('static', filename='scripts/custom.js') }}"></script>
   </head>
   <body>
+  
+<!-- could not link to custom changes, so added here and needs to be moved to other css sheet. sorry! -->
+<style>.btn-breast { 
+  color: #000000; 
+  background-color: #E6008E; 
+  border-color: #000000; 
+} 
+ 
+.btn-breast:hover, 
+.btn-breast:focus, 
+.btn-breast:active, 
+.btn-breast.active, 
+.open .dropdown-toggle.btn-breast { 
+  color: #000000; 
+  background-color: #B80071; 
+  border-color: #000000; 
+} 
+ 
+.btn-breast:active, 
+.btn-breast.active, 
+.open .dropdown-toggle.btn-breast { 
+  background-image: none; 
+} 
+ 
+.btn-breast.disabled, 
+.btn-breast[disabled], 
+fieldset[disabled] .btn-breast, 
+.btn-breast.disabled:hover, 
+.btn-breast[disabled]:hover, 
+fieldset[disabled] .btn-breast:hover, 
+.btn-breast.disabled:focus, 
+.btn-breast[disabled]:focus, 
+fieldset[disabled] .btn-breast:focus, 
+.btn-breast.disabled:active, 
+.btn-breast[disabled]:active, 
+fieldset[disabled] .btn-breast:active, 
+.btn-breast.disabled.active, 
+.btn-breast[disabled].active, 
+fieldset[disabled] .btn-breast.active { 
+  background-color: #E6008E; 
+  border-color: #000000; 
+} 
+ 
+.btn-breast .badge { 
+  color: #E6008E; 
+  background-color: #000000; 
+}
+
+.btn-bladder { 
+  color: #FFFFFF; 
+  background-color: #F20E0E; 
+  border-color: #000000; 
+} 
+ 
+.btn-bladder:hover, 
+.btn-bladder:focus, 
+.btn-bladder:active, 
+.btn-bladder.active, 
+.open .dropdown-toggle.btn-bladder { 
+  color: #FFFFFF; 
+  background-color: #C40A0A; 
+  border-color: #000000; 
+} 
+ 
+.btn-bladder:active, 
+.btn-bladder.active, 
+.open .dropdown-toggle.btn-bladder { 
+  background-image: none; 
+} 
+ 
+.btn-bladder.disabled, 
+.btn-bladder[disabled], 
+fieldset[disabled] .btn-bladder, 
+.btn-bladder.disabled:hover, 
+.btn-bladder[disabled]:hover, 
+fieldset[disabled] .btn-bladder:hover, 
+.btn-bladder.disabled:focus, 
+.btn-bladder[disabled]:focus, 
+fieldset[disabled] .btn-bladder:focus, 
+.btn-bladder.disabled:active, 
+.btn-bladder[disabled]:active, 
+fieldset[disabled] .btn-bladder:active, 
+.btn-bladder.disabled.active, 
+.btn-bladder[disabled].active, 
+fieldset[disabled] .btn-bladder.active { 
+  background-color: #F20E0E; 
+  border-color: #000000; 
+} 
+ 
+.btn-bladder .badge { 
+  color: #F20E0E; 
+  background-color: #FFFFFF; 
+}
+
+.btn-other { 
+  color: #000000; 
+  background-color: #999999; 
+  border-color: #000000; 
+} 
+ 
+.btn-other:hover, 
+.btn-other:focus, 
+.btn-other:active, 
+.btn-other.active, 
+.open .dropdown-toggle.btn-other { 
+  color: #000000; 
+  background-color: #7A7A7A; 
+  border-color: #000000; 
+} 
+ 
+.btn-other:active, 
+.btn-other.active, 
+.open .dropdown-toggle.btn-other { 
+  background-image: none; 
+} 
+ 
+.btn-other.disabled, 
+.btn-other[disabled], 
+fieldset[disabled] .btn-other, 
+.btn-other.disabled:hover, 
+.btn-other[disabled]:hover, 
+fieldset[disabled] .btn-other:hover, 
+.btn-other.disabled:focus, 
+.btn-other[disabled]:focus, 
+fieldset[disabled] .btn-other:focus, 
+.btn-other.disabled:active, 
+.btn-other[disabled]:active, 
+fieldset[disabled] .btn-other:active, 
+.btn-other.disabled.active, 
+.btn-other[disabled].active, 
+fieldset[disabled] .btn-other.active { 
+  background-color: #999999; 
+  border-color: #000000; 
+} 
+ 
+.btn-other .badge { 
+  color: #999999; 
+  background-color: #000000; 
+}
+
+.btn-prostate { 
+  color: #FFFFFF; 
+  background-color: #FF4545; 
+  border-color: #000000; 
+} 
+ 
+.btn-prostate:hover, 
+.btn-prostate:focus, 
+.btn-prostate:active, 
+.btn-prostate.active, 
+.open .dropdown-toggle.btn-prostate { 
+  color: #FFFFFF; 
+  background-color: #CC3535; 
+  border-color: #000000; 
+} 
+ 
+.btn-prostate:active, 
+.btn-prostate.active, 
+.open .dropdown-toggle.btn-prostate { 
+  background-image: none; 
+} 
+ 
+.btn-prostate.disabled, 
+.btn-prostate[disabled], 
+fieldset[disabled] .btn-prostate, 
+.btn-prostate.disabled:hover, 
+.btn-prostate[disabled]:hover, 
+fieldset[disabled] .btn-prostate:hover, 
+.btn-prostate.disabled:focus, 
+.btn-prostate[disabled]:focus, 
+fieldset[disabled] .btn-prostate:focus, 
+.btn-prostate.disabled:active, 
+.btn-prostate[disabled]:active, 
+fieldset[disabled] .btn-prostate:active, 
+.btn-prostate.disabled.active, 
+.btn-prostate[disabled].active, 
+fieldset[disabled] .btn-prostate.active { 
+  background-color: #FF4545; 
+  border-color: #000000; 
+} 
+ 
+.btn-prostate .badge { 
+  color: #FF4545; 
+  background-color: #FFFFFF; 
+}
+
+.btn-melanoma { 
+  color: #000000; 
+  background-color: #C6AA8D; 
+  border-color: #000000; 
+} 
+ 
+.btn-melanoma:hover, 
+.btn-melanoma:focus, 
+.btn-melanoma:active, 
+.btn-melanoma.active, 
+.open .dropdown-toggle.btn-melanoma { 
+  color: #000000; 
+  background-color: #9E8870; 
+  border-color: #000000; 
+} 
+ 
+.btn-melanoma:active, 
+.btn-melanoma.active, 
+.open .dropdown-toggle.btn-melanoma { 
+  background-image: none; 
+} 
+ 
+.btn-melanoma.disabled, 
+.btn-melanoma[disabled], 
+fieldset[disabled] .btn-melanoma, 
+.btn-melanoma.disabled:hover, 
+.btn-melanoma[disabled]:hover, 
+fieldset[disabled] .btn-melanoma:hover, 
+.btn-melanoma.disabled:focus, 
+.btn-melanoma[disabled]:focus, 
+fieldset[disabled] .btn-melanoma:focus, 
+.btn-melanoma.disabled:active, 
+.btn-melanoma[disabled]:active, 
+fieldset[disabled] .btn-melanoma:active, 
+.btn-melanoma.disabled.active, 
+.btn-melanoma[disabled].active, 
+fieldset[disabled] .btn-melanoma.active { 
+  background-color: #C6AA8D; 
+  border-color: #000000; 
+} 
+ 
+.btn-melanoma .badge { 
+  color: #C6AA8D; 
+  background-color: #000000; 
+}
+
+.btn-glioma { 
+  color: #FFFFFF; 
+  background-color: #381669; 
+  border-color: #000000; 
+} 
+ 
+.btn-glioma:hover, 
+.btn-glioma:focus, 
+.btn-glioma:active, 
+.btn-glioma.active, 
+.open .dropdown-toggle.btn-glioma { 
+  color: #FFFFFF; 
+  background-color: #250E45; 
+  border-color: #000000; 
+} 
+ 
+.btn-glioma:active, 
+.btn-glioma.active, 
+.open .dropdown-toggle.btn-glioma { 
+  background-image: none; 
+} 
+ 
+.btn-glioma.disabled, 
+.btn-glioma[disabled], 
+fieldset[disabled] .btn-glioma, 
+.btn-glioma.disabled:hover, 
+.btn-glioma[disabled]:hover, 
+fieldset[disabled] .btn-glioma:hover, 
+.btn-glioma.disabled:focus, 
+.btn-glioma[disabled]:focus, 
+fieldset[disabled] .btn-glioma:focus, 
+.btn-glioma.disabled:active, 
+.btn-glioma[disabled]:active, 
+fieldset[disabled] .btn-glioma:active, 
+.btn-glioma.disabled.active, 
+.btn-glioma[disabled].active, 
+fieldset[disabled] .btn-glioma.active { 
+  background-color: #381669; 
+  border-color: #000000; 
+} 
+ 
+.btn-glioma .badge { 
+  color: #381669; 
+  background-color: #FFFFFF; 
+}
+
+.btn-panc { 
+  color: #000000; 
+  background-color: #A1EB58; 
+  border-color: #000000; 
+} 
+ 
+.btn-panc:hover, 
+.btn-panc:focus, 
+.btn-panc:active, 
+.btn-panc.active, 
+.open .dropdown-toggle.btn-panc { 
+  color: #000000; 
+  background-color: #7DB348; 
+  border-color: #000000; 
+} 
+ 
+.btn-panc:active, 
+.btn-panc.active, 
+.open .dropdown-toggle.btn-panc { 
+  background-image: none; 
+} 
+ 
+.btn-panc.disabled, 
+.btn-panc[disabled], 
+fieldset[disabled] .btn-panc, 
+.btn-panc.disabled:hover, 
+.btn-panc[disabled]:hover, 
+fieldset[disabled] .btn-panc:hover, 
+.btn-panc.disabled:focus, 
+.btn-panc[disabled]:focus, 
+fieldset[disabled] .btn-panc:focus, 
+.btn-panc.disabled:active, 
+.btn-panc[disabled]:active, 
+fieldset[disabled] .btn-panc:active, 
+.btn-panc.disabled.active, 
+.btn-panc[disabled].active, 
+fieldset[disabled] .btn-panc.active { 
+  background-color: #A1EB58; 
+  border-color: #000000; 
+} 
+ 
+.btn-panc .badge { 
+  color: #A1EB58; 
+  background-color: #000000; 
+}
+.btn-liver { 
+  color: #000000; 
+  background-color: #FFFF30; 
+  border-color: #000000; 
+} 
+ 
+.btn-liver:hover, 
+.btn-liver:focus, 
+.btn-liver:active, 
+.btn-liver.active, 
+.open .dropdown-toggle.btn-liver { 
+  color: #000000; 
+  background-color: #DEDE25; 
+  border-color: #000000; 
+} 
+ 
+.btn-liver:active, 
+.btn-liver.active, 
+.open .dropdown-toggle.btn-liver { 
+  background-image: none; 
+} 
+ 
+.btn-liver.disabled, 
+.btn-liver[disabled], 
+fieldset[disabled] .btn-liver, 
+.btn-liver.disabled:hover, 
+.btn-liver[disabled]:hover, 
+fieldset[disabled] .btn-liver:hover, 
+.btn-liver.disabled:focus, 
+.btn-liver[disabled]:focus, 
+fieldset[disabled] .btn-liver:focus, 
+.btn-liver.disabled:active, 
+.btn-liver[disabled]:active, 
+fieldset[disabled] .btn-liver:active, 
+.btn-liver.disabled.active, 
+.btn-liver[disabled].active, 
+fieldset[disabled] .btn-liver.active { 
+  background-color: #FFFF30; 
+  border-color: #000000; 
+} 
+ 
+.btn-liver .badge { 
+  color: #FFFF30; 
+  background-color: #000000; 
+}
+
+.btn-kidney { 
+  color: #000000; 
+  background-color: #FF7519; 
+  border-color: #000000; 
+} 
+ 
+.btn-kidney:hover, 
+.btn-kidney:focus, 
+.btn-kidney:active, 
+.btn-kidney.active, 
+.open .dropdown-toggle.btn-kidney { 
+  color: #000000; 
+  background-color: #D46115; 
+  border-color: #000000; 
+} 
+ 
+.btn-kidney:active, 
+.btn-kidney.active, 
+.open .dropdown-toggle.btn-kidney { 
+  background-image: none; 
+} 
+ 
+.btn-kidney.disabled, 
+.btn-kidney[disabled], 
+fieldset[disabled] .btn-kidney, 
+.btn-kidney.disabled:hover, 
+.btn-kidney[disabled]:hover, 
+fieldset[disabled] .btn-kidney:hover, 
+.btn-kidney.disabled:focus, 
+.btn-kidney[disabled]:focus, 
+fieldset[disabled] .btn-kidney:focus, 
+.btn-kidney.disabled:active, 
+.btn-kidney[disabled]:active, 
+fieldset[disabled] .btn-kidney:active, 
+.btn-kidney.disabled.active, 
+.btn-kidney[disabled].active, 
+fieldset[disabled] .btn-kidney.active { 
+  background-color: #FF7519; 
+  border-color: #000000; 
+} 
+ 
+.btn-kidney .badge { 
+  color: #FF7519; 
+  background-color: #000000; 
+}
+
+.btn-thyroid { 
+  color: #000000; 
+  background-color: #248FB2; 
+  border-color: #000000; 
+} 
+ 
+.btn-thyroid:hover, 
+.btn-thyroid:focus, 
+.btn-thyroid:active, 
+.btn-thyroid.active, 
+.open .dropdown-toggle.btn-thyroid { 
+  color: #000000; 
+  background-color: #227B99; 
+  border-color: #000000; 
+} 
+ 
+.btn-thyroid:active, 
+.btn-thyroid.active, 
+.open .dropdown-toggle.btn-thyroid { 
+  background-image: none; 
+} 
+ 
+.btn-thyroid.disabled, 
+.btn-thyroid[disabled], 
+fieldset[disabled] .btn-thyroid, 
+.btn-thyroid.disabled:hover, 
+.btn-thyroid[disabled]:hover, 
+fieldset[disabled] .btn-thyroid:hover, 
+.btn-thyroid.disabled:focus, 
+.btn-thyroid[disabled]:focus, 
+fieldset[disabled] .btn-thyroid:focus, 
+.btn-thyroid.disabled:active, 
+.btn-thyroid[disabled]:active, 
+fieldset[disabled] .btn-thyroid:active, 
+.btn-thyroid.disabled.active, 
+.btn-thyroid[disabled].active, 
+fieldset[disabled] .btn-thyroid.active { 
+  background-color: #248FB2; 
+  border-color: #000000; 
+} 
+ 
+.btn-thyroid .badge { 
+  color: #248FB2; 
+  background-color: #000000; 
+}
+
+.btn-hn { 
+  color: #000000; 
+  background-color: #0BA6D9; 
+  border-color: #000000; 
+} 
+ 
+.btn-hn:hover, 
+.btn-hn:focus, 
+.btn-hn:active, 
+.btn-hn.active, 
+.open .dropdown-toggle.btn-hn { 
+  color: #000000; 
+  background-color: #0B8DB8; 
+  border-color: #000000; 
+} 
+ 
+.btn-hn:active, 
+.btn-hn.active, 
+.open .dropdown-toggle.btn-hn { 
+  background-image: none; 
+} 
+ 
+.btn-hn.disabled, 
+.btn-hn[disabled], 
+fieldset[disabled] .btn-hn, 
+.btn-hn.disabled:hover, 
+.btn-hn[disabled]:hover, 
+fieldset[disabled] .btn-hn:hover, 
+.btn-hn.disabled:focus, 
+.btn-hn[disabled]:focus, 
+fieldset[disabled] .btn-hn:focus, 
+.btn-hn.disabled:active, 
+.btn-hn[disabled]:active, 
+fieldset[disabled] .btn-hn:active, 
+.btn-hn.disabled.active, 
+.btn-hn[disabled].active, 
+fieldset[disabled] .btn-hn.active { 
+  background-color: #0BA6D9; 
+  border-color: #000000; 
+} 
+ 
+.btn-hn .badge { 
+  color: #0BA6D9; 
+  background-color: #000000; 
+}
+
+.btn-cervix { 
+  color: #FFFFFF; 
+  background-color: #8300E0; 
+  border-color: #000000; 
+} 
+ 
+.btn-cervix:hover, 
+.btn-cervix:focus, 
+.btn-cervix:active, 
+.btn-cervix.active, 
+.open .dropdown-toggle.btn-cervix { 
+  color: #FFFFFF; 
+  background-color: #6500AD; 
+  border-color: #000000; 
+} 
+ 
+.btn-cervix:active, 
+.btn-cervix.active, 
+.open .dropdown-toggle.btn-cervix { 
+  background-image: none; 
+} 
+ 
+.btn-cervix.disabled, 
+.btn-cervix[disabled], 
+fieldset[disabled] .btn-cervix, 
+.btn-cervix.disabled:hover, 
+.btn-cervix[disabled]:hover, 
+fieldset[disabled] .btn-cervix:hover, 
+.btn-cervix.disabled:focus, 
+.btn-cervix[disabled]:focus, 
+fieldset[disabled] .btn-cervix:focus, 
+.btn-cervix.disabled:active, 
+.btn-cervix[disabled]:active, 
+fieldset[disabled] .btn-cervix:active, 
+.btn-cervix.disabled.active, 
+.btn-cervix[disabled].active, 
+fieldset[disabled] .btn-cervix.active { 
+  background-color: #8300E0; 
+  border-color: #000000; 
+} 
+ 
+.btn-cervix .badge { 
+  color: #8300E0; 
+  background-color: #FFFFFF; 
+}
+
+.btn-lung { 
+  color: #000000; 
+  background-color: #19AC87; 
+  border-color: #000000; 
+} 
+ 
+.btn-lung:hover, 
+.btn-lung:focus, 
+.btn-lung:active, 
+.btn-lung.active, 
+.open .dropdown-toggle.btn-lung { 
+  color: #000000; 
+  background-color: #169172; 
+  border-color: #000000; 
+} 
+ 
+.btn-lung:active, 
+.btn-lung.active, 
+.open .dropdown-toggle.btn-lung { 
+  background-image: none; 
+} 
+ 
+.btn-lung.disabled, 
+.btn-lung[disabled], 
+fieldset[disabled] .btn-lung, 
+.btn-lung.disabled:hover, 
+.btn-lung[disabled]:hover, 
+fieldset[disabled] .btn-lung:hover, 
+.btn-lung.disabled:focus, 
+.btn-lung[disabled]:focus, 
+fieldset[disabled] .btn-lung:focus, 
+.btn-lung.disabled:active, 
+.btn-lung[disabled]:active, 
+fieldset[disabled] .btn-lung:active, 
+.btn-lung.disabled.active, 
+.btn-lung[disabled].active, 
+fieldset[disabled] .btn-lung.active { 
+  background-color: #19AC87; 
+  border-color: #000000; 
+} 
+ 
+.btn-lung .badge { 
+  color: #19AC87; 
+  background-color: #000000; 
+}
+
+.btn-stomach { 
+  color: #000000; 
+  background-color: #197519; 
+  border-color: #000000; 
+} 
+ 
+.btn-stomach:hover, 
+.btn-stomach:focus, 
+.btn-stomach:active, 
+.btn-stomach.active, 
+.open .dropdown-toggle.btn-stomach { 
+  color: #000000; 
+  background-color: #135913; 
+  border-color: #000000; 
+} 
+ 
+.btn-stomach:active, 
+.btn-stomach.active, 
+.open .dropdown-toggle.btn-stomach { 
+  background-image: none; 
+} 
+ 
+.btn-stomach.disabled, 
+.btn-stomach[disabled], 
+fieldset[disabled] .btn-stomach, 
+.btn-stomach.disabled:hover, 
+.btn-stomach[disabled]:hover, 
+fieldset[disabled] .btn-stomach:hover, 
+.btn-stomach.disabled:focus, 
+.btn-stomach[disabled]:focus, 
+fieldset[disabled] .btn-stomach:focus, 
+.btn-stomach.disabled:active, 
+.btn-stomach[disabled]:active, 
+fieldset[disabled] .btn-stomach:active, 
+.btn-stomach.disabled.active, 
+.btn-stomach[disabled].active, 
+fieldset[disabled] .btn-stomach.active { 
+  background-color: #197519; 
+  border-color: #000000; 
+} 
+ 
+.btn-stomach .badge { 
+  color: #197519; 
+  background-color: #000000; 
+}
+
+.btn-colo { 
+  color: #000000; 
+  background-color: #FFD119; 
+  border-color: #000000; 
+} 
+ 
+.btn-colo:hover, 
+.btn-colo:focus, 
+.btn-colo:active, 
+.btn-colo.active, 
+.open .dropdown-toggle.btn-colo { 
+  color: #000000; 
+  background-color: #E6BC12; 
+  border-color: #000000; 
+} 
+ 
+.btn-colo:active, 
+.btn-colo.active, 
+.open .dropdown-toggle.btn-colo { 
+  background-image: none; 
+} 
+ 
+.btn-colo.disabled, 
+.btn-colo[disabled], 
+fieldset[disabled] .btn-colo, 
+.btn-colo.disabled:hover, 
+.btn-colo[disabled]:hover, 
+fieldset[disabled] .btn-colo:hover, 
+.btn-colo.disabled:focus, 
+.btn-colo[disabled]:focus, 
+fieldset[disabled] .btn-colo:focus, 
+.btn-colo.disabled:active, 
+.btn-colo[disabled]:active, 
+fieldset[disabled] .btn-colo:active, 
+.btn-colo.disabled.active, 
+.btn-colo[disabled].active, 
+fieldset[disabled] .btn-colo.active { 
+  background-color: #FFD119; 
+  border-color: #000000; 
+} 
+ 
+.btn-colo .badge { 
+  color: #FFD119; 
+  background-color: #000000; 
+}
+
+.btn-uterus { 
+  color: #FFFFFF; 
+  background-color: #A319D1; 
+  border-color: #000000; 
+} 
+ 
+.btn-uterus:hover, 
+.btn-uterus:focus, 
+.btn-uterus:active, 
+.btn-uterus.active, 
+.open .dropdown-toggle.btn-uterus { 
+  color: #FFFFFF; 
+  background-color: #8C16B3; 
+  border-color: #000000; 
+} 
+ 
+.btn-uterus:active, 
+.btn-uterus.active, 
+.open .dropdown-toggle.btn-uterus { 
+  background-image: none; 
+} 
+ 
+.btn-uterus.disabled, 
+.btn-uterus[disabled], 
+fieldset[disabled] .btn-uterus, 
+.btn-uterus.disabled:hover, 
+.btn-uterus[disabled]:hover, 
+fieldset[disabled] .btn-uterus:hover, 
+.btn-uterus.disabled:focus, 
+.btn-uterus[disabled]:focus, 
+fieldset[disabled] .btn-uterus:focus, 
+.btn-uterus.disabled:active, 
+.btn-uterus[disabled]:active, 
+fieldset[disabled] .btn-uterus:active, 
+.btn-uterus.disabled.active, 
+.btn-uterus[disabled].active, 
+fieldset[disabled] .btn-uterus.active { 
+  background-color: #A319D1; 
+  border-color: #000000; 
+} 
+ 
+.btn-uterus .badge { 
+  color: #A319D1; 
+  background-color: #FFFFFF; 
+}
+
+.btn-ovary { 
+  color: #FFFFFF; 
+  background-color: #D119A3; 
+  border-color: #000000; 
+} 
+ 
+.btn-ovary:hover, 
+.btn-ovary:focus, 
+.btn-ovary:active, 
+.btn-ovary.active, 
+.open .dropdown-toggle.btn-ovary { 
+  color: #FFFFFF; 
+  background-color: #B81690; 
+  border-color: #000000; 
+} 
+ 
+.btn-ovary:active, 
+.btn-ovary.active, 
+.open .dropdown-toggle.btn-ovary { 
+  background-image: none; 
+} 
+ 
+.btn-ovary.disabled, 
+.btn-ovary[disabled], 
+fieldset[disabled] .btn-ovary, 
+.btn-ovary.disabled:hover, 
+.btn-ovary[disabled]:hover, 
+fieldset[disabled] .btn-ovary:hover, 
+.btn-ovary.disabled:focus, 
+.btn-ovary[disabled]:focus, 
+fieldset[disabled] .btn-ovary:focus, 
+.btn-ovary.disabled:active, 
+.btn-ovary[disabled]:active, 
+fieldset[disabled] .btn-ovary:active, 
+.btn-ovary.disabled.active, 
+.btn-ovary[disabled].active, 
+fieldset[disabled] .btn-ovary.active { 
+  background-color: #D119A3; 
+  border-color: #000000; 
+} 
+ 
+.btn-ovary .badge { 
+  color: #D119A3; 
+  background-color: #FFFFFF; 
+}
+
+.btn-lats { 
+  color: #FFFFFF; 
+  background-color: #1919D1; 
+  border-color: #000000; 
+} 
+ 
+.btn-lats:hover, 
+.btn-lats:focus, 
+.btn-lats:active, 
+.btn-lats.active, 
+.open .dropdown-toggle.btn-lats { 
+  color: #FFFFFF; 
+  background-color: #1212B5; 
+  border-color: #000000; 
+} 
+ 
+.btn-lats:active, 
+.btn-lats.active, 
+.open .dropdown-toggle.btn-lats { 
+  background-image: none; 
+} 
+ 
+.btn-lats.disabled, 
+.btn-lats[disabled], 
+fieldset[disabled] .btn-lats, 
+.btn-lats.disabled:hover, 
+.btn-lats[disabled]:hover, 
+fieldset[disabled] .btn-lats:hover, 
+.btn-lats.disabled:focus, 
+.btn-lats[disabled]:focus, 
+fieldset[disabled] .btn-lats:focus, 
+.btn-lats.disabled:active, 
+.btn-lats[disabled]:active, 
+fieldset[disabled] .btn-lats:active, 
+.btn-lats.disabled.active, 
+.btn-lats[disabled].active, 
+fieldset[disabled] .btn-lats.active { 
+  background-color: #1919D1; 
+  border-color: #000000; 
+} 
+ 
+.btn-lats .badge { 
+  color: #1919D1; 
+  background-color: #FFFFFF; 
+}
+
+.btn-cats { 
+  color: #FFFFFF; 
+  background-color: #CC0000; 
+  border-color: #000000; 
+} 
+ 
+.btn-cats:hover, 
+.btn-cats:focus, 
+.btn-cats:active, 
+.btn-cats.active, 
+.open .dropdown-toggle.btn-cats { 
+  color: #FFFFFF; 
+  background-color: #AB0000; 
+  border-color: #000000; 
+} 
+ 
+.btn-cats:active, 
+.btn-cats.active, 
+.open .dropdown-toggle.btn-cats { 
+  background-image: none; 
+} 
+ 
+.btn-cats.disabled, 
+.btn-cats[disabled], 
+fieldset[disabled] .btn-cats, 
+.btn-cats.disabled:hover, 
+.btn-cats[disabled]:hover, 
+fieldset[disabled] .btn-cats:hover, 
+.btn-cats.disabled:focus, 
+.btn-cats[disabled]:focus, 
+fieldset[disabled] .btn-cats:focus, 
+.btn-cats.disabled:active, 
+.btn-cats[disabled]:active, 
+fieldset[disabled] .btn-cats:active, 
+.btn-cats.disabled.active, 
+.btn-cats[disabled].active, 
+fieldset[disabled] .btn-cats.active { 
+  background-color: #CC0000; 
+  border-color: #000000; 
+} 
+ 
+.btn-cats .badge { 
+  color: #CC0000; 
+  background-color: #FFFFFF; 
+}
+
+.btn-clats { 
+  color: #FFFFFF; 
+  background-color: #911891; 
+  border-color: #000000; 
+} 
+ 
+.btn-clats:hover, 
+.btn-clats:focus, 
+.btn-clats:active, 
+.btn-clats.active, 
+.open .dropdown-toggle.btn-clats { 
+  color: #FFFFFF; 
+  background-color: #781478; 
+  border-color: #000000; 
+} 
+ 
+.btn-clats:active, 
+.btn-clats.active, 
+.open .dropdown-toggle.btn-clats { 
+  background-image: none; 
+} 
+ 
+.btn-clats.disabled, 
+.btn-clats[disabled], 
+fieldset[disabled] .btn-clats, 
+.btn-clats.disabled:hover, 
+.btn-clats[disabled]:hover, 
+fieldset[disabled] .btn-clats:hover, 
+.btn-clats.disabled:focus, 
+.btn-clats[disabled]:focus, 
+fieldset[disabled] .btn-clats:focus, 
+.btn-clats.disabled:active, 
+.btn-clats[disabled]:active, 
+fieldset[disabled] .btn-clats:active, 
+.btn-clats.disabled.active, 
+.btn-clats[disabled].active, 
+fieldset[disabled] .btn-clats.active { 
+  background-color: #911891; 
+  border-color: #000000; 
+} 
+ 
+.btn-clats .badge { 
+  color: #911891; 
+  background-color: #FFFFFF; 
+}
+
+.btn-hiclncs { 
+  color: #FFFFFF; 
+  background-color: #198719; 
+  border-color: #000000; 
+} 
+ 
+.btn-hiclncs:hover, 
+.btn-hiclncs:focus, 
+.btn-hiclncs:active, 
+.btn-hiclncs.active, 
+.open .dropdown-toggle.btn-hiclncs { 
+  color: #FFFFFF; 
+  background-color: #146B14; 
+  border-color: #000000; 
+} 
+ 
+.btn-hiclncs:active, 
+.btn-hiclncs.active, 
+.open .dropdown-toggle.btn-hiclncs { 
+  background-image: none; 
+} 
+ 
+.btn-hiclncs.disabled, 
+.btn-hiclncs[disabled], 
+fieldset[disabled] .btn-hiclncs, 
+.btn-hiclncs.disabled:hover, 
+.btn-hiclncs[disabled]:hover, 
+fieldset[disabled] .btn-hiclncs:hover, 
+.btn-hiclncs.disabled:focus, 
+.btn-hiclncs[disabled]:focus, 
+fieldset[disabled] .btn-hiclncs:focus, 
+.btn-hiclncs.disabled:active, 
+.btn-hiclncs[disabled]:active, 
+fieldset[disabled] .btn-hiclncs:active, 
+.btn-hiclncs.disabled.active, 
+.btn-hiclncs[disabled].active, 
+fieldset[disabled] .btn-hiclncs.active { 
+  background-color: #198719; 
+  border-color: #000000; 
+} 
+ 
+.btn-hiclncs .badge { 
+  color: #198719; 
+  background-color: #FFFFFF; 
+}
+
+.btn-ann { 
+  color: #000000; 
+  background-color: #CCCCCC; 
+  border-color: #000000; 
+} 
+ 
+.btn-ann:hover, 
+.btn-ann:focus, 
+.btn-ann:active, 
+.btn-ann.active, 
+.open .dropdown-toggle.btn-ann { 
+  color: #000000; 
+  background-color: #B0B0B0; 
+  border-color: #000000; 
+} 
+ 
+.btn-ann:active, 
+.btn-ann.active, 
+.open .dropdown-toggle.btn-ann { 
+  background-image: none; 
+} 
+ 
+.btn-ann.disabled, 
+.btn-ann[disabled], 
+fieldset[disabled] .btn-ann, 
+.btn-ann.disabled:hover, 
+.btn-ann[disabled]:hover, 
+fieldset[disabled] .btn-ann:hover, 
+.btn-ann.disabled:focus, 
+.btn-ann[disabled]:focus, 
+fieldset[disabled] .btn-ann:focus, 
+.btn-ann.disabled:active, 
+.btn-ann[disabled]:active, 
+fieldset[disabled] .btn-ann:active, 
+.btn-ann.disabled.active, 
+.btn-ann[disabled].active, 
+fieldset[disabled] .btn-ann.active { 
+  background-color: #CCCCCC; 
+  border-color: #000000; 
+} 
+ 
+.btn-ann .badge { 
+  color: #CCCCCC; 
+  background-color: #000000; 
+}
+</style>
 
     <!-- Fixed horizontal navbar -->
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -126,26 +1139,28 @@
         <div id="Choose_Study" class="toshow jumbotron">
           <a type="button" class="close" onclick="toggle_off('Choose_Study');toggle_on('Home')">&times;</a>
           <h2><strong>Choose a study:</strong></h2>
-          <p>Our analysis has identified Lineage-Associated Transcripts (LATs), Cancer-Associated Transcripts (CATs), and a combination of Cancer- and Lineage-Associated Transcripts (CLATs). Please choose the transcript type you would like to study.
+          <p>Our analysis has identified Lineage-Associated Transcripts (LATs), Cancer-Associated Transcripts (CATs), and a combination of Cancer- and Lineage-Associated Transcripts (CLATs). We have also identified a subset of Highly Conserved lncRNAs (HiCLNCs).  Finally, we have included a list of previously annotated lncRNAs for your browsing pleasure.  Please choose the transcript type you would like to view.
           </p>
           <p1>
-            <a class="btn btn-lg btn-primary" href="#" role="button" onclick="toggle_off('Choose_Study');toggle_on('LATs')">LATs &raquo;</a>
-            <a class="btn btn-lg btn-primary" href="#" role="button" onclick="toggle_off('Choose_Study');toggle_on('CATs')">CATs &raquo;</a>
-            <a class="btn btn-lg btn-primary" href="#" role="button" onclick="toggle_off('Choose_Study');toggle_on('CLATs')">CLATs &raquo;</a>
+            <a class="btn btn-lg btn-lats" href="#" role="button" onclick="toggle_off('Choose_Study');toggle_on('LATs')">LATs &raquo;</a>
+            <a class="btn btn-lg btn-cats" href="#" role="button" onclick="toggle_off('Choose_Study');toggle_on('CATs')">CATs &raquo;</a>
+            <a class="btn btn-lg btn-clats" href="#" role="button" onclick="toggle_off('Choose_Study');toggle_on('CLATs')">CLATs &raquo;</a>
+            <a class="btn btn-lg btn-hiclncs" href="#" role="button" onclick="toggle_off('Choose_Study');toggle_on('HiCLNCs')">HiCLNCs &raquo;</a>
+            <a class="btn btn-lg btn-ann" href="#" role="button" onclick="toggle_off('Choose_Study');toggle_on('Annotated')"><small>Annotated lncRNAs &raquo;</small></a>
           </p1>
         </div><!-- /Choose Study -->
 
         <div id="Methods" class="toshow jumbotron">
           <a type="button" class="close" onclick="toggle_off('Methods');toggle_on('Home')">&times;</a>
-          <h1>Methods</h1>
-          <p>Show methods here.
+          <h2><strong>Methods</strong></h2>
+          <p>Copy and paste methods here.
           </p>
         </div><!-- /Search by sample set -->
 
         <div id="Downloads" class="toshow jumbotron">
           <a type="button" class="close" onclick="toggle_off('Downloads');toggle_on('Home')">&times;</a>
-          <h1>Downloads</h1>
-          <p>Downloads available here.
+          <h2><strong>Downloads</strong></h2>
+          <p>Include links to downloads here.
           </p>
         </div><!-- /View Downloads -->
 
@@ -155,52 +1170,52 @@
           <p>Choose a lineage below:
           </p>
             <div class="btn-group btn-group-justified">
-              <a href="#" class="btn btn-default">AML</a>
-              <a href="#" class="btn btn-default">Bladder (Ca)</a>
-              <a href="#" class="btn btn-default">Bladder</a>
-              <a href="#" class="btn btn-default">Breast (Ca)</a>
-              <a href="#" class="btn btn-default">Breast</a>
-              <a href="#" class="btn btn-default">Cervix (Ca)</a>
+              <a href="#" class="btn btn-other">AML</a>
+              <a href="#" class="btn btn-bladder">Bladder (Ca)</a>
+              <a href="#" class="btn btn-bladder">Bladder</a>
+              <a href="#" class="btn btn-breast">Breast (Ca)</a>
+              <a href="#" class="btn btn-breast">Breast</a>
+              <a href="#" class="btn btn-cervix">Cervix (Ca)</a>
             </div>
             <div class="btn-group btn-group-justified">
-              <a href="#" class="btn btn-default">CML</a>
-              <a href="#" class="btn btn-default">Colorect. (Ca)</a>
-              <a href="#" class="btn btn-default">GBM</a>
-              <a href="#" class="btn btn-default">H & N (Ca)</a>
-              <a href="#" class="btn btn-default">H & N</a>
-              <a href="#" class="btn btn-default">Heart</a>
+              <a href="#" class="btn btn-other">CML</a>
+              <a href="#" class="btn btn-colo">Colorect. (Ca)</a>
+              <a href="#" class="btn btn-glioma">GBM</a>
+              <a href="#" class="btn btn-hn">H & N (Ca)</a>
+              <a href="#" class="btn btn-hn">H & N</a>
+              <a href="#" class="btn btn-other">Heart</a>
             </div>
             <div class="btn-group btn-group-justified">
-              <a href="#" class="btn btn-default">hESC</a>
-              <a href="#" class="btn btn-default">KICH</a>
-              <a href="#" class="btn btn-default">Kidney</a>
-              <a href="#" class="btn btn-default">KIRC</a>
-              <a href="#" class="btn btn-default">KIRP</a>
-              <a href="#" class="btn btn-default">LGG</a>
+              <a href="#" class="btn btn-other">hESC</a>
+              <a href="#" class="btn btn-kidney">KICH</a>
+              <a href="#" class="btn btn-kidney">Kidney</a>
+              <a href="#" class="btn btn-kidney">KIRC</a>
+              <a href="#" class="btn btn-kidney">KIRP</a>
+              <a href="#" class="btn btn-glioma">LGG</a>
             </div>
             <div class="btn-group btn-group-justified">
-              <a href="#" class="btn btn-default">Liver (Ca)</a>
-              <a href="#" class="btn btn-default">Liver</a>
-              <a href="#" class="btn btn-default">LUAD</a>
-              <a href="#" class="btn btn-default">Lung</a>
-              <a href="#" class="btn btn-default">LUSC</a>
-              <a href="#" class="btn btn-default">Medullo.</a>
+              <a href="#" class="btn btn-liver">Liver (Ca)</a>
+              <a href="#" class="btn btn-liver">Liver</a>
+              <a href="#" class="btn btn-lung">LUAD</a>
+              <a href="#" class="btn btn-lung">Lung</a>
+              <a href="#" class="btn btn-lung">LUSC</a>
+              <a href="#" class="btn btn-other">Medullo.</a>
             </div>
             <div class="btn-group btn-group-justified">
-              <a href="#" class="btn btn-default">Melanoma</a>
-              <a href="#" class="btn btn-default">MPN</a>
-              <a href="#" class="btn btn-default">Ovarian (Ca)</a>
-              <a href="#" class="btn btn-default">Panc. (Ca)</a>
-              <a href="#" class="btn btn-default">Prostate (Ca)</a>
-              <a href="#" class="btn btn-default">Prostate</a>
+              <a href="#" class="btn btn-melanoma">Melanoma</a>
+              <a href="#" class="btn btn-other">MPN</a>
+              <a href="#" class="btn btn-ovary">Ovarian (Ca)</a>
+              <a href="#" class="btn btn-panc">Panc. (Ca)</a>
+              <a href="#" class="btn btn-prostate">Prostate (Ca)</a>
+              <a href="#" class="btn btn-prostate">Prostate</a>
             </div>
             <div class="btn-group btn-group-justified">
-              <a href="#" class="btn btn-default">Skel. Musc.</a>
-              <a href="#" class="btn btn-default">Stomach (Ca)</a>
-              <a href="#" class="btn btn-default">Stomach</a>
-              <a href="#" class="btn btn-default">Thyroid (Ca)</a>
-              <a href="#" class="btn btn-default">Thyroid</a>
-              <a href="#" class="btn btn-default">Uterus (Ca)</a>
+              <a href="#" class="btn btn-other">Skel. Musc.</a>
+              <a href="#" class="btn btn-stomach">Stomach (Ca)</a>
+              <a href="#" class="btn btn-stomach">Stomach</a>
+              <a href="#" class="btn btn-thyroid">Thyroid (Ca)</a>
+              <a href="#" class="btn btn-thyroid">Thyroid</a>
+              <a href="#" class="btn btn-uterus">Uterus (Ca)</a>
             </div>
             <br>
             <ul class="list-unstyled">
@@ -226,20 +1241,23 @@
           <p>Choose a cancer type below:
           </p>
           <div class="btn-group btn-group-justified">
-              <a href="#" class="btn btn-default">Bladder</a>
-              <a href="#" class="btn btn-default">Breast</a>
-              <a href="#" class="btn btn-default">H & N</a>
-              <a href="#" class="btn btn-default">KICH</a>
-              <a href="#" class="btn btn-default">KIRC</a>
-              <a href="#" class="btn btn-default">KIRP</a>
+              <a href="#" class="btn btn-bladder">Bladder</a>
+              <a href="#" class="btn btn-breast">Breast</a>
+              <a href="#" class="btn btn-hn">H & N</a>
+              <a href="#" class="btn btn-kidney">KICH</a>
+              <a href="#" class="btn btn-kidney">KIRC</a>
+              <a href="#" class="btn btn-kidney">KIRP</a>
             </div>
             <div class="btn-group btn-group-justified">
-              <a href="#" class="btn btn-default">Liver</a>
-              <a href="#" class="btn btn-default">LUAD</a>
-              <a href="#" class="btn btn-default">LUSC</a>
-              <a href="#" class="btn btn-default">Prostate</a>
-              <a href="#" class="btn btn-default">Thyroid</a>
-              <a href="#" class="btn btn-default">Stomach</a>
+              <a href="#" class="btn btn-liver">Liver</a>
+              <a href="#" class="btn btn-lung">LUAD</a>
+              <a href="#" class="btn btn-lung">LUSC</a>
+              <a href="#" class="btn btn-prostate">Prostate</a>
+              <a href="#" class="btn btn-thyroid">Thyroid</a>
+              <a href="#" class="btn btn-stomach">Stomach</a>
+            </div>
+            <div class="btn-group btn-group-justified">
+              <a href="#" class="btn btn-ann">Pan-Cancer</a>
             </div>
             <br>
             <ul class="list-unstyled">
@@ -258,20 +1276,20 @@
           <p>Choose a cancer/lineage from below:
           </p>
           <div class="btn-group btn-group-justified">
-              <a href="#" class="btn btn-default">Bladder</a>
-              <a href="#" class="btn btn-default">Breast</a>
-              <a href="#" class="btn btn-default">H & N</a>
-              <a href="#" class="btn btn-default">KICH</a>
-              <a href="#" class="btn btn-default">KIRC</a>
-              <a href="#" class="btn btn-default">KIRP</a>
+              <a href="#" class="btn btn-bladder">Bladder</a>
+              <a href="#" class="btn btn-breast">Breast</a>
+              <a href="#" class="btn btn-hn">H & N</a>
+              <a href="#" class="btn btn-kidney">KICH</a>
+              <a href="#" class="btn btn-kidney">KIRC</a>
+              <a href="#" class="btn btn-kidney">KIRP</a>
             </div>
             <div class="btn-group btn-group-justified">
-              <a href="#" class="btn btn-default">Liver</a>
-              <a href="#" class="btn btn-default">LUAD</a>
-              <a href="#" class="btn btn-default">LUSC</a>
-              <a href="#" class="btn btn-default">Prostate</a>
-              <a href="#" class="btn btn-default">Thyroid</a>
-              <a href="#" class="btn btn-default">Stomach</a>
+              <a href="#" class="btn btn-liver">Liver</a>
+              <a href="#" class="btn btn-lung">LUAD</a>
+              <a href="#" class="btn btn-lung">LUSC</a>
+              <a href="#" class="btn btn-prostate">Prostate</a>
+              <a href="#" class="btn btn-thyroid">Thyroid</a>
+              <a href="#" class="btn btn-stomach">Stomach</a>
             </div>
             <br>
             <ul class="list-unstyled">
@@ -282,7 +1300,22 @@
 			  	<li><strong>LUAD</strong>  Lung Adenocarcinoma</li>
 			  	<li><strong>LUSC</strong>  Lung Squamous Cell Carcinoma</li>
 				</ul>
-        </div><!-- /Search by CLATs -->                
+        </div><!-- /Search by CLATs -->
+        
+        <div id="HiCLNCs" class="toshow jumbotron">
+          <a type="button" class="close" onclick="toggle_off('HiCLNCs');toggle_on('Choose_Study')">&times;</a>
+          <h2><strong>Highly Conserved LncRNAs (HiCLNCs)</strong></h2>
+          <p>Auto-populated, clickable table of HiCLNCs
+          </p>
+        </div><!-- /Table of HiCLNCs -->
+        
+        <div id="Annotated" class="toshow jumbotron">
+          <a type="button" class="close" onclick="toggle_off('Annotated');toggle_on('Choose_Study')">&times;</a>
+          <h2><strong>Annotated lncRNAs</strong></h2>
+          <p>Auto-populated, searchable, clickable table of annotated lncRNAs
+          </p>
+        </div><!-- /Table of Annotated lncRNAs -->
+                        
 
         <div id="div-selected-transcripts" class="jumbotron">
           <a id="btn-close-transcripts" type="button" class="close">&times;</a>
