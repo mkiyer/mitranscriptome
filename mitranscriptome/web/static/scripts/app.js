@@ -46,6 +46,8 @@ define([
 	toggle_off('LATs');
 	toggle_off('CATs');
 	toggle_off('CLATs');
+	toggle_off('HiCLNCs')
+	toggle_off('Annotated')
   });
   $('#Methods_Btn').click(function() {
 	toggle_off('Home');
@@ -55,6 +57,8 @@ define([
 	toggle_off('LATs');
 	toggle_off('CATs');
 	toggle_off('CLATs');
+	toggle_off('HiCLNCs')
+	toggle_off('Annotated')
   });
   $('#Downloads_Btn').click(function() {
 	toggle_off('Home');
@@ -64,6 +68,8 @@ define([
 	toggle_off('CATs');
 	toggle_off('CLATs');
 	toggle_off('Choose_Study');
+	toggle_off('HiCLNCs')
+	toggle_off('Annotated')
   });
 
   $('#btn-close-transcript').click(function() { toggle_off('div-selected-transcripts'); });
