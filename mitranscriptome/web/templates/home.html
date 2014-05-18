@@ -1117,12 +1117,11 @@ fieldset[disabled] .btn-ann.active {
     <div class="container bs-docs-container">
       <div class="row">
         <div class="col-md-2" id="fix" >
-          <!--  <div class="bs-sidebar hidden-print" role="complementary">-->
-          <ul class="nav nav-pills nav-stacked">
-            <!-- <ul class="nav bs-sidenav">  -->
+			<div class="bs-sidebar hidden-print" role="complementary">
+              <ul class="nav bs-sidenav">
               <li id="Select_Transcripts_Btn"><a href="#Select_Transcripts">Select Transcripts</a></li>
               <li id="Methods_Btn"><a href="#Methods">Methods</a></li>
-              <li id="Downloads_Btn"><a href="#Downloads">Downloads</a></li>
+              <li id="Downloads_Btn"><a href="#Downloads">Downloads</a></li></ul>
           </div>
         </div>
       </div>
@@ -1138,7 +1137,7 @@ fieldset[disabled] .btn-ann.active {
         </div><!-- /Home Screen -->
 
         <div id="Select_Transcripts" class="toshow jumbotron">
-          <a type="button" class="close" onclick="toggle_off('Select_Transcripts');toggle_on('Home')">&times;</a>
+          <a type="button" class="close" onclick="toggle_off('Choose_Study');toggle_on('Home')">&laquo;</a>
           <h2><strong>Select Transcripts</strong></h2>
           <p>Our analysis has identified Lineage-Associated Transcripts (LATs), Cancer-Associated Transcripts (CATs), and a combination of Cancer- and Lineage-Associated Transcripts (CLATs). We have also identified a subset of Highly Conserved lncRNAs (HiCLNCs).  Finally, we have included a list of previously annotated lncRNAs for your browsing pleasure.  Please choose the transcript type you would like to view.
           </p>
@@ -1166,7 +1165,7 @@ fieldset[disabled] .btn-ann.active {
         </div><!-- /View Downloads -->
 
         <div id="LATs" class="toshow jumbotron">
-          <a type="button" class="close" onclick="toggle_off('LATs');toggle_on('Select_Transcripts')">&times;</a>
+          <a type="button" class="close" onclick="toggle_off('LATs');toggle_on('Select_Transcripts')">&laquo;</a>
           <h2><strong>Lineage-associated transcripts (LATs)</strong></h2>
           <p>Choose a lineage below:
           </p>
@@ -1237,7 +1236,7 @@ fieldset[disabled] .btn-ann.active {
         </div><!-- /Search by LATs -->
 
         <div id="CATs" class="toshow jumbotron">
-          <a type="button" class="close" onclick="toggle_off('CATs');toggle_on('Select_Transcripts')">&times;</a>
+          <a type="button" class="close" onclick="toggle_off('CATs');toggle_on('Select_Transcripts')">&laquo;</a>
           <h2><strong>CATs</strong></h2>
           <p>Choose a cancer type below:
           </p>
@@ -1272,7 +1271,7 @@ fieldset[disabled] .btn-ann.active {
         </div><!-- /Search by CATs -->
 
         <div id="CLATs" class="toshow jumbotron">
-          <a type="button" class="close" onclick="toggle_off('CLATs');toggle_on('Select_Transcripts')">&times;</a>
+          <a type="button" class="close" onclick="toggle_off('CLATs');toggle_on('Select_Transcripts')">&laquo;</a>
           <h2><strong>Cancer- and Lineage- associated transcripts (CLATs)</strong></h2>
           <p>Choose a cancer/lineage from below:
           </p>
@@ -1304,14 +1303,14 @@ fieldset[disabled] .btn-ann.active {
         </div><!-- /Search by CLATs -->
         
         <div id="HiCLNCs" class="toshow jumbotron">
-          <a type="button" class="close" onclick="toggle_off('HiCLNCs');toggle_on('Select_Transcripts')">&times;</a>
+          <a type="button" class="close" onclick="toggle_off('HiCLNCs');toggle_on('Select_Transcripts')">&laquo;</a>
           <h2><strong>Highly Conserved LncRNAs (HiCLNCs)</strong></h2>
           <p>Auto-populated, clickable table of HiCLNCs
           </p>
         </div><!-- /Table of HiCLNCs -->
         
         <div id="Annotated" class="toshow jumbotron">
-          <a type="button" class="close" onclick="toggle_off('Annotated');toggle_on('Select_Transcripts')">&times;</a>
+          <a type="button" class="close" onclick="toggle_off('Annotated');toggle_on('Select_Transcripts')">&laquo;</a>
           <h2><strong>Annotated lncRNAs</strong></h2>
           <p>Auto-populated, searchable, clickable table of annotated lncRNAs
           </p>
@@ -1324,6 +1323,22 @@ fieldset[disabled] .btn-ann.active {
           <div id="div-transcript-table"></div>
           <p></p>
         </div><!-- /Display table of transcripts -->
+        
+		<button class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">Example Row in Table</button>
+		<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+		    <div class="modal-content">
+			    <div class="modal-header">
+		            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		            <h4 class="modal-title" id="myModalLabel_About">Name of Transcript</h4>
+		        </div>	
+	            <div class="modal-body">
+	            Some graphs, images, and links.
+	            </div>
+		  	</div>
+		  </div>
+		</div><!-- Large modal example for data display-->
+		        
 
       </div><!-- /col-md-10 -->
     </div> <!-- /container -->
