@@ -9,6 +9,10 @@
 <td>Strand</td>
 <td>Annotated / Unannotated</td>
 <td>Intergenic / Intragenic</td>
+<td>Functional Category</td>
+<td>Functional Type</td>
+<td>Functional Name</td>
+<td>Enrichment Direction</td>
 </tr>
 </thead>
 <tbody>
@@ -23,6 +27,10 @@
   <td><%= t.get('strand') %></td>
   <td><%= t.get('tstatus') %></td>
   <td><%= t.get('tgenic') %></td>
+  <td><%= t.get('func_cat') %></td>
+  <td><%= t.get('func_type') %></td>
+  <td><%= t.get('func_name') %></td>
+  <td><%= t.get('func_dir') %></td>
 </tr>
 <% } %>
 </tbody>

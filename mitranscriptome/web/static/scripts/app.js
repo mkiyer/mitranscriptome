@@ -19,7 +19,7 @@ define([
   });
   
   // load transcripts
-  selectedTranscripts.load('CLAT', 'breast');
+  //selectedTranscripts.load('clat', 'breast');
  
   // button click functions
   function toggle_visibility(id) {
@@ -38,11 +38,11 @@ define([
     e.style.display = 'block';
   }
   // button events
-  $('#Choose_Study_Btn').click(function() {
+  $('#Select_Transcripts_Btn').click(function() {
 	toggle_off('Home');
 	toggle_off('Methods');
 	toggle_off('Downloads');
-	toggle_on('Choose_Study');
+	toggle_on('Select_Transcripts');
 	toggle_off('LATs');
 	toggle_off('CATs');
 	toggle_off('CLATs');
@@ -51,7 +51,7 @@ define([
 	toggle_off('Home');
 	toggle_on('Methods');
 	toggle_off('Downloads');
-	toggle_off('Choose_Study');
+	toggle_off('Select_Transcripts');
 	toggle_off('LATs');
 	toggle_off('CATs');
 	toggle_off('CLATs');
@@ -63,7 +63,7 @@ define([
 	toggle_off('LATs');
 	toggle_off('CATs');
 	toggle_off('CLATs');
-	toggle_off('Choose_Study');
+	toggle_off('Select_Transcripts');
   });
 
   $('#btn-close-transcript').click(function() { toggle_off('div-selected-transcripts'); });

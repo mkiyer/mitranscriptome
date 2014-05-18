@@ -27,7 +27,8 @@
   <body>
   
 <!-- could not link to custom changes, so added here and needs to be moved to other css sheet. sorry! -->
-<style>.btn-breast { 
+<style>
+.btn-breast { 
   color: #000000; 
   background-color: #E6008E; 
   border-color: #000000; 
@@ -1119,7 +1120,7 @@ fieldset[disabled] .btn-ann.active {
           <!--  <div class="bs-sidebar hidden-print" role="complementary">-->
           <ul class="nav nav-pills nav-stacked">
             <!-- <ul class="nav bs-sidenav">  -->
-              <li id="Choose_Study_Btn"><a href="#Choose_Study">Choose Study</a></li>
+              <li id="Select_Transcripts_Btn"><a href="#Select_Transcripts">Select Transcripts</a></li>
               <li id="Methods_Btn"><a href="#Methods">Methods</a></li>
               <li id="Downloads_Btn"><a href="#Downloads">Downloads</a></li>
           </div>
@@ -1133,20 +1134,20 @@ fieldset[disabled] .btn-ann.active {
         <div id="Home" class="jumbotron">
           <h1>Welcome to MiTranscriptome!</h1>
           <p>MiTranscriptome is a comprehensive tool that allows researchers to study gene expression across multiple cancer-related sample sets, providing powerful insight into the cancer transcriptome.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button" onclick="toggle_off('Home');toggle_on('Choose_Study')">Get Started &raquo;</a></p>
+          <p><a class="btn btn-lg btn-primary" href="#" role="button" onclick="toggle_off('Home');toggle_on('Select_Transcripts')">Get Started &raquo;</a></p>
         </div><!-- /Home Screen -->
 
-        <div id="Choose_Study" class="toshow jumbotron">
-          <a type="button" class="close" onclick="toggle_off('Choose_Study');toggle_on('Home')">&times;</a>
-          <h2><strong>Choose a study:</strong></h2>
+        <div id="Select_Transcripts" class="toshow jumbotron">
+          <a type="button" class="close" onclick="toggle_off('Select_Transcripts');toggle_on('Home')">&times;</a>
+          <h2><strong>Select Transcripts</strong></h2>
           <p>Our analysis has identified Lineage-Associated Transcripts (LATs), Cancer-Associated Transcripts (CATs), and a combination of Cancer- and Lineage-Associated Transcripts (CLATs). We have also identified a subset of Highly Conserved lncRNAs (HiCLNCs).  Finally, we have included a list of previously annotated lncRNAs for your browsing pleasure.  Please choose the transcript type you would like to view.
           </p>
           <p1>
-            <a class="btn btn-lg btn-lats" href="#" role="button" onclick="toggle_off('Choose_Study');toggle_on('LATs')">LATs &raquo;</a>
-            <a class="btn btn-lg btn-cats" href="#" role="button" onclick="toggle_off('Choose_Study');toggle_on('CATs')">CATs &raquo;</a>
-            <a class="btn btn-lg btn-clats" href="#" role="button" onclick="toggle_off('Choose_Study');toggle_on('CLATs')">CLATs &raquo;</a>
-            <a class="btn btn-lg btn-hiclncs" href="#" role="button" onclick="toggle_off('Choose_Study');toggle_on('HiCLNCs')">HiCLNCs &raquo;</a>
-            <a class="btn btn-lg btn-ann" href="#" role="button" onclick="toggle_off('Choose_Study');toggle_on('Annotated')"><small>Annotated lncRNAs &raquo;</small></a>
+            <a class="btn btn-lg btn-lats" href="#" role="button" onclick="toggle_off('Select_Transcripts');toggle_on('LATs')">LATs &raquo;</a>
+            <a class="btn btn-lg btn-cats" href="#" role="button" onclick="toggle_off('Select_Transcripts');toggle_on('CATs')">CATs &raquo;</a>
+            <a class="btn btn-lg btn-clats" href="#" role="button" onclick="toggle_off('Select_Transcripts');toggle_on('CLATs')">CLATs &raquo;</a>
+            <a class="btn btn-lg btn-hiclncs" href="#" role="button" onclick="toggle_off('Select_Transcripts');toggle_on('HiCLNCs')">HiCLNCs &raquo;</a>
+            <a class="btn btn-lg btn-ann" href="#" role="button" onclick="toggle_off('Select_Transcripts');toggle_on('Annotated')"><small>Annotated lncRNAs &raquo;</small></a>
           </p1>
         </div><!-- /Choose Study -->
 
@@ -1165,7 +1166,7 @@ fieldset[disabled] .btn-ann.active {
         </div><!-- /View Downloads -->
 
         <div id="LATs" class="toshow jumbotron">
-          <a type="button" class="close" onclick="toggle_off('LATs');toggle_on('Choose_Study')">&times;</a>
+          <a type="button" class="close" onclick="toggle_off('LATs');toggle_on('Select_Transcripts')">&times;</a>
           <h2><strong>Lineage-associated transcripts (LATs)</strong></h2>
           <p>Choose a lineage below:
           </p>
@@ -1232,11 +1233,11 @@ fieldset[disabled] .btn-ann.active {
 			  	<li><strong>LUAD</strong>  Lung Adenocarcinoma</li>
 			  	<li><strong>LUSC</strong>  Lung Squamous Cell Carcinoma</li>
 			  	<li><strong>MPN</strong>  Myeloproliferative Neoplasm</li>
-				</ul>
+			</ul>
         </div><!-- /Search by LATs -->
 
         <div id="CATs" class="toshow jumbotron">
-          <a type="button" class="close" onclick="toggle_off('CATs');toggle_on('Choose_Study')">&times;</a>
+          <a type="button" class="close" onclick="toggle_off('CATs');toggle_on('Select_Transcripts')">&times;</a>
           <h2><strong>CATs</strong></h2>
           <p>Choose a cancer type below:
           </p>
@@ -1271,7 +1272,7 @@ fieldset[disabled] .btn-ann.active {
         </div><!-- /Search by CATs -->
 
         <div id="CLATs" class="toshow jumbotron">
-          <a type="button" class="close" onclick="toggle_off('CLATs');toggle_on('Choose_Study')">&times;</a>
+          <a type="button" class="close" onclick="toggle_off('CLATs');toggle_on('Select_Transcripts')">&times;</a>
           <h2><strong>Cancer- and Lineage- associated transcripts (CLATs)</strong></h2>
           <p>Choose a cancer/lineage from below:
           </p>
@@ -1303,14 +1304,14 @@ fieldset[disabled] .btn-ann.active {
         </div><!-- /Search by CLATs -->
         
         <div id="HiCLNCs" class="toshow jumbotron">
-          <a type="button" class="close" onclick="toggle_off('HiCLNCs');toggle_on('Choose_Study')">&times;</a>
+          <a type="button" class="close" onclick="toggle_off('HiCLNCs');toggle_on('Select_Transcripts')">&times;</a>
           <h2><strong>Highly Conserved LncRNAs (HiCLNCs)</strong></h2>
           <p>Auto-populated, clickable table of HiCLNCs
           </p>
         </div><!-- /Table of HiCLNCs -->
         
         <div id="Annotated" class="toshow jumbotron">
-          <a type="button" class="close" onclick="toggle_off('Annotated');toggle_on('Choose_Study')">&times;</a>
+          <a type="button" class="close" onclick="toggle_off('Annotated');toggle_on('Select_Transcripts')">&times;</a>
           <h2><strong>Annotated lncRNAs</strong></h2>
           <p>Auto-populated, searchable, clickable table of annotated lncRNAs
           </p>

@@ -3,7 +3,6 @@ Created on May 9, 2014
 
 @author: mkiyer
 '''
-import json
 
 class DBInterfaceFile(object):
     def __init__(self):
