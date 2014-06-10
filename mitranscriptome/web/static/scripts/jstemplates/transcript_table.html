@@ -2,15 +2,15 @@
 <thead>
 <tr>
 <td>Info</td>
-<td>Transcript ID</td>
-<td>Gene ID</td>
+<td>Functional Name</td>
 <td>UCSC</td>
+<td>Tissue/Cancer Type</td>
 <td>Annotated / Unannotated</td>
 <td>Intergenic / Intragenic</td>
 <td>Functional Category</td>
-<td>Functional Type</td>
-<td>Functional Name</td>
-<td>Enrichment Direction</td>
+<td>Ultraconserved Element</td>
+<td>Conserved Bases</td>
+<td>SSEA Percentile</td>
 </tr>
 </thead>
 <tbody>
@@ -25,25 +25,67 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel_About"><%= t.get('transcript_id') %></h4>
+            <h4 class="modal-title" id="myModalLabel_About"><%= t.get('func_name') %></h4>
 	      </div>	
 	      <div class="modal-body">
-	        <%= t.get('gene_id') %> Some graphs, images, and links.
-	        <img src="<%= t.get('expr_plot') %>" alt="TODO"/>
+	        <%= t.get('gene_id') %> Some graphs, images, and links.<br>
+	        <div class="col-md-6">
+		        <div class="thumbnail">
+		        	<img src="<%= t.get('ssea_can') %>" alt="TODO" width="100%" title = 'Lineage SSEA'/>
+		        </div>
+		        <div class="caption">
+		        	<p> SSEA plot for Cancer vs Normal </p>
+		        </div>
+	        </div>
+	        <div class="col-sm-5 col-md-6">
+		        <div class="thumbnail">
+		        	<img src="<%= t.get('ssea_can_expr') %>" alt="TODO" width="100%" title = 'Lineage SSEA'/>
+		        </div>
+		        <div class="caption">
+		        	<p> Expression. Red = Cancer; Blue = Normal </p>
+		        </div>
+	        </div>
+	        <div class="col-sm-5 col-md-6">
+		        <div class="thumbnail">
+		        	<img src="<%= t.get('ssea_type') %>" alt="TODO" width="100%" title = 'Cancer vs Normal SSEA'/>
+		        </div>
+		        <div class="caption">
+		        	<p> SSEA plot for Lineage/Cancer Specificity </p>
+		        </div>
+	        </div>
+	        <div class="col-sm-5 col-md-6">
+		        <div class="thumbnail">
+		        	<img src="<%= t.get('ssea_type_expr') %>" alt="TODO" width="100%" title = 'Cancer vs Normal SSEA'/>
+		        </div>
+		        <div class="caption">
+		        	<p> Expression. Red = Tissue/Cancer of interest; Blue = All other samples </p>
+		        </div>
+	        </div>
+
+	        <div class="col-sm-5 col-md-10">
+		        <div class="thumbnail">
+		        	<img src="<%= t.get('expr_plot') %>" alt="TODO" width="100%" title = 'Expression Plot'/>
+		        </div>
+		        <div class="caption">
+		        	<p> Expression across all samples </p>
+		        </div>
+	        </div>
+	        I don't know how to get these images in the right place with the modal background in the right place
+	        <img src="<%= t.get('expr_plot') %>" alt="TODO" width="100%" title = 'Expression Plot'/>
 	      </div>
 	   </div>
 	  </div>
 	</div><!-- Large modal example for data display-->
   </td>
-  <td><%= t.get('transcript_id') %></td>
-  <td><%= t.get('gene_id') %></td>
+  <td><%= t.get('func_name') %></td>
   <td><a href="<%= t.get('ucsc_link') %>" target="_blank"><%= t.get('chrom') + ':' + t.get('start') + '-' + t.get('end') + '[' + t.get('strand') + ']' %></a></td>
+  <td><%= t.get('func_type') %></td>
   <td><%= t.get('tstatus') %></td>
   <td><%= t.get('tgenic') %></td>
   <td><%= t.get('func_cat') %></td>
-  <td><%= t.get('func_type') %></td>
-  <td><%= t.get('func_name') %></td>
-  <td><%= t.get('func_dir') %></td>
+  <td><%= t.get('uce') %></td>
+  <td><%= t.get('cons') %></td>
+  <td><%= t.get('avg_frac') %></td>
 </tr>
 <% } %>
 </tbody>
