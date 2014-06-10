@@ -21,13 +21,13 @@ define([
         return response.results;
     },
 
-    load: function(func_cat, func_type) {
+    load: function(func_type) {
       var self = this;
       // clear collection
       self.reset();
       // load
       var ajaxParams = _.extend(self.ajaxParams,
-        { data: JSON.stringify({ func_cat: func_cat, func_type: func_type }) }
+        { data: JSON.stringify({func_type: func_type }) }
       );
       this.fetch(self.ajaxParams);
     }

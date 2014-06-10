@@ -7,7 +7,8 @@ MiTranscriptome web server
 @version: 0.0.1
 '''
 import collections
-from flask import Flask, render_template, request, g, jsonify
+import os
+from flask import Flask, render_template, request, g, jsonify, send_file
 
 # project imports
 from dbapi import DBInterfaceFile
@@ -22,6 +23,8 @@ TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start',
                               'end', 'strand', 'tstatus', 'tgenic', 
                               'func_name', 'func_type', 'func_cat', 
                               'func_dir']
+EXPRESSION_PLOT_DIR = '/mctp/projects/mitranscriptome/naming/expr_plots'
+
 
 def init_transcript_db():
     return DBInterfaceFile.open(TRANSCRIPT_METADATA_FILE)
@@ -36,7 +39,10 @@ def init_transcript_tables(tdb):
                                           fields=TRANSCRIPT_METADATA_FIELDS)
     ttables = collections.defaultdict(lambda: [])
     for r in results:
-        k = (r['func_cat'], r['func_type'])
+        k = r['func_type']
+        # TODO: construct bigbed link
+        r['ucsc_link'] = 'http://www.google.com'
+        r['expr_plot'] = 'http://127.0.0.1:5000/get_expression_boxplot?transcript_id=%s' % (r['transcript_id'])        
         ttables[k].append(r)
     return ttables
 
@@ -44,6 +50,14 @@ def get_transcript_tables(tdb):
     if not hasattr(g, 'transcript_tables'):
         g.transcript_tables = init_transcript_tables(tdb)
     return g.transcript_tables
+
+@app.route('/get_expression_boxplot')
+def get_expression_boxplot():
+    transcript_id = request.args.get('transcript_id')
+    filename = os.path.join(EXPRESSION_PLOT_DIR, '%s_expr.jpeg' % (transcript_id))
+    app.logger.debug('Get expression boxplot: %s' % (filename))
+    # TODO: debugging (make sure file exists)
+    return send_file(filename, mimetype='image/jpeg')
 
 @app.route('/transcripts', methods=['POST'])
 def request_transcripts():
@@ -60,14 +74,12 @@ def request_transcripts():
     ttables = get_transcript_tables(get_transcript_db())
     # parse the incoming json request
     d = request.get_json()
-    func_cat = d['func_cat']
-    func_type = d['func_type']
-    k = (func_cat, func_type)
+    k = d['func_type']
     if k not in ttables:
-        app.logger.error('Transcript table (%s:%s) not found' % (k))
+        app.logger.error('Transcript table (%s) not found' % (k))
         # TODO: handle error?
         return jsonify(results=None)
-    app.logger.debug('Transcript table %s:%s' % (k))
+    app.logger.debug('Transcript table %s' % (k))
     return jsonify(results=ttables[k])
 
 @app.route('/')

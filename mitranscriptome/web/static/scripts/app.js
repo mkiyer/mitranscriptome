@@ -19,7 +19,7 @@ define([
   });
   
   // load transcripts
-  //selectedTranscripts.load('clat', 'breast');
+  selectedTranscripts.load('breast');
  
   // button click functions
   function toggle_visibility(id) {
@@ -37,6 +37,7 @@ define([
     var e = document.getElementById(id);
     e.style.display = 'block';
   }
+  
   // button events
   $('#Select_Transcripts_Btn').click(function() {
 	toggle_off('Home');
@@ -74,4 +75,13 @@ define([
 
   $('#btn-close-transcript').click(function() { toggle_off('div-selected-transcripts'); });
 
+  
+  $('.btn-bladder').click(function() { 
+	  console.log('BLADDER'); 
+	  selectedTranscripts.load('bladder');
+  });
+
+
+  
+  
 });
