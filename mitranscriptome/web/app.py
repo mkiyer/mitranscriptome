@@ -160,6 +160,9 @@ def ssea_selector(type, cat):
     if type == 'uterine':
         ssea_type = 'cancer_type_uterine_endometrial_carcinoma'
         ssea_can = 'NA'
+    
+    
+    
     return ssea_type, ssea_can
     
 def init_transcript_db():
@@ -181,13 +184,10 @@ def init_transcript_tables(tdb):
                             'hgS_otherUserName=mitranscriptome&'
                             'hgS_otherUserSessionName=mitranscriptome&position=%s' % 
                             (r['chrom'] + '%3A' + r['start'] + '-' + r['end']))
-        r['modal'] = 'http://127.0.0.1:5000/modal?t_id=%s&name=%s&func_cat=%s&func_type=%s' % (r['transcript_id'], 
-                                                                             r['func_name'],
-                                                                             r['func_cat'],
-                                                                             r['func_type'])
-        r['seq_request'] = 'http://127.0.0.1:5000/download_seq?seq=%s' % (r['seq'])
+        r['modal'] = 'http://127.0.0.1:5000/modal?t_id=%s' % (r['transcript_id'])
+        r['seq_request'] = 'http://127.0.0.1:5000/download_seq?t_id=%s' % (r['transcript_id'])
         if r['avg_frac'] != 'NA':
-            r['avg_frac'] = format(float(r['avg_frac']), '.4f')
+            r['avg_frac'] = float(format(float(r['avg_frac']), '.4f'))
         ttables[k].append(r)
     for k in ttables.iterkeys():
         ttables[k] = sorted(ttables[k], key=itemgetter('avg_frac'), reverse=True)
@@ -203,7 +203,6 @@ def get_transcript_tables(tdb):
 def get_expression_boxplot():
     transcript_id = request.args.get('transcript_id')
     filename = os.path.join(EXPRESSION_PLOT_DIR, '%s_expr.jpeg' % (transcript_id))
-    app.logger.debug('Get expression boxplot: %s' % (filename))
     # TODO: debugging (make sure file exists)
     return send_file(filename, mimetype='image/jpeg')
 
@@ -214,7 +213,6 @@ def get_ssea():
     plot_type = request.args.get('plot_type')
     
     filename = os.path.join(SSEA_PLOT_DIR, subdir, '%s.%s.png' % (transcript_id, plot_type))
-    app.logger.debug('Get expression boxplot: %s' % (filename))
     # TODO: debugging (make sure file exists)
     return send_file(filename, mimetype='image/jpeg')
 
@@ -244,30 +242,44 @@ def request_transcripts():
 @app.route('/modal')
 def modal():
     t_id = request.args.get('t_id')
-    name = request.args.get('name')
-    func_cat = request.args.get('func_cat')
-    func_type = request.args.get('func_type')
-    ssea_type, ssea_can = ssea_selector(func_type, func_cat)
-    ssea_type_img = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_type)
-    ssea_type_expr_img = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_type)        
-    ssea_can_img = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_can)
-    ssea_can_expr_img = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_can)
-    expr_img = 'http://127.0.0.1:5000/get_expression_boxplot?transcript_id=%s' % (t_id)
-    return render_template('modal.html', 
-                           t_id=t_id, 
-                           name=name,
-                           ssea_type_img=ssea_type_img,
-                           ssea_type_expr_img=ssea_type_expr_img,
-                           ssea_can_img=ssea_can_img,
-                           ssea_can_expr_img=ssea_can_expr_img,
-                           expr_img=expr_img                          
-                           )
+    meta = get_transcript_db().metadata_json_dict[t_id]
+    ssea_type, ssea_can = ssea_selector(meta['func_type'], meta['func_cat'])
+    meta['loc'] = meta['chrom'] + ':' + meta['start'] + '-' + meta['end'] + '[' + meta['strand'] + ']'   
+    can_show = ''
+    type_show = ''
+    if meta['tcat'] == 'lncrna':
+        meta['tcat'] = 'lncRNA'
+    if meta['tcat'] == 'tucp':
+        meta['tcat'] = 'TUCP'
+    if meta['func_cat'] == 'clat':
+        meta['func_cat'] = 'Cancer and Lineage Association'
+    if meta['func_cat'] == 'lat':
+        meta['func_cat'] = 'Lineage Association'
+        meta['can_show'] = 'hide'
+    if meta['func_cat'] == 'cat':
+        meta['func_cat'] = 'Cancer Association'
+        meta['type_show'] = 'hide'
+    meta['avg_frac'] = float(format(float(meta['avg_frac']), '.4f'))
+    meta['ssea_type_img'] = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_type)
+    
+    meta['ssea_type_expr_img'] = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_type)        
+    meta['ssea_can_img'] = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_can)
+    meta['ssea_can_expr_img'] = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_can)
+    meta['expr_img'] = 'http://127.0.0.1:5000/get_expression_boxplot?transcript_id=%s' % (t_id)
+    meta['ucsc_link'] = ('http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&'
+                            'hgS_otherUserName=mitranscriptome&'
+                            'hgS_otherUserSessionName=mitranscriptome&position=%s' % 
+                            (meta['chrom'] + '%3A' + meta['start'] + '-' + meta['end']))
+    meta['seq_link'] = 'http://127.0.0.1:5000/download_seq?t_id=%s' % t_id
+    
+    return render_template('modal.html', meta=meta)
 
 @app.route('/download_seq')
 def download_seq():
-    seq = request.args.get('seq')
+    t_id = request.args.get('t_id')
+    meta = get_transcript_db().metadata_json_dict[t_id]
+    seq = meta['seq']
     response = make_response(seq)
-    tdb = get_transcript_db()
     # This is the key: Set the right header for the response
     # to be downloaded, instead of just printed on the browser
     response.headers["Content-Disposition"] = "attachment; filename=sequence.txt"

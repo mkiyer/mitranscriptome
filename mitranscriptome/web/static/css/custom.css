@@ -2,6 +2,18 @@
     word-wrap: break-word;
 }
 
+.blue {
+    color: blue;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
 .popover {
   font-size: 12px;
   font-weight: 300;

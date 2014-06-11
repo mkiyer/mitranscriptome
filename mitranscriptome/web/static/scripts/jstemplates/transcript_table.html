@@ -1,17 +1,18 @@
+<h3>Selected Transcripts:</h3>
 <table id="transcripts_table" class="table table-hover">
 <thead>
 <tr>
 <td>Info</td>
 <td>Seq</td>
-<td>Functional Name</td>
-<td>UCSC</td>
-<td>Tissue/Cancer Type</td>
-<td>Annotated / Unannotated</td>
-<td>Intergenic / Intragenic</td>
-<td>Functional Category</td>
-<td>Ultraconserved Element</td>
-<td>Conserved Bases</td>
-<td>SSEA Percentile</td>
+<td>Name</td>
+<td>Location</td>
+<td>Tissue/ Cancer</td>
+<td>Unannotated?</td>
+<td>Intergenic?</td>
+<td>Association Type</td>
+<td>Ultraconserved Element?</td>
+<td>Conserved Bases?</td>
+<td>SSEA %ile</td>
 </tr>
 </thead>
 <tbody>
@@ -54,12 +55,49 @@
   <td><%= t.get('func_name') %></td>
   <td><a href="<%= t.get('ucsc_link') %>" target="_blank"><%= t.get('chrom') + ':' + t.get('start') + '-' + t.get('end') + '[' + t.get('strand') + ']' %></a></td>
   <td><%= t.get('func_type') %></td>
-  <td><%= t.get('tstatus') %></td>
-  <td><%= t.get('tgenic') %></td>
+  <td class="text-center">
+    <% if(t.get('tstatus')=="unannotated") { %>
+     <span class="glyphicon glyphicon-ok green"></span>
+    <% } %>
+    <% if(t.get('tstatus')=="annotated") { %>
+     <span class="glyphicon glyphicon-remove"></span>
+    <% } %>
+  </td>
+  <td class="text-center">
+    <% if(t.get('tgenic')=="intergenic") { %>
+     <span class="glyphicon glyphicon-ok green"></span>
+    <% } %>
+    <% if(t.get('tgenic')=="intragenic") { %>
+     <span class="glyphicon glyphicon-remove"></span>
+    <% } %>
+  </td>
   <td><%= t.get('func_cat') %></td>
-  <td><%= t.get('uce') %></td>
-  <td><%= t.get('cons') %></td>
-  <td><%= t.get('avg_frac') %></td>
+  <td class="text-center">
+    <% if(t.get('uce')=="TRUE") { %>
+     <span class="glyphicon glyphicon-ok green"></span>
+    <% } %>
+    <% if(t.get('uce')=="FALSE") { %>
+     <span class="glyphicon glyphicon-remove"></span>
+    <% } %>
+  </td>
+  <td class="text-center">
+    <% if(t.get('cons')=="TRUE") { %>
+     <span class="glyphicon glyphicon-ok green"></span>
+    <% } %>
+    <% if(t.get('cons')=="FALSE") { %>
+     <span class="glyphicon glyphicon-remove"></span>
+    <% } %>
+  </td>
+  <td class="text-center">
+    <% if(t.get('func_dir')=="up") { %>
+     <span><span class="glyphicon glyphicon-arrow-up red"></span><%= t.get('avg_frac')%></span>
+    <% } %>
+    <% if(t.get('func_dir')=="dn") { %>
+     <span class="glyphicon glyphicon-arrow-down blue"></span><%= t.get('avg_frac')%>
+    <% } %>
+    
+  </td>
+  
 </tr>
 <% } %>
 </tbody>

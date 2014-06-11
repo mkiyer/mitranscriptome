@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/BlockM.ico') }}">
-    <title>{{name}}</title>
+    <title>{{meta['func_name']}}</title>
 
     <!-- Bootstrap CSS -->
     <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" rel="stylesheet">
@@ -25,72 +25,16 @@
      <script src="{{ url_for('static', filename='scripts/custom.js') }}"></script>
   </head>
 <body>
-	
-    <!-- Fixed horizontal navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="glyphicon glyphicon-home" href="/"></a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#" data-toggle="modal" data-target="#myModal_Help">Help</a></li>
-            <li><a href="#" data-toggle="modal" data-target="#myModal_About">About</a></li>
-            <li><a href="#" data-toggle="modal" data-target="#myModal_Contact">Contact</a></li>
-        </div>
-      </div><!--/.container -->
-    </div><!--/.navbar -->
-
-    <div class="modal fade" id="myModal_Help" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_Help" aria-hidden="true">
+	   
+    <div class="modal fade" id="explain-ssea" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_Contact" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel_Help">Help</h4>
+            <h4 class="modal-title" id="myModalLabel_Contact">SSEA Explanation</h4>
           </div>
           <div class="modal-body">
-            We are sorry you are having trouble. Please try one of the following links for assistance:
-          </div>
-            <ul>
-              <li><a href="#">Google Forum</a></li>
-              <li><a href="#">SSEA Source Code</a></li>
-              <li><a href="#">AssemblyLine Source Code</a></li>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
-    <div class="modal fade" id="myModal_About" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_About" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel_About">About</h4>
-          </div>
-          <div class="modal-body">
-            MiTranscriptome was developed at the Michigan Center for Translational Pathology at the University of Michigan.
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
-    <div class="modal fade" id="myModal_Contact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_Contact" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel_Contact">Contact</h4>
-          </div>
-          <div class="modal-body">
-            <ul>
-              <li>Arul Chinnaiyan: arul@umich.edu</a></li>
-              <li>Matthew Iyer: mkiyer@umich.edu</a></li>
-              <li>Yashar Niknafs: yniknafs@umich.edu</a></li>
+            SSEA Explanation Here
             </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -98,71 +42,203 @@
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+    
+<!--    END MODALS -->
    
  <div class="container">
 
         <div class="row">
 
             <div class="col-lg-12">
-                <h1 class="page-header">2 Col Portfolio
-                    <small>Showcase Your Work Two Columns at a Time</small>
+                <h1 class="page-header">{{meta['func_name']}}
+                    <small>Additional Information</small>
                 </h1>
             </div>
 
         </div>
 		
 		<div class="row">
-			<div class="col-lg-12 col-md-12 portfolio-item text-center">
-				<th>table goes here </th>
-				<td></td>
-			</div>
-			<div class="col-lg-12 col-md-12 portfolio-item text-center">
-				<h3><a href="#project-two">Project Two</a>
-	            </h3>
-	            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-	        </div>
+				<div class="col-lg-3 col-md-3 portfolio-item text-center"></div>
+				<div class="col-lg-6 portfolio-item">
+					<table id="transcript_info_table" class="table table-striped">
+						<thead>
+						</thead>
+						<tbody>
+							<tr>
+							  <td>
+							    Name
+							  </td>
+							  <td>
+							    {{meta['func_name']}}
+							  </td>
+							</tr>
+							<tr>
+							  <td>
+							    MiTranscriptome Gene ID
+							  </td>
+							  <td>
+							    {{meta['gene_id']}}
+							  </td>
+							</tr>
+							<tr>
+							  <td>
+							    Position
+							  </td>
+							  <td>
+							    <a href={{meta['ucsc_link']}} target="_blank"> {{meta['loc']}}</a>
+							  </td>
+							</tr>
+							<tr>
+							  <td>
+							    Tissue/Cancer Association
+							  </td>
+							  <td>
+							    {{meta['func_type']}}
+							  </td>
+							</tr>
+							<tr>
+							  <td>
+							    Association Type
+							  </td>
+							  <td>
+							    {{meta['func_cat']}}
+							  </td>
+							</tr>
+							<tr>
+							  <td>
+							    SSEA Associtaion Direction/Percentile
+							  </td>
+							  <td>
+							    <script type="text/javascript">
+							    if("{{meta['func_dir']}}"=="up"){
+							    	document.write("<span class=\"glyphicon glyphicon-arrow-up red\"></span>")	
+							    }
+							    if("{{meta['func_dir']}}"=="dn"){
+							    	document.write("<span class=\"glyphicon glyphicon-arrow-down blue\"></span>")	
+							    }
+							    </script>  {{meta['avg_frac']}}
+							  </td>
+							</tr>
+							<tr>
+							  <td>
+							    Contains Ultraconserved Element?
+							  </td>
+							  <td>
+							   <script type="text/javascript">
+							    if("{{meta['uce']}}"=="TRUE"){
+							    	document.write("<span class=\"glyphicon glyphicon-ok green\"></span>")	
+							    }
+							    if("{{meta['uce']}}"=="FALSE"){
+							    	document.write("<span class=\"glyphicon glyphicon-remove\"></span>")	
+							    }
+							    </script>
+							  </td>
+							</tr>
+							<tr>
+							  <td>
+							    Conserved Bases?
+							  </td>
+							  <td>
+							   <script type="text/javascript">
+							    if("{{meta['cons']}}"=="TRUE"){
+							    	document.write("<span class=\"glyphicon glyphicon-ok green\"></span>")	
+							    }
+							    if("{{meta['cons']}}"=="FALSE"){
+							    	document.write("<span class=\"glyphicon glyphicon-remove\"></span>")	
+							    }
+							    </script>
+							  </td>
+							</tr>
+							<tr>
+							  <td>
+							    TUCP? 
+							  </td>
+							  <td>
+							    <script type="text/javascript">
+							    if("{{meta['tcat']}}"=="TUCP"){
+							    	document.write("<span class=\"glyphicon glyphicon-ok green\"></span>")	
+							    }
+							    if("{{meta['tcat']}}"=="lncRNA"){
+							    	document.write("<span class=\"glyphicon glyphicon-remove\"></span>")	
+							    }
+							    </script>
+							  </td>
+							</tr>
+							<tr>
+							  <td>
+							    Unannotated?  
+							  </td>
+							  <td>
+							    <script type="text/javascript">
+							    if("{{meta['tstatus']}}"=="unannotated"){
+							    	document.write("<span class=\"glyphicon glyphicon-ok green\"></span>")	
+							    }
+							    if("{{meta['tstatus']}}"=="annotated"){
+							    	document.write("<span class=\"glyphicon glyphicon-remove\"></span>")	
+							    }
+							    </script>
+							  </td>
+							</tr>
+							<tr>
+							  <td>
+							    Intergenic?  
+							  </td>
+							  <td>
+							    <script type="text/javascript">
+							    if("{{meta['tgenic']}}"=="intergenic"){
+							    	document.write("<span class=\"glyphicon glyphicon-ok green\"></span>")	
+							    }
+							    if("{{meta['tgenic']}}"=="intragenic"){
+							    	document.write("<span class=\"glyphicon glyphicon-remove\"></span>")	
+							    }
+							    </script>
+							  </td>
+							</tr>
+							<tr>
+							  <td>
+							    Sequence  
+							  </td>
+							  <td>
+							    <a href={{meta['seq_link']}} target="_blank"> Download</a>
+							  </td>
+							</tr>
+						</tbody>
+						</table>
+					
+				</div>
+				<div class="col-lg-3 col-md-3 portfolio-item text-center"></div>
+				
 		</div>
-
-        <div class="row">
+		
+        <div class="row {{meta['can_show']}}">
 
             <div class="col-lg-6 col-md-6 portfolio-item">
-<!--                 <a href="#project-one"> -->
-                    <img class="img-responsive" src={{ssea_can_img}}>
-<!--                 </a> -->
-                <h3><a href="#project-one">Project One</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+					<h3>Cancer vs Normal SSEA Plot</h3>
+	                <a href="#" data-toggle="modal" data-target="#explain-ssea">Explain SSEA</a>
+                    <img class="img-responsive thumbnail" src={{meta['ssea_can_img']}}>
             </div>
 
             <div class="col-lg-6 col-md-6 portfolio-item">
-<!--                 <a href="#project-two"> -->
-                    <img class="img-responsive" src={{ssea_can_expr_img}}>
-<!--                 </a> -->
-                <h3><a href="#project-two">Project Two</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+					<h3>Cancer vs Normal Expression Plot</h3>
+	                <p>Color Code: <span class="red"> Cancer (Left)</span>; <span class="blue"> Normal (Right)</span></p>
+                    <img class="img-responsive thumbnail" src={{meta['ssea_can_expr_img']}}>
+                
             </div>
 
         </div>
 
-        <div class="row">
-
+        <div class="row {{meta['type_show']}}">
             <div class="col-lg-6 col-md-6 portfolio-item">
-<!--                 <a href="#project-three"> -->
-                    <img class="img-responsive" src={{ssea_type_img}}>
-<!--                 </a> -->
-                <h3><a href="#project-three">Project Three</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+					<h3>Lineage/Cancer Specificty SSEA Plot</h3>
+	                <a href="#" data-toggle="modal" data-target="#explain-ssea">Explain SSEA</a>
+                    <img class="img-responsive thumbnail" src={{meta['ssea_type_img']}}>
+                
             </div>
 
             <div class="col-lg-6 col-md-6 portfolio-item">
-<!--                 <a href="#project-four"> -->
-                    <img class="img-responsive" src={{ssea_type_expr_img}}>
-<!--                 </a> -->
-                <h3><a href="#project-four">Project Four</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+					<h3>Lineage/Cancer Specificity Expression Plot</h3>
+	                <p>Color Code: <span class="red"> Selected Tissue/Cancer (Left)</span>; <span class="blue"> All Other Samples (Right)</span></p>
+                    <img class="img-responsive" src={{meta['ssea_type_expr_img']}}>
             </div>
 
         </div>
@@ -172,31 +248,28 @@
 			<div class="col-lg-2 col-md-2"></div>
             <div class="col-lg-8 col-md-8">
 <!--                 <a href={{expr_img}}> -->
-					<div class="row text-center">
-                		<h3><a href="#project-five">Project Five</a></h3>
+                	<div class="row text-center">
+                		<h3>Expression Across All Samples in Compendium</h3>
                 	</div>
 					<div class="row">
-	                    <img class="img-responsive col-lg-12 col-md-12" src={{expr_img}}>
+	                    <img class="img-responsive col-lg-12 col-md-12" src={{meta['expr_img']}}>
                     </div>
 <!--                 </a> -->
-					<div class="row text-center">
-                		<h3><a href="#project-five">Project Five</a></h3>
-                		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-                	</div>
-                
             </div>
 			<div class="col-lg-2 col-md-2"></div>
 
         </div>
 
 
-               <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Company 2013</p>
-                </div>
-            </div>
-        </footer>
+<!--         <footer> -->
+<!--             <div class="row"> -->
+<!--                 <div class="col-lg-12"> -->
+<!--                     <p>Copyright &copy; Company 2013</p> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--         </footer> -->
+
+
 
     </div>
     <!-- /.container -->
