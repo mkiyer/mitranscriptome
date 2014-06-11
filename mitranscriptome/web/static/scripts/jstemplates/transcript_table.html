@@ -2,6 +2,7 @@
 <thead>
 <tr>
 <td>Info</td>
+<td>Seq</td>
 <td>Functional Name</td>
 <td>UCSC</td>
 <td>Tissue/Cancer Type</td>
@@ -18,64 +19,37 @@
 <% var t = transcriptCollection.at(i); %>
 <tr>
   <td>
-    <button class="btn btn-default" data-toggle="modal" data-target="#<%= t.get('transcript_id') %>_info">Info</button>
-
-    <div id="<%= t.get('transcript_id') %>_info" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
+    <a class="btn btn-default btn-xs"  href='<%= t.get('modal') %>' target="_blank">
+     <span class="glyphicon glyphicon-th text-center" ></span></a>
+  </td>
+  <td>
+    <a class="btn btn-default btn-xs"  data-toggle="modal" data-target="#<%= t.get('transcript_id') %>seq-modal" target="_blank">
+     <span class="glyphicon glyphicon-save text-center" ></span></a>
+	<div class="modal fade" id="<%= t.get('transcript_id') %>seq-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel_About"><%= t.get('func_name') %></h4>
-	      </div>	
-	      <div class="modal-body">
-	        <%= t.get('gene_id') %> Some graphs, images, and links.<br>
-	        <div class="col-md-6">
-		        <div class="thumbnail">
-		        	<img src="<%= t.get('ssea_can') %>" alt="TODO" width="100%" title = 'Lineage SSEA'/>
-		        </div>
-		        <div class="caption">
-		        	<p> SSEA plot for Cancer vs Normal </p>
-		        </div>
-	        </div>
-	        <div class="col-sm-5 col-md-6">
-		        <div class="thumbnail">
-		        	<img src="<%= t.get('ssea_can_expr') %>" alt="TODO" width="100%" title = 'Lineage SSEA'/>
-		        </div>
-		        <div class="caption">
-		        	<p> Expression. Red = Cancer; Blue = Normal </p>
-		        </div>
-	        </div>
-	        <div class="col-sm-5 col-md-6">
-		        <div class="thumbnail">
-		        	<img src="<%= t.get('ssea_type') %>" alt="TODO" width="100%" title = 'Cancer vs Normal SSEA'/>
-		        </div>
-		        <div class="caption">
-		        	<p> SSEA plot for Lineage/Cancer Specificity </p>
-		        </div>
-	        </div>
-	        <div class="col-sm-5 col-md-6">
-		        <div class="thumbnail">
-		        	<img src="<%= t.get('ssea_type_expr') %>" alt="TODO" width="100%" title = 'Cancer vs Normal SSEA'/>
-		        </div>
-		        <div class="caption">
-		        	<p> Expression. Red = Tissue/Cancer of interest; Blue = All other samples </p>
-		        </div>
-	        </div>
-
-	        <div class="col-sm-5 col-md-10">
-		        <div class="thumbnail">
-		        	<img src="<%= t.get('expr_plot') %>" alt="TODO" width="100%" title = 'Expression Plot'/>
-		        </div>
-		        <div class="caption">
-		        	<p> Expression across all samples </p>
-		        </div>
-	        </div>
-	        I don't know how to get these images in the right place with the modal background in the right place
-	        <img src="<%= t.get('expr_plot') %>" alt="TODO" width="100%" title = 'Expression Plot'/>
-	      </div>
-	   </div>
-	  </div>
-	</div><!-- Large modal example for data display-->
+            <h4 class="modal-title" id="myModalLabel_Help">Exon Sequence for <%= t.get('func_name')%>: 
+            <a href="<%= t.get('ucsc_link') %>" target="_blank"> <%= t.get('chrom') + ':' + t.get('start') + 
+            '-' + t.get('end') + '[' + t.get('strand') + ']' %></a>
+            </h4>
+          </div>
+          <div class="modal-body">
+            Exon junctions represented "<->".<br>
+            <br>
+            <a href="<%= t.get('seq_request') %>"> Download</a>
+            <br>
+            <br>
+            <%= t.get('seq') %>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
   </td>
   <td><%= t.get('func_name') %></td>
   <td><a href="<%= t.get('ucsc_link') %>" target="_blank"><%= t.get('chrom') + ':' + t.get('start') + '-' + t.get('end') + '[' + t.get('strand') + ']' %></a></td>
@@ -90,3 +64,4 @@
 <% } %>
 </tbody>
 </table>
+

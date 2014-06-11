@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/BlockM.ico') }}">
+    <title>{{name}}</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap-responsive.css') }}" rel="stylesheet">
+
+    <!-- Custom CSS for this template-->
+    <link href="{{ url_for('static', filename='css/navbar-fixed-top.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
+
+     <!-- data-main attribute tells require.js to load
+          scripts/main.js after require.js loads. -->
+     <script data-main="{{ url_for('static', filename='scripts/main') }}" src="{{ url_for('static', filename='scripts/libs/require.js') }}"></script>
+     
+     <!-- anirban toggle functions -->
+     <script src="{{ url_for('static', filename='scripts/custom.js') }}"></script>
+  </head>
+<body>
+	
+    <!-- Fixed horizontal navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="glyphicon glyphicon-home" href="/"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" data-toggle="modal" data-target="#myModal_Help">Help</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#myModal_About">About</a></li>
+            <li><a href="#" data-toggle="modal" data-target="#myModal_Contact">Contact</a></li>
+        </div>
+      </div><!--/.container -->
+    </div><!--/.navbar -->
+
+    <div class="modal fade" id="myModal_Help" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_Help" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel_Help">Help</h4>
+          </div>
+          <div class="modal-body">
+            We are sorry you are having trouble. Please try one of the following links for assistance:
+          </div>
+            <ul>
+              <li><a href="#">Google Forum</a></li>
+              <li><a href="#">SSEA Source Code</a></li>
+              <li><a href="#">AssemblyLine Source Code</a></li>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="myModal_About" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_About" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel_About">About</h4>
+          </div>
+          <div class="modal-body">
+            MiTranscriptome was developed at the Michigan Center for Translational Pathology at the University of Michigan.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="myModal_Contact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_Contact" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel_Contact">Contact</h4>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <li>Arul Chinnaiyan: arul@umich.edu</a></li>
+              <li>Matthew Iyer: mkiyer@umich.edu</a></li>
+              <li>Yashar Niknafs: yniknafs@umich.edu</a></li>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+   
+ <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <h1 class="page-header">2 Col Portfolio
+                    <small>Showcase Your Work Two Columns at a Time</small>
+                </h1>
+            </div>
+
+        </div>
+		
+		<div class="row">
+			<div class="col-lg-12 col-md-12 portfolio-item text-center">
+				<th>table goes here </th>
+				<td></td>
+			</div>
+			<div class="col-lg-12 col-md-12 portfolio-item text-center">
+				<h3><a href="#project-two">Project Two</a>
+	            </h3>
+	            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+	        </div>
+		</div>
+
+        <div class="row">
+
+            <div class="col-lg-6 col-md-6 portfolio-item">
+<!--                 <a href="#project-one"> -->
+                    <img class="img-responsive" src={{ssea_can_img}}>
+<!--                 </a> -->
+                <h3><a href="#project-one">Project One</a>
+                </h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            </div>
+
+            <div class="col-lg-6 col-md-6 portfolio-item">
+<!--                 <a href="#project-two"> -->
+                    <img class="img-responsive" src={{ssea_can_expr_img}}>
+<!--                 </a> -->
+                <h3><a href="#project-two">Project Two</a>
+                </h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-6 col-md-6 portfolio-item">
+<!--                 <a href="#project-three"> -->
+                    <img class="img-responsive" src={{ssea_type_img}}>
+<!--                 </a> -->
+                <h3><a href="#project-three">Project Three</a>
+                </h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            </div>
+
+            <div class="col-lg-6 col-md-6 portfolio-item">
+<!--                 <a href="#project-four"> -->
+                    <img class="img-responsive" src={{ssea_type_expr_img}}>
+<!--                 </a> -->
+                <h3><a href="#project-four">Project Four</a>
+                </h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+            </div>
+
+        </div>
+		
+		<div class="row text-center"> <br><br> </div>
+        <div class="row">
+			<div class="col-lg-2 col-md-2"></div>
+            <div class="col-lg-8 col-md-8">
+<!--                 <a href={{expr_img}}> -->
+					<div class="row text-center">
+                		<h3><a href="#project-five">Project Five</a></h3>
+                	</div>
+					<div class="row">
+	                    <img class="img-responsive col-lg-12 col-md-12" src={{expr_img}}>
+                    </div>
+<!--                 </a> -->
+					<div class="row text-center">
+                		<h3><a href="#project-five">Project Five</a></h3>
+                		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+                	</div>
+                
+            </div>
+			<div class="col-lg-2 col-md-2"></div>
+
+        </div>
+
+
+               <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Company 2013</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+   
+
+</body>
+   

@@ -1,3 +1,7 @@
+.modal-body{
+    word-wrap: break-word;
+}
+
 .popover {
   font-size: 12px;
   font-weight: 300;

@@ -1,0 +1,54 @@
+   <div class="modal-dialog modal-lg">
+     <div class="modal-content">
+       <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+         <h4 class="modal-title" id="myModalLabel_About">Test</h4>
+    </div>	
+    <div class="modal-body">
+      <%= t.get('gene_id') %> Some graphs, images, and links.<br>
+      <div class="col-md-6">
+       <div class="thumbnail">
+       	<img src="<%= t.get('ssea_can') %>" alt="TODO" width="100%" title = 'Lineage SSEA'/>
+       </div>
+       <div class="caption">
+       	<p> SSEA plot for Cancer vs Normal </p>
+       </div>
+      </div>
+      <div class="col-sm-5 col-md-6">
+       <div class="thumbnail">
+       	<img src="<%= t.get('ssea_can_expr') %>" alt="TODO" width="100%" title = 'Lineage SSEA'/>
+       </div>
+       <div class="caption">
+       	<p> Expression. Red = Cancer; Blue = Normal </p>
+       </div>
+      </div>
+      <div class="col-sm-5 col-md-6">
+       <div class="thumbnail">
+       	<img src="<%= t.get('ssea_type') %>" alt="TODO" width="100%" title = 'Cancer vs Normal SSEA'/>
+       </div>
+       <div class="caption">
+       	<p> SSEA plot for Lineage/Cancer Specificity </p>
+       </div>
+      </div>
+      <div class="col-sm-5 col-md-6">
+       <div class="thumbnail">
+       	<img src="<%= t.get('ssea_type_expr') %>" alt="TODO" width="100%" title = 'Cancer vs Normal SSEA'/>
+       </div>
+       <div class="caption">
+       	<p> Expression. Red = Tissue/Cancer of interest; Blue = All other samples </p>
+       </div>
+      </div>
+
+      <div class="col-sm-5 col-md-10">
+       <div class="thumbnail">
+       	<img src="<%= t.get('expr_plot') %>" alt="TODO" width="100%" title = 'Expression Plot'/>
+       </div>
+       <div class="caption">
+       	<p> Expression across all samples </p>
+       </div>
+      </div>
+      I don't know how to get these images in the right place with the modal background in the right place
+      <img src="<%= t.get('expr_plot') %>" alt="TODO" width="100%" title = 'Expression Plot'/>
+    </div>
+ </div>
+</div>

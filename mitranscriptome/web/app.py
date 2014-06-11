@@ -9,7 +9,7 @@ MiTranscriptome web server
 import collections
 import os
 from operator import itemgetter
-from flask import Flask, render_template, request, g, jsonify, send_file
+from flask import Flask, render_template, request, g, jsonify, send_file, make_response
 
 # project imports
 from dbapi import DBInterfaceFile
@@ -24,7 +24,7 @@ TRANSCRIPT_METADATA_FILE = os.path.join(MAIN_DIR, 'metadata.mitranscriptome.txt'
 TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 
                               'end', 'strand', 'tstatus', 'tgenic', 
                               'func_name', 'func_type', 'func_cat', 
-                              'func_dir', 'uce', 'cons', 'avg_frac']
+                              'func_dir', 'uce', 'cons', 'avg_frac', 'seq']
 EXPRESSION_PLOT_DIR = os.path.join(MAIN_DIR, 'expr_plots')
 SSEA_PLOT_DIR = os.path.join(MAIN_DIR, 'ssea_plots')
 def ssea_selector(type, cat):
@@ -181,12 +181,11 @@ def init_transcript_tables(tdb):
                             'hgS_otherUserName=mitranscriptome&'
                             'hgS_otherUserSessionName=mitranscriptome&position=%s' % 
                             (r['chrom'] + '%3A' + r['start'] + '-' + r['end']))
-        r['expr_plot'] = 'http://127.0.0.1:5000/get_expression_boxplot?transcript_id=%s' % (r['transcript_id'])
-        ssea_type, ssea_can = ssea_selector(k, r['func_cat'])
-        r['ssea_type'] = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (r['transcript_id'], ssea_type)
-        r['ssea_type_expr'] = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (r['transcript_id'], ssea_type)        
-        r['ssea_can'] = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (r['transcript_id'], ssea_can)
-        r['ssea_can_expr'] = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (r['transcript_id'], ssea_can)
+        r['modal'] = 'http://127.0.0.1:5000/modal?t_id=%s&name=%s&func_cat=%s&func_type=%s' % (r['transcript_id'], 
+                                                                             r['func_name'],
+                                                                             r['func_cat'],
+                                                                             r['func_type'])
+        r['seq_request'] = 'http://127.0.0.1:5000/download_seq?seq=%s' % (r['seq'])
         if r['avg_frac'] != 'NA':
             r['avg_frac'] = format(float(r['avg_frac']), '.4f')
         ttables[k].append(r)
@@ -242,9 +241,43 @@ def request_transcripts():
     app.logger.debug('Transcript table %s' % (k))
     return jsonify(results=ttables[k])
 
+@app.route('/modal')
+def modal():
+    t_id = request.args.get('t_id')
+    name = request.args.get('name')
+    func_cat = request.args.get('func_cat')
+    func_type = request.args.get('func_type')
+    ssea_type, ssea_can = ssea_selector(func_type, func_cat)
+    ssea_type_img = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_type)
+    ssea_type_expr_img = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_type)        
+    ssea_can_img = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_can)
+    ssea_can_expr_img = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_can)
+    expr_img = 'http://127.0.0.1:5000/get_expression_boxplot?transcript_id=%s' % (t_id)
+    return render_template('modal.html', 
+                           t_id=t_id, 
+                           name=name,
+                           ssea_type_img=ssea_type_img,
+                           ssea_type_expr_img=ssea_type_expr_img,
+                           ssea_can_img=ssea_can_img,
+                           ssea_can_expr_img=ssea_can_expr_img,
+                           expr_img=expr_img                          
+                           )
+
+@app.route('/download_seq')
+def download_seq():
+    seq = request.args.get('seq')
+    response = make_response(seq)
+    tdb = get_transcript_db()
+    # This is the key: Set the right header for the response
+    # to be downloaded, instead of just printed on the browser
+    response.headers["Content-Disposition"] = "attachment; filename=sequence.txt"
+    return response
+
+
 @app.route('/')
 def home():
     return render_template('home.html')
+
 
 if __name__ == '__main__':
     app.run(debug=DEBUG)
