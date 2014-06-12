@@ -296,7 +296,8 @@ def modal():
     if meta['func_cat'] == 'cat':
         meta['func_cat'] = 'Cancer Association'
         meta['type_show'] = 'hide'
-    meta['avg_frac'] = float(format(float(meta['avg_frac']), '.4f'))
+    if meta['avg_frac'] != 'NA':
+            meta['avg_frac'] = float(format(float(r['avg_frac']), '.4f'))
     meta['ssea_type_img'] = SERVER_URL + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_type)
     
     meta['ssea_type_expr_img'] = SERVER_URL + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_type)        
