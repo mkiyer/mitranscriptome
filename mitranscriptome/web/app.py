@@ -27,7 +27,7 @@ SERVER_URL = ''
 MAIN_DIR = '/var/www/html/mitranscriptome/mitranscriptome/web/static/toy'
 TRANSCRIPT_METADATA_FILE = os.path.join(MAIN_DIR, 'metadata.mitranscriptome.txt')
 TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 
-                              'end', 'strand', 'tstatus', 'tgenic', 
+                              'end', 'strand', 'tstatus', 'tgenic', 'tcat',
                               'func_name', 'func_type', 'func_cat', 
                               'func_dir', 'uce', 'cons', 'avg_frac', 'seq']
 EXPRESSION_PLOT_DIR = os.path.join(MAIN_DIR, 'expr_plots')
@@ -225,6 +225,7 @@ def init_transcript_tables(tdb):
         if r['avg_frac'] != 'NA':
             r['avg_frac'] = float(format(float(r['avg_frac']), '.4f'))
         r['type_name'] = type_name
+        app.logger.debug(r['tcat'])
         ttables[k].append(r)
     for k in ttables.iterkeys():
         ttables[k] = sorted(ttables[k], key=itemgetter('avg_frac'), reverse=True)
