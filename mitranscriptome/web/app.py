@@ -19,9 +19,9 @@ app = Flask(__name__)
 
 # configuration
 DEBUG = True
-#SERVER_URL1 = ''
-SERVER_URL1 = 'mitranscriptome.path.med.umich.edu'
-SERVER_URL2 = 'mitranscriptome.path.med.umich.edu'
+SERVER_URL = ''
+#SERVER_URL1 = 'mitranscriptome.path.med.umich.edu'
+#SERVER_URL2 = 'mitranscriptome.path.med.umich.edu'
 #SERVER_URL = 'http://127.0.0.1:5000'
 #MAIN_DIR = '/mctp/projects/mitranscriptome/naming/mitranscriptome_data'
 MAIN_DIR = '/var/www/html/mitranscriptome/mitranscriptome/web/static/toy'
@@ -220,8 +220,8 @@ def init_transcript_tables(tdb):
                             'hgS_otherUserName=mitranscriptome&'
                             'hgS_otherUserSessionName=mitranscriptome&position=%s' % 
                             (r['chrom'] + '%3A' + r['start'] + '-' + r['end']))
-        r['modal'] = SERVER_URL2 + '/modal?t_id=%s' % (r['transcript_id'])
-        r['seq_request'] = SERVER_URL2 + '/download_seq?t_id=%s' % (r['transcript_id'])
+        r['modal'] = SERVER_URL + '/modal?t_id=%s' % (r['transcript_id'])
+        r['seq_request'] = SERVER_URL + '/download_seq?t_id=%s' % (r['transcript_id'])
         if r['avg_frac'] != 'NA':
             r['avg_frac'] = float(format(float(r['avg_frac']), '.4f'))
         r['type_name'] = type_name
@@ -297,17 +297,17 @@ def modal():
         meta['func_cat'] = 'Cancer Association'
         meta['type_show'] = 'hide'
     meta['avg_frac'] = float(format(float(meta['avg_frac']), '.4f'))
-    meta['ssea_type_img'] = SERVER_URL1 + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_type)
+    meta['ssea_type_img'] = SERVER_URL + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_type)
     
-    meta['ssea_type_expr_img'] = SERVER_URL1 + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_type)        
-    meta['ssea_can_img'] = SERVER_URL1 + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_can)
-    meta['ssea_can_expr_img'] = SERVER_URL1 + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_can)
-    meta['expr_img'] = SERVER_URL1 + '/get_expression_boxplot?transcript_id=%s' % (t_id)
+    meta['ssea_type_expr_img'] = SERVER_URL + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_type)        
+    meta['ssea_can_img'] = SERVER_URL + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_can)
+    meta['ssea_can_expr_img'] = SERVER_URL + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_can)
+    meta['expr_img'] = SERVER_URL + '/get_expression_boxplot?transcript_id=%s' % (t_id)
     meta['ucsc_link'] = ('http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&'
                             'hgS_otherUserName=mitranscriptome&'
                             'hgS_otherUserSessionName=mitranscriptome&position=%s' % 
                             (meta['chrom'] + '%3A' + meta['start'] + '-' + meta['end']))
-    meta['seq_link'] = SERVER_URL1 + '/download_seq?t_id=%s' % t_id
+    meta['seq_link'] = SERVER_URL + '/download_seq?t_id=%s' % t_id
     meta['type_name'] = type_name
     
     return render_template('modal.html', meta=meta)
