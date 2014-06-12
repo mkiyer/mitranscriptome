@@ -1,4 +1,5 @@
-<h3>Selected Transcripts:</h3>
+<% var t = transcriptCollection.at(1); %>
+<h3><%= t.get('type_name') %>:</h3>
 <table id="transcripts_table" class="table table-hover">
 <thead>
 <tr>
@@ -7,12 +8,36 @@
 <td>Name</td>
 <td>Location</td>
 <td>Tissue/ Cancer</td>
-<td>Unannotated?</td>
-<td>Intergenic?</td>
-<td>Association Type</td>
-<td>Ultraconserved Element?</td>
-<td>Conserved Bases?</td>
-<td>SSEA %ile</td>
+<td class="text-center">Unannotated?</td>
+<td class="text-center">Intergenic?</td>
+<td class="text-center">Association Type 
+   <span class="glyphicon glyphicon-question-sign btn" data-toggle="modal" data-target="#association-modal"></span>
+
+   <div class="modal fade" id="association-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-sm">
+       <div class="modal-content">
+         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+           <h4 class="modal-title" id="myModalLabel_Help">Association Type Legend:</h4>
+         </div>
+         <div class="modal-body text-left">
+		    <span class="glyphicon glyphicon-leaf green"></span> = Lineage Association
+		    <br>
+		    <span class="glyphicon glyphicon-flash yellow"></span> = Cancer Association
+		    <br>
+		    <span class="glyphicon glyphicon-fire orange"></span> = Cancer And Lineage Association
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         </div>
+       </div><!-- /.modal-content -->
+     </div><!-- /.modal-dialog -->
+   </div><!-- /.modal -->
+
+</td>
+<td class="text-center">Ultraconserved Element?</td>
+<td class="text-center">Conserved Bases?</td>
+<td class="text-center">SSEA Percentile</td>
 </tr>
 </thead>
 <tbody>
@@ -54,7 +79,7 @@
   </td>
   <td><%= t.get('func_name') %></td>
   <td><a href="<%= t.get('ucsc_link') %>" target="_blank"><%= t.get('chrom') + ':' + t.get('start') + '-' + t.get('end') + '[' + t.get('strand') + ']' %></a></td>
-  <td><%= t.get('func_type') %></td>
+  <td><%= t.get('func_type') %></td>  
   <td class="text-center">
     <% if(t.get('tstatus')=="unannotated") { %>
      <span class="glyphicon glyphicon-ok green"></span>
@@ -71,7 +96,17 @@
      <span class="glyphicon glyphicon-remove"></span>
     <% } %>
   </td>
-  <td><%= t.get('func_cat') %></td>
+  <td class="text-center">
+    <% if(t.get('func_cat')=="lat") { %>
+     <span class="glyphicon glyphicon-leaf green"></span>
+    <% } %>
+    <% if(t.get('func_cat')=="cat") { %>
+     <span class="glyphicon glyphicon-flash yellow"></span>
+    <% } %>
+    <% if(t.get('func_cat')=="clat") { %>
+     <span class="glyphicon glyphicon-fire orange"></span>
+    <% } %>
+  </td>
   <td class="text-center">
     <% if(t.get('uce')=="TRUE") { %>
      <span class="glyphicon glyphicon-ok green"></span>

@@ -34,10 +34,12 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#Select_Transcripts" onclick="toggle_on('Select_Transcripts');toggle_off('Home');toggle_off('div-selected-transcripts')">Choose Study</a></li>
+            <li><a href="#top" onclick="toggle_on('Select_Transcripts');toggle_off('Home')">Choose Study</a></li>
+            <li><a href="https://google.com" target = "_blank" >View Assembly in UCSC Browser</a></li>
             <li><a href="#" data-toggle="modal" data-target="#myModal_links">Links</a></li>
             <li><a href="#" data-toggle="modal" data-target="#myModal_About">About</a></li>
             <li><a href="#" data-toggle="modal" data-target="#myModal_Contact">Contact</a></li>
+            
           </ul>
         </div>
       </div><!--/.container -->
@@ -52,10 +54,8 @@
           </div>
           <div class="modal-body">
             <ul>             
-              <li><a href="#">SSEA Source Code</a></li>
-              <li><a href="#">AssemblyLine Source Code</a></li>
-              <li><a href="#">View Assembly in Genome Browser</a></li>
-          	</ul>
+              <li><a href="https://code.google.com/p/ssea" target = "_blank">SSEA Source Code</a></li>
+              <li><a href="https://code.google.com/p/assemblyline" target = "_blank">AssemblyLine Source Code</a></li>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -102,7 +102,7 @@
     </div><!-- /.modal -->
 
     <!-- Main Component -->
-    <div class="container">
+    <div class="container" id="top">
     
         <div id="Home" class="jumbotron">
           <h1>Welcome to MiTranscriptome!</h1>
@@ -149,35 +149,35 @@
    		<div class="btn-group">
 		  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Choose Study <span class="caret"></span></button>
                 <ul class="dropdown-menu scrollable-menu" role="menu">
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-aml" onclick="toggle_on('div-selected-transcripts')">Acute Myelogenous Leukemia (AMATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-bladder" onclick="toggle_on('div-selected-transcripts')">Bladder Cancer (BLCATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-breast" onclick="toggle_on('div-selected-transcripts')">Breast Cancer (BRCATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-cervical" onclick="toggle_on('div-selected-transcripts')">Cervical Cancer (CVATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-cml" onclick="toggle_on('div-selected-transcripts')">Chronic Myelogenous Leukemia (CMATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-colorectal" onclick="toggle_on('div-selected-transcripts')">Colorectal Cancer (CRATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-gbm" onclick="toggle_on('div-selected-transcripts')">Glioblastoma Multiforme (GBATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-head_neck" onclick="toggle_on('div-selected-transcripts')">Head and Neck Cancer (HNCATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-heart" onclick="toggle_on('div-selected-transcripts')">Heart Tissue (HRATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-hesc" onclick="toggle_on('div-selected-transcripts')">Human Embryonic Stem Cells (ESATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-kich" onclick="toggle_on('div-selected-transcripts')">Chromophobe Renal Cell Carcinoma (KCHCATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-kirc" onclick="toggle_on('div-selected-transcripts')">Renal Clear Cell Carcinoma (KCCATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-kirp" onclick="toggle_on('div-selected-transcripts')">Renal Papillary Cell Carcinoma (KPCATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-lgg" onclick="toggle_on('div-selected-transcripts')">Low Grade Glioma (LGATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-liver" onclick="toggle_on('div-selected-transcripts')">Liver Cancer (LVCATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-luad" onclick="toggle_on('div-selected-transcripts')">Lung Adenocarcinoma (LACATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-lusc" onclick="toggle_on('div-selected-transcripts')">Lung Squamous Cell Carcinoma (LSCATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-medulloblastoma" onclick="toggle_on('div-selected-transcripts')">Medulloblastoma (MBATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-melanoma" onclick="toggle_on('div-selected-transcripts')">Melanoma (MEATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-mpn" onclick="toggle_on('div-selected-transcripts')">Myeloproliferative Neoplasia (MPATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-ovarian" onclick="toggle_on('div-selected-transcripts')">Ovarian Cancer (OVATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-pancreatic" onclick="toggle_on('div-selected-transcripts')">Pancreatic Cancer (PNATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-prostate" onclick="toggle_on('div-selected-transcripts')">Prostate Cancer (PCATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-skeletal_muscle" onclick="toggle_on('div-selected-transcripts')">Skeletal Muscle Tissue (SMATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-stomach" onclick="toggle_on('div-selected-transcripts')">Stomach Cancer (STCATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-thyroid" onclick="toggle_on('div-selected-transcripts')">Thyroid Cancer (THCATs)</a></li>
-                    <li><a href="#div-selected-transcripts" role="button" id="btn-uterine" onclick="toggle_on('div-selected-transcripts')">Uterine Endometrial Carcinoma (UTATs)</a></li>
+                    <li><a  role="button" id="btn-aml" onclick="toggle_on('div-selected-transcripts')">Acute Myelogenous Leukemia (AMATs)</a></li>
+                    <li><a  role="button" id="btn-bladder" onclick="toggle_on('div-selected-transcripts')">Bladder Cancer (BLCATs)</a></li>
+                    <li><a  role="button" id="btn-breast" onclick="toggle_on('div-selected-transcripts')">Breast Cancer (BRCATs)</a></li>
+                    <li><a  role="button" id="btn-cervical" onclick="toggle_on('div-selected-transcripts')">Cervical Cancer (CVATs)</a></li>
+                    <li><a  role="button" id="btn-cml" onclick="toggle_on('div-selected-transcripts')">Chronic Myelogenous Leukemia (CMATs)</a></li>
+                    <li><a  role="button" id="btn-colorectal" onclick="toggle_on('div-selected-transcripts')">Colorectal Cancer (CRATs)</a></li>
+                    <li><a  role="button" id="btn-gbm" onclick="toggle_on('div-selected-transcripts')">Glioblastoma Multiforme (GBATs)</a></li>
+                    <li><a  role="button" id="btn-head_neck" onclick="toggle_on('div-selected-transcripts')">Head and Neck Cancer (HNCATs)</a></li>
+                    <li><a  role="button" id="btn-heart" onclick="toggle_on('div-selected-transcripts')">Heart Tissue (HRATs)</a></li>
+                    <li><a  role="button" id="btn-hesc" onclick="toggle_on('div-selected-transcripts')">Human Embryonic Stem Cells (ESATs)</a></li>
+                    <li><a  role="button" id="btn-kich" onclick="toggle_on('div-selected-transcripts')">Chromophobe Renal Cell Carcinoma (KCHCATs)</a></li>
+                    <li><a  role="button" id="btn-kirc" onclick="toggle_on('div-selected-transcripts')">Renal Clear Cell Carcinoma (KCCATs)</a></li>
+                    <li><a  role="button" id="btn-kirp" onclick="toggle_on('div-selected-transcripts')">Renal Papillary Cell Carcinoma (KPCATs)</a></li>
+                    <li><a  role="button" id="btn-lgg" onclick="toggle_on('div-selected-transcripts')">Low Grade Glioma (LGATs)</a></li>
+                    <li><a  role="button" id="btn-liver" onclick="toggle_on('div-selected-transcripts')">Liver Cancer (LVCATs)</a></li>
+                    <li><a  role="button" id="btn-luad" onclick="toggle_on('div-selected-transcripts')">Lung Adenocarcinoma (LACATs)</a></li>
+                    <li><a  role="button" id="btn-lusc" onclick="toggle_on('div-selected-transcripts')">Lung Squamous Cell Carcinoma (LSCATs)</a></li>
+                    <li><a  role="button" id="btn-medulloblastoma" onclick="toggle_on('div-selected-transcripts')">Medulloblastoma (MBATs)</a></li>
+                    <li><a  role="button" id="btn-melanoma" onclick="toggle_on('div-selected-transcripts')">Melanoma (MEATs)</a></li>
+                    <li><a  role="button" id="btn-mpn" onclick="toggle_on('div-selected-transcripts')">Myeloproliferative Neoplasia (MPATs)</a></li>
+                    <li><a  role="button" id="btn-ovarian" onclick="toggle_on('div-selected-transcripts')">Ovarian Cancer (OVATs)</a></li>
+                    <li><a  role="button" id="btn-pancreatic" onclick="toggle_on('div-selected-transcripts')">Pancreatic Cancer (PNATs)</a></li>
+                    <li><a  role="button" id="btn-prostate" onclick="toggle_on('div-selected-transcripts')">Prostate Cancer (PCATs)</a></li>
+                    <li><a  role="button" id="btn-skeletal_muscle" onclick="toggle_on('div-selected-transcripts')">Skeletal Muscle Tissue (SMATs)</a></li>
+                    <li><a  role="button" id="btn-stomach" onclick="toggle_on('div-selected-transcripts')">Stomach Cancer (STCATs)</a></li>
+                    <li><a  role="button" id="btn-thyroid" onclick="toggle_on('div-selected-transcripts')">Thyroid Cancer (THCATs)</a></li>
+                    <li><a  role="button" id="btn-uterine" onclick="toggle_on('div-selected-transcripts')">Uterine Endometrial Carcinoma (UTATs)</a></li>
                     <li class="divider"></li>
-    				<li><a href="#div-selected-transcripts" role="button" id="btn-hiclincs" onclick="toggle_on('div-selected-transcripts')">Highly Conserved Long Intergenic Non-Coding RNAs (HICLINCs)</a></li>
+    				<li><a href="#div-selected-transcripts" role="button" id="btn-hiclinc" onclick="toggle_on('div-selected-transcripts')">Highly Conserved Long Intergenic Non-Coding RNAs (HICLINCs)</a></li>
                 </ul>
            </div><!-- Dropdown Buttons -->
            </p>
@@ -185,7 +185,6 @@
 
         <div id="div-selected-transcripts" class="toshow jumbotron">
           <a type="button" class="close" onclick="toggle_off('div-selected-transcripts');toggle_on('Select_Transcripts')">&times;</a>
-          <h3>Selected Transcripts:</h3>
           <div id="div-transcript-table"></div>
           <p></p>
         </div><!-- /Display table of transcripts -->     

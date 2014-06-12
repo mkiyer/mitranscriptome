@@ -19,6 +19,7 @@ app = Flask(__name__)
 
 # configuration
 DEBUG = True
+SERVER_URL = 'mitranscriptome.path.med.umich.edu'
 MAIN_DIR = '/mctp/projects/mitranscriptome/naming/toy'
 TRANSCRIPT_METADATA_FILE = os.path.join(MAIN_DIR, 'metadata.mitranscriptome.txt')
 TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 
@@ -27,10 +28,13 @@ TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start',
                               'func_dir', 'uce', 'cons', 'avg_frac', 'seq']
 EXPRESSION_PLOT_DIR = os.path.join(MAIN_DIR, 'expr_plots')
 SSEA_PLOT_DIR = os.path.join(MAIN_DIR, 'ssea_plots')
+
+
 def ssea_selector(type, cat):
     if type == 'aml':
         ssea_type = 'cancer_type_aml'
         ssea_can = 'NA'
+        type_name = 'Acute Myelogenous Leukemia Associated Transcripts'
     if type == 'bladder':
         if cat == 'clat':
             ssea_type = 'cancer_type_bladder'
@@ -38,6 +42,7 @@ def ssea_selector(type, cat):
         else: 
             ssea_type = 'NA'
             ssea_can = 'cancer_versus_normal_bladder'
+        type_name = 'Bladder Cancer Associated Transcripts'
     if type == 'breast':
         if cat == 'clat':
             ssea_type = 'cancer_type_breast_carcinoma'
@@ -45,18 +50,23 @@ def ssea_selector(type, cat):
         else: 
             ssea_type = 'NA'
             ssea_can = 'cancer_versus_normal_breast'
+        type_name = 'Breast Cancer Associated Transcripts'
     if type == 'cervical':
-        ssea_type = 'cancer_type_cervical_carcinoma'
+        ssea_type = 'cancer_type_cervical_carcinoTranscriptsma'
         ssea_can = 'NA'
+        type_name = 'Cervical Cancer Associated Transcripts'
     if type == 'cml':
         ssea_type = 'cancer_type_cml'
         ssea_can = 'NA'
+        type_name = 'Chronic Myelogenous Leukemia Associated Transcripts'
     if type == 'colorectal':
         ssea_type = 'cancer_type_colorectal_carcinoma'
         ssea_can = 'NA'
+        type_name = 'Colorectal Cancer Associated Transcripts'
     if type == 'gbm':
         ssea_type = 'cancer_type_glioblastoma_multiforme_gbm'
         ssea_can = 'NA'
+        type_name = 'Glioblastoma Multiforme Associated Transcripts'
     if type == 'head_neck':
         if cat == 'clat':
             ssea_type = 'cancer_type_head_and_neck_carcinoma'
@@ -64,15 +74,19 @@ def ssea_selector(type, cat):
         else: 
             ssea_type = 'NA'
             ssea_can = 'cancer_versus_normal_head_and_neck'
+        type_name = 'Head and Neck Cancer Associated Transcripts'
     if type == 'heart':
         ssea_type = 'normal_type_heart'
         ssea_can = 'NA'
+        type_name = 'Heart Tissue Associated Transcripts'
     if type == 'hesc':
         ssea_type = 'normal_type_embryonic_stem_cells'
         ssea_can = 'NA'
+        type_name = 'Human Embryonic Stem Cells Associated Transcripts'
     if type == 'hiclinc':
         ssea_type = 'NA'
         ssea_can = 'NA'
+        type_name = 'Highly Conserved lncRNAs (not otherwise tissue/cancer associated)'
     if type == 'kich':
         if cat == 'clat':
             ssea_type = 'cancer_type_renal_cell_carcinoma_chromophobe'
@@ -80,6 +94,7 @@ def ssea_selector(type, cat):
         else: 
             ssea_type = 'NA'
             ssea_can = 'cancer_versus_normal_kidney_chromophobe'
+        type_name = 'Chromophobe Renal Cell Carcinoma Associated Transcripts'
     if type == 'kirc':
         if cat == 'clat':
             ssea_type = 'cancer_type_renal_clear_cell_carcinoma'
@@ -87,6 +102,7 @@ def ssea_selector(type, cat):
         else: 
             ssea_type = 'NA'
             ssea_can = 'cancer_versus_normal_kidney_clear_cell'
+        type_name = 'Renal Clear Cell Carcinoma Associated Transcripts'
     if type == 'kirp':
         if cat == 'clat':
             ssea_type = 'cancer_type_renal_papillary_cell_carcinoma'
@@ -94,9 +110,11 @@ def ssea_selector(type, cat):
         else: 
             ssea_type = 'NA'
             ssea_can = 'cancer_versus_normal_kidney_papillary_cell'
+        type_name = 'Renal Papillary Cell Carcinoma Associated Transcripts'
     if type == 'lgg':
         ssea_type = 'cancer_type_lower_grade_glioma_lgg'
         ssea_can = 'NA'
+        type_name = 'Low Grade Glioma Associated Transcripts'
     if type == 'liver':
         if cat == 'clat':
             ssea_type = 'cancer_type_hepatocellular_carcinoma'
@@ -104,6 +122,7 @@ def ssea_selector(type, cat):
         else: 
             ssea_type = 'NA'
             ssea_can = 'cancer_versus_normal_liver'
+        type_name = 'Liver Cancer Associated Transcripts'
     if type == 'luad':
         if cat == 'clat':
             ssea_type = 'cancer_type_lung_adenocarcinoma'
@@ -111,6 +130,7 @@ def ssea_selector(type, cat):
         else: 
             ssea_type = 'NA'
             ssea_can = 'cancer_versus_normal_lung_adenocarcinoma'
+        type_name = 'Lung Adenocarcinoma Associated Transcripts'
     if type == 'lusc':
         if cat == 'clat':
             ssea_type = 'cancer_type_lung_squamous_cell_carcinoma'
@@ -118,21 +138,27 @@ def ssea_selector(type, cat):
         else: 
             ssea_type = 'NA'
             ssea_can = 'cancer_versus_normal_lung_squamous'
+        type_name = 'Lung Squamous Cell Carcinoma Associated Transcripts'
     if type == 'medulloblastoma':
         ssea_type = 'cancer_type_medulloblastoma'
         ssea_can = 'NA'
+        type_name = 'Medulloblastoma Associated Transcripts'
     if type == 'melanoma':
         ssea_type = 'cancer_type_melanoma'
         ssea_can = 'NA'
+        type_name = 'Melanoma Associated Transcripts'
     if type == 'mpn':
         ssea_type = 'cancer_type_mpn'
         ssea_can = 'NA'
+        type_name = 'Myeloproliferative Neoplasia Associated Transcripts'
     if type == 'ovarian':
         ssea_type = 'cancer_type_ovarian'
         ssea_can = 'NA'
+        type_name = 'Ovarian Cancer Associated Transcripts'
     if type == 'pancreatic':
         ssea_type = 'cancer_type_pancreatic_carcinoma'
         ssea_can = 'NA'
+        type_name = 'Pancreatic Cancer Associated Transcripts'
     if type == 'prostate':
         if cat == 'clat':
             ssea_type = 'cancer_type_prostate_carcinoma'
@@ -140,9 +166,11 @@ def ssea_selector(type, cat):
         else: 
             ssea_type = 'NA'
             ssea_can = 'cancer_versus_normal_prostate'
+        type_name = 'Prostate Cancer Associated Transcripts'
     if type == 'skeletal_muscle':
         ssea_type = 'normal_type_skeletal_muscle'
         ssea_can = 'NA'
+        type_name = 'Skeletal Muscle Tissue Associated Transcripts'
     if type == 'stomach':
         if cat == 'clat':
             ssea_type = 'cancer_type_stomach_adenocarcinoma'
@@ -150,6 +178,7 @@ def ssea_selector(type, cat):
         else: 
             ssea_type = 'NA'
             ssea_can = 'cancer_versus_normal_stomach'
+        type_name = 'Stomach Cancer Associated Transcripts'
     if type == 'thyroid':
         if cat == 'clat':
             ssea_type = 'cancer_type_thyroid'
@@ -157,13 +186,15 @@ def ssea_selector(type, cat):
         else: 
             ssea_type = 'NA'
             ssea_can = 'cancer_versus_normal_thyroid'
+        type_name = 'Thyroid Cancer Associated Transcripts'
     if type == 'uterine':
         ssea_type = 'cancer_type_uterine_endometrial_carcinoma'
         ssea_can = 'NA'
+        type_name = 'Uterine Endometrial Carcinoma Associated Transcripts'
     
     
     
-    return ssea_type, ssea_can
+    return ssea_type, ssea_can, type_name
     
 def init_transcript_db():
     return DBInterfaceFile.open(TRANSCRIPT_METADATA_FILE)
@@ -179,6 +210,7 @@ def init_transcript_tables(tdb):
     ttables = collections.defaultdict(lambda: [])
     for r in results:
         k = r['func_type']
+        ssea_type, ssea_can, type_name = ssea_selector(r['func_type'], r['func_cat'])
         # TODO: construct bigbed link
         r['ucsc_link'] = ('http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&'
                             'hgS_otherUserName=mitranscriptome&'
@@ -188,6 +220,7 @@ def init_transcript_tables(tdb):
         r['seq_request'] = 'http://127.0.0.1:5000/download_seq?t_id=%s' % (r['transcript_id'])
         if r['avg_frac'] != 'NA':
             r['avg_frac'] = float(format(float(r['avg_frac']), '.4f'))
+        r['type_name'] = type_name
         ttables[k].append(r)
     for k in ttables.iterkeys():
         ttables[k] = sorted(ttables[k], key=itemgetter('avg_frac'), reverse=True)
@@ -243,7 +276,7 @@ def request_transcripts():
 def modal():
     t_id = request.args.get('t_id')
     meta = get_transcript_db().metadata_json_dict[t_id]
-    ssea_type, ssea_can = ssea_selector(meta['func_type'], meta['func_cat'])
+    ssea_type, ssea_can, type_name = ssea_selector(meta['func_type'], meta['func_cat'])
     meta['loc'] = meta['chrom'] + ':' + meta['start'] + '-' + meta['end'] + '[' + meta['strand'] + ']'   
     can_show = ''
     type_show = ''
@@ -271,6 +304,7 @@ def modal():
                             'hgS_otherUserSessionName=mitranscriptome&position=%s' % 
                             (meta['chrom'] + '%3A' + meta['start'] + '-' + meta['end']))
     meta['seq_link'] = 'http://127.0.0.1:5000/download_seq?t_id=%s' % t_id
+    meta['type_name'] = type_name
     
     return render_template('modal.html', meta=meta)
 
