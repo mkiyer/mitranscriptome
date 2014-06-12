@@ -30,7 +30,7 @@
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <a href="/"><span class="glyphicon glyphicon-home"></span><h4> MiTranscriptome</h4></a>
+          <a href="/"><span class="glyphicon glyphicon-home"></span><h4> MiTranscriptome lncRNA Database</h4></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -75,6 +75,9 @@
             <h4 class="modal-title" id="myModalLabel_About">About</h4>
           </div>
           <div class="modal-body">
+          	The MiTranscriptome was assembled from an ab initio transcriptome construction based on 6,503 RNA-seq libraries from 
+          multiple cancer and tissue types. The lncRNAs most differnetially expressed in cancers and tissues are reported in this database. 
+          A novel non-parametric tool, called Sample Set Enrichment Analysis (SSEA) was used to perform differential expression analysis. 
             MiTranscriptome was developed at the Michigan Center for Translational Pathology at the University of Michigan.
           </div>
           <div class="modal-footer">
@@ -108,14 +111,15 @@
     <div class="container" id="top">
     
         <div id="Home" class="jumbotron">
-          <h1>Welcome to MiTranscriptome!</h1>
-          <p>MiTranscriptome is a comprehensive tool that allows researchers to study gene expression across multiple cancer-related sample sets, providing powerful insight into the cancer transcriptome.</p>
+          <h1>Welcome to the MiTranscriptome lncRNA Database</h1>
+          <p>The MiTranscriptome was assembled from an ab initio transcriptome construction based on 6,503 RNA-seq libraries from 
+          multiple cancer and tissue types. The lncRNAs most differnetially expressed in cancers and tissues are reported in this database.</p>
           <p><a class="btn btn-lg btn-primary" href="#" role="button" onclick="toggle_off('Home');toggle_on('Select_Transcripts')">Get Started &raquo;</a></p>
         </div><!-- /Home Screen -->
 
         <div id="Select_Transcripts" class="toshow jumbotron">
           <h3><strong>Select Transcripts</strong></h3>
-          <p>Our analysis has identified transcripts associated with various cancer and tissue types. Please make a selection from the dropdown menu below:</p>
+          <p>Our analysis has identified lncRNAs associated with various cancer and tissue types. Please make a selection from the dropdown menu below:</p>
    		<p>
    	<!-- 
    		<select id="choose_study" class="form-control">
