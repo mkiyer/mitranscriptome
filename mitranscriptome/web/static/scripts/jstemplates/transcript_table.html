@@ -35,6 +35,7 @@
    </div><!-- /.modal -->
 
 </td>
+<td class="text-center">TUCP?</td>
 <td class="text-center">Ultraconserved Element?</td>
 <td class="text-center">Conserved Bases?</td>
 <td class="text-center">SSEA Percentile</td>
@@ -105,6 +106,14 @@
     <% } %>
     <% if(t.get('func_cat')=="clat") { %>
      <span class="glyphicon glyphicon-fire orange"></span>
+    <% } %>
+  </td>
+  <td class="text-center">
+    <% if(t.get('tcat')=="TUCP") { %>
+     <span class="glyphicon glyphicon-ok green"></span>
+    <% } %>
+    <% if(t.get('tcat')=="lncRNA") { %>
+     <span class="glyphicon glyphicon-remove"></span>
     <% } %>
   </td>
   <td class="text-center">
