@@ -23,8 +23,9 @@ SERVER_URL = ''
 #SERVER_URL1 = 'mitranscriptome.path.med.umich.edu'
 #SERVER_URL2 = 'mitranscriptome.path.med.umich.edu'
 #SERVER_URL = 'http://127.0.0.1:5000'
-#MAIN_DIR = '/mctp/projects/mitranscriptome/naming/mitranscriptome_data'
-MAIN_DIR = '/var/mitranscriptome_data'
+MAIN_DIR = '/mctp/projects/mitranscriptome/naming/mitranscriptome_data'
+#MAIN_DIR = '/var/mitranscriptome_data'
+
 TRANSCRIPT_METADATA_FILE = os.path.join(MAIN_DIR, 'metadata.mitranscriptome.txt')
 TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 
                               'end', 'strand', 'tstatus', 'tgenic', 'tcat',
