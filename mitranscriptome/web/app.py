@@ -19,7 +19,8 @@ app = Flask(__name__)
 
 # configuration
 DEBUG = True
-SERVER_URL1 = ''
+#SERVER_URL1 = ''
+SERVER_URL1 = 'mitranscriptome.path.med.umich.edu'
 SERVER_URL2 = 'mitranscriptome.path.med.umich.edu'
 #SERVER_URL = 'http://127.0.0.1:5000'
 #MAIN_DIR = '/mctp/projects/mitranscriptome/naming/mitranscriptome_data'
