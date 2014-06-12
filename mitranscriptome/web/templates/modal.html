@@ -101,7 +101,20 @@
 							    Association Type
 							  </td>
 							  <td>
-							    {{meta['func_cat']}}
+							    <script type="text/javascript">
+							    if("{{meta['func_cat']}}"=="Lineage Association"){
+							    	document.write("<span class=\"glyphicon glyphicon-leaf green\"></span>")	
+							    }
+							    if("{{meta['func_cat']}}"=="Cancer Association"){
+							    	document.write("<span class=\"glyphicon glyphicon-flash yellow\"></span>")	
+							    }
+							    if("{{meta['func_cat']}}"=="Cancer and Lineage Association"){
+							    	document.write("<span class=\"glyphicon glyphicon-fire orange\"></span>")	
+							    }
+							    if("{{meta['func_dir']}}"=="dn"){
+							    	document.write("<span class=\"glyphicon glyphicon-arrow-down blue\"></span>")	
+							    }
+							   </script> {{meta['func_cat']}}
 							  </td>
 							</tr>
 							<tr>
@@ -213,7 +226,7 @@
         <div class="row {{meta['can_show']}}">
 
             <div class="col-lg-6 col-md-6 portfolio-item">
-					<h3>Cancer vs Normal SSEA Plot</h3>
+					<h3>Cancer vs Normal SSEA Plot</h3><br>
 	                <a href="#" data-toggle="modal" data-target="#explain-ssea">Explain SSEA</a>
                     <img class="img-responsive thumbnail" src={{meta['ssea_can_img']}}>
             </div>
@@ -229,7 +242,7 @@
 
         <div class="row {{meta['type_show']}}">
             <div class="col-lg-6 col-md-6 portfolio-item">
-					<h3>Lineage/Cancer Specificty SSEA Plot</h3>
+					<h3>Lineage/Cancer Specificty SSEA Plot</h3><br>
 	                <a href="#" data-toggle="modal" data-target="#explain-ssea">Explain SSEA</a>
                     <img class="img-responsive thumbnail" src={{meta['ssea_type_img']}}>
                 

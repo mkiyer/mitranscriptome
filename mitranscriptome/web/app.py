@@ -19,8 +19,9 @@ app = Flask(__name__)
 
 # configuration
 DEBUG = True
-SERVER_URL = 'mitranscriptome.path.med.umich.edu'
-MAIN_DIR = '/mctp/projects/mitranscriptome/naming/toy'
+#SERVER_URL = 'mitranscriptome.path.med.umich.edu'
+SERVER_URL = 'http://127.0.0.1:5000'
+MAIN_DIR = '/mctp/projects/mitranscriptome/naming/mitranscriptome_data'
 TRANSCRIPT_METADATA_FILE = os.path.join(MAIN_DIR, 'metadata.mitranscriptome.txt')
 TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 
                               'end', 'strand', 'tstatus', 'tgenic', 
@@ -216,8 +217,8 @@ def init_transcript_tables(tdb):
                             'hgS_otherUserName=mitranscriptome&'
                             'hgS_otherUserSessionName=mitranscriptome&position=%s' % 
                             (r['chrom'] + '%3A' + r['start'] + '-' + r['end']))
-        r['modal'] = 'http://127.0.0.1:5000/modal?t_id=%s' % (r['transcript_id'])
-        r['seq_request'] = 'http://127.0.0.1:5000/download_seq?t_id=%s' % (r['transcript_id'])
+        r['modal'] = SERVER_URL + '/modal?t_id=%s' % (r['transcript_id'])
+        r['seq_request'] = SERVER_URL + '/download_seq?t_id=%s' % (r['transcript_id'])
         if r['avg_frac'] != 'NA':
             r['avg_frac'] = float(format(float(r['avg_frac']), '.4f'))
         r['type_name'] = type_name
@@ -278,33 +279,34 @@ def modal():
     meta = get_transcript_db().metadata_json_dict[t_id]
     ssea_type, ssea_can, type_name = ssea_selector(meta['func_type'], meta['func_cat'])
     meta['loc'] = meta['chrom'] + ':' + meta['start'] + '-' + meta['end'] + '[' + meta['strand'] + ']'   
-    can_show = ''
-    type_show = ''
+    meta['can_show'] = ''
+    meta['type_show'] = ''
     if meta['tcat'] == 'lncrna':
         meta['tcat'] = 'lncRNA'
     if meta['tcat'] == 'tucp':
         meta['tcat'] = 'TUCP'
     if meta['func_cat'] == 'clat':
         meta['func_cat'] = 'Cancer and Lineage Association'
-    if meta['func_cat'] == 'lat':
+    if meta['func_cat'] == 'at':
         meta['func_cat'] = 'Lineage Association'
         meta['can_show'] = 'hide'
     if meta['func_cat'] == 'cat':
         meta['func_cat'] = 'Cancer Association'
         meta['type_show'] = 'hide'
     meta['avg_frac'] = float(format(float(meta['avg_frac']), '.4f'))
-    meta['ssea_type_img'] = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_type)
+    meta['ssea_type_img'] = SERVER_URL + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_type)
     
-    meta['ssea_type_expr_img'] = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_type)        
-    meta['ssea_can_img'] = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_can)
-    meta['ssea_can_expr_img'] = 'http://127.0.0.1:5000/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_can)
-    meta['expr_img'] = 'http://127.0.0.1:5000/get_expression_boxplot?transcript_id=%s' % (t_id)
+    meta['ssea_type_expr_img'] = SERVER_URL + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_type)        
+    meta['ssea_can_img'] = SERVER_URL + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_can)
+    meta['ssea_can_expr_img'] = SERVER_URL + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_can)
+    meta['expr_img'] = SERVER_URL + '/get_expression_boxplot?transcript_id=%s' % (t_id)
     meta['ucsc_link'] = ('http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&'
                             'hgS_otherUserName=mitranscriptome&'
                             'hgS_otherUserSessionName=mitranscriptome&position=%s' % 
                             (meta['chrom'] + '%3A' + meta['start'] + '-' + meta['end']))
-    meta['seq_link'] = 'http://127.0.0.1:5000/download_seq?t_id=%s' % t_id
+    meta['seq_link'] = SERVER_URL + '/download_seq?t_id=%s' % t_id
     meta['type_name'] = type_name
+    app.logger.debug(meta['can_show'])
     
     return render_template('modal.html', meta=meta)
 
