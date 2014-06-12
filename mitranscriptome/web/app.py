@@ -320,11 +320,12 @@ def modal():
 def download_seq():
     t_id = request.args.get('t_id')
     meta = get_transcript_db().metadata_json_dict[t_id]
+    name = meta['func_name']
     seq = meta['seq']
     response = make_response(seq)
     # This is the key: Set the right header for the response
     # to be downloaded, instead of just printed on the browser
-    response.headers["Content-Disposition"] = "attachment; filename=sequence.txt"
+    response.headers["Content-Disposition"] = "attachment; filename=%s_sequence.txt" % name
     return response
 
 
