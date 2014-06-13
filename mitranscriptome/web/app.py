@@ -17,10 +17,14 @@ from dbapi import DBInterfaceFile
 # create flask application
 app = Flask(__name__)
 
-# configuration
 DEBUG = True
+
+# uncomment for toy data configuration
 SERVER_URL = 'http://127.0.0.1:5000'
 MAIN_DIR = '/Users/mkiyer/git/mitranscriptome/mitranscriptome/web/static/toy'
+# uncomment for server configuration
+#SERVER_URL = ''
+#MAIN_DIR = '/mctp/projects/mitranscriptome/naming/mitranscriptome_data'
 
 TRANSCRIPT_METADATA_FILE = os.path.join(MAIN_DIR, 'metadata.mitranscriptome.txt')
 TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 
