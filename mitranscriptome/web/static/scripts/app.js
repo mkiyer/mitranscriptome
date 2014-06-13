@@ -4,7 +4,7 @@ define([
   'backbone',
   'd3',
   'collections/transcripts',
-  'views/transcript_table'
+  'views/transcript_table',
 ], function($, _, Backbone, d3,
     TranscriptCollection,
     TranscriptTableView) {
@@ -214,12 +214,5 @@ define([
 	  console.log('HICLINC'); 
 	  selectedTranscripts.load('hiclinc');
   });
-  
-  
-//  $('#btn-breast').click(function() { 
-//	  console.log('BREAST'); 
-//	  selectedTranscripts.load('breast');
-//  });
-//  var val = $("#myOptions option:selected").text();
-  
+
 })

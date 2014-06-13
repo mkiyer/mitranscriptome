@@ -1,12 +1,13 @@
-define(function(require) {
-  // load third-party javascript libraries
-  var $ = require('jquery'),
-      _ = require('underscore'),
-      Backbone = require('backbone');
-
-  // user-defined modules
-  var TranscriptTableTemplate = require('text!jstemplates/transcript_table.html');
-  var TranscriptCollection = require('collections/transcripts');
+define([
+  'jquery', 
+  'underscore', 
+  'backbone',
+  'text!jstemplates/transcript_table.html',
+  'collections/transcripts',
+  'tablesorter',
+], function($, _, Backbone,
+  TranscriptTableTemplate,
+  TranscriptCollection) {
 
   // define view
   var TranscriptTableView = Backbone.View.extend({
@@ -26,6 +27,8 @@ define(function(require) {
       var self = this;
       // render the collection to html
       self.$el.html(self.template({ 'transcriptCollection': self.collection }));
+      // add tablesorter functionality to table
+      $('#transcripts_table').tablesorter();
       return self;
     }
 

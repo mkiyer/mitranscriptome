@@ -9,6 +9,7 @@ requirejs.config({
         'jquery': 'libs/jquery-1.10.2.min',
         'underscore': 'libs/underscore-min',
         'backbone': 'libs/backbone-min',
+        'tablesorter': 'libs/jquery.tablesorter.min',
         'd3': 'libs/d3.v3.min',
         'bootstrap': '../bootstrap/js/bootstrap.min',
         'domReady': 'libs/domReady',
@@ -31,6 +32,10 @@ requirejs.config({
         'bootstrap': {
             deps: ['jquery'],
             exports: "$.fn.popover"
+        },
+        'tablesorter': {
+            deps: ['jquery'],
+            exports: '$.fn.tablesorter'
         }
     }    
 });
@@ -45,7 +50,7 @@ require(['domReady'], function (domReady) {
   });
 });
 
-define(["jquery", "underscore", "backbone", 'd3', 'bootstrap'],
+define(["jquery", "underscore", "backbone", 'd3', 'bootstrap', 'tablesorter'],
     function ($, _, Backbone, d3) {
         console.log("Test output");
         console.log("$: " + typeof $);
