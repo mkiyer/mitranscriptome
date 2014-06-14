@@ -29,13 +29,8 @@ DEBUG = True
 SECURE_USERNAME = '4e1b98cdd7dc28789293e67d1779acee77277b517ff3525a5e2fdf6079b65d8480d0aa02c60d772d6049e9f3583ccfae85367599c23435a414394d829be9289c'
 SECURE_PASSWORD = '491118ba32bec59bdcf53f4e4b6671c5881a2f265740337f54ea2fca3a74e53698304ca24e87765585f968f89520c0522c630b91658449812dcc40f8f6862133'
 
-# uncomment for toy data configuration
-SERVER_URL = 'http://127.0.0.1:5000'
+# location of static files on server
 MAIN_DIR = '/Users/mkiyer/git/mitranscriptome/mitranscriptome/web/static/toy'
-# uncomment for server configuration
-#SERVER_URL = ''
-#MAIN_DIR = '/mctp/projects/mitranscriptome/naming/mitranscriptome_data'
-
 # path to metadata files
 TRANSCRIPT_METADATA_FILE = os.path.join(MAIN_DIR, 'metadata.mitranscriptome.txt')
 TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 
@@ -251,8 +246,8 @@ def init_transcript_tables(tdb):
                           'hgS_otherUserName=mitranscriptome&'
                           'hgS_otherUserSessionName=mitranscriptome&position=%s' % 
                           (r['chrom'] + '%3A' + r['start'] + '-' + r['end']))
-        r['modal'] = SERVER_URL + '/modal?t_id=%s' % (r['transcript_id'])
-        r['seq_request'] = SERVER_URL + '/download_seq?t_id=%s' % (r['transcript_id'])
+        r['modal'] = '/modal?t_id=%s' % (r['transcript_id'])
+        r['seq_request'] = '/download_seq?t_id=%s' % (r['transcript_id'])
         if r['avg_frac'] != 'NA':
             r['avg_frac'] = float(format(float(r['avg_frac']), '.4f'))
         r['type_name'] = type_name
@@ -324,16 +319,16 @@ def request_transcript_view():
     if meta['avg_frac'] != 'NA':
         meta['avg_frac'] = float(format(float(meta['avg_frac']), '.4f'))
     # construct links to images
-    meta['ssea_type_img'] = SERVER_URL + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_type)
-    meta['ssea_type_expr_img'] = SERVER_URL + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_type)        
-    meta['ssea_can_img'] = SERVER_URL + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_can)
-    meta['ssea_can_expr_img'] = SERVER_URL + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_can)
-    meta['expr_img'] = SERVER_URL + '/get_expression_boxplot?transcript_id=%s' % (t_id)
+    meta['ssea_type_img'] = '/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_type)
+    meta['ssea_type_expr_img'] = '/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_type)        
+    meta['ssea_can_img'] = '/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_can)
+    meta['ssea_can_expr_img'] = '/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_can)
+    meta['expr_img'] = '/get_expression_boxplot?transcript_id=%s' % (t_id)
     meta['ucsc_link'] = ('http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&'
                             'hgS_otherUserName=mitranscriptome&'
                             'hgS_otherUserSessionName=mitranscriptome&position=%s' % 
                             (meta['chrom'] + '%3A' + meta['start'] + '-' + meta['end']))
-    meta['seq_link'] = SERVER_URL + '/download_seq?t_id=%s' % t_id
+    meta['seq_link'] = '/download_seq?t_id=%s' % t_id
     meta['type_name'] = type_name
     return render_template('transcript_view.html', meta=meta)
 
