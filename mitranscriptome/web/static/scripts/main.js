@@ -13,7 +13,9 @@ requirejs.config({
         'd3': 'libs/d3.v3.min',
         'bootstrap': '../bootstrap/js/bootstrap.min',
         'domReady': 'libs/domReady',
-        'text': 'libs/text'
+        'text': 'libs/text',
+        'spin': 'libs/spin.min',
+        'jqueryspin': 'libs/jquery.spin'
     },
     
     shim: {
@@ -36,6 +38,10 @@ requirejs.config({
         'tablesorter': {
             deps: ['jquery'],
             exports: '$.fn.tablesorter'
+        },
+        'jqueryspin': {
+          deps: ['spin', 'jquery'],
+          exports: '$.fn.spin'
         }
     }    
 });

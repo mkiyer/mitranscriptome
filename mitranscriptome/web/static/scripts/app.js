@@ -8,211 +8,154 @@ define([
 ], function($, _, Backbone, d3,
     TranscriptCollection,
     TranscriptTableView) {
-
+  
   // collections
   var selectedTranscripts = new TranscriptCollection;
-
   // views
   var transcriptTableView = new TranscriptTableView({ 
     el: '#div-transcript-table',
     collection: selectedTranscripts
   });
-  
-  // load transcripts
- // selectedTranscripts.load('breast');
- 
-  // button click functions
-  function toggle_visibility(id) {
-    var e = document.getElementById(id);
-    if(e.style.display == 'block')
-      e.style.display = 'none';
-    else
-      e.style.display = 'block';
-  }
-  function toggle_off(id) {
-    var e = document.getElementById(id);
-    e.style.display = 'none';
-  }
-  function toggle_on(id) {
-    var e = document.getElementById(id);
-    e.style.display = 'block';
-  }
-  
-  // button events
-  $('#Select_Transcripts_Btn').click(function() {
-	toggle_off('Home');
-	toggle_off('Methods');
-	toggle_off('Downloads');
-	toggle_on('Select_Transcripts');
-	toggle_off('LATs');
-	toggle_off('CATs');
-	toggle_off('CLATs');
-	toggle_off('HiCLNCs')
-	toggle_off('Annotated')
-  });
-  $('#Methods_Btn').click(function() {
-	toggle_off('Home');
-	toggle_on('Methods');
-	toggle_off('Downloads');
-	toggle_off('Select_Transcripts');
-	toggle_off('LATs');
-	toggle_off('CATs');
-	toggle_off('CLATs');
-	toggle_off('HiCLNCs')
-	toggle_off('Annotated')
-  });
-  $('#Downloads_Btn').click(function() {
-	toggle_off('Home');
-	toggle_off('Methods');
-	toggle_on('Downloads');
-	toggle_off('LATs');
-	toggle_off('CATs');
-	toggle_off('CLATs');
-	toggle_off('Select_Transcripts');
-	toggle_off('HiCLNCs')
-	toggle_off('Annotated')
-  });
 
-  $('#btn-close-transcript').click(function() { toggle_off('div-selected-transcripts'); });
- 
+  // application control logic
   $('#btn-aml').click(function() { 
 	  console.log('AML'); 
-	  selectedTranscripts.load('aml');
+	  transcriptTableView.load('aml');
   });
 
   $('#btn-bladder').click(function() { 
 	  console.log('BLADDER'); 
-	  selectedTranscripts.load('bladder');
+	  transcriptTableView.load('bladder');
   });
   
   $('#btn-breast').click(function() { 
-	  console.log('BREAST'); 
-	  selectedTranscripts.load('breast');
+	  console.log('BREAST');
+	  transcriptTableView.load('breast');
   });
  
   $('#btn-cervical').click(function() { 
 	  console.log('CERVICAL'); 
-	  selectedTranscripts.load('cervical');
+	  transcriptTableView.load('cervical');
   });
   
   $('#btn-cml').click(function() { 
 	  console.log('cml'); 
-	  selectedTranscripts.load('cml');
+	  transcriptTableView.load('cml');
   });
   
   $('#btn-colorectal').click(function() { 
 	  console.log('COLORECTAL'); 
-	  selectedTranscripts.load('colorectal');
+	  transcriptTableView.load('colorectal');
   });
   
   $('#btn-gbm').click(function() { 
 	  console.log('GBM'); 
-	  selectedTranscripts.load('gbm');
+	  transcriptTableView.load('gbm');
   });
   
   $('#btn-head_neck').click(function() { 
 	  console.log('HEAD_NECK'); 
-	  selectedTranscripts.load('head_neck');
+	  transcriptTableView.load('head_neck');
   });
   
   $('#btn-heart').click(function() { 
 	  console.log('HEART'); 
-	  selectedTranscripts.load('heart');
+	  transcriptTableView.load('heart');
   });
   
   $('#btn-hesc').click(function() { 
 	  console.log('HESC'); 
-	  selectedTranscripts.load('hesc');
+	  transcriptTableView.load('hesc');
   });
   
   $('#btn-kich').click(function() { 
 	  console.log('KICH'); 
-	  selectedTranscripts.load('kich');
+	  transcriptTableView.load('kich');
   });
   
   $('#btn-kirc').click(function() { 
 	  console.log('KIRC'); 
-	  selectedTranscripts.load('kirc');
+	  transcriptTableView.load('kirc');
   });
   
   $('#btn-kirp').click(function() { 
 	  console.log('KIRP'); 
-	  selectedTranscripts.load('kirp');
+	  transcriptTableView.load('kirp');
   });
   
   $('#btn-lgg').click(function() { 
 	  console.log('LGG'); 
-	  selectedTranscripts.load('lgg');
+	  transcriptTableView.load('lgg');
   });
   
   $('#btn-liver').click(function() { 
 	  console.log('LIVER'); 
-	  selectedTranscripts.load('liver');
+	  transcriptTableView.load('liver');
   });
   
   $('#btn-luad').click(function() { 
 	  console.log('LUAD'); 
-	  selectedTranscripts.load('luad');
+	  transcriptTableView.load('luad');
   });
   
   $('#btn-lusc').click(function() { 
 	  console.log('LUSC'); 
-	  selectedTranscripts.load('lusc');
+	  transcriptTableView.load('lusc');
   });
   
   $('#btn-medulloblastoma').click(function() { 
 	  console.log('MEDULLOBLASTOMA'); 
-	  selectedTranscripts.load('medulloblastoma');
+	  transcriptTableView.load('medulloblastoma');
   });
   
   $('#btn-melanoma').click(function() { 
 	  console.log('MELANOMA'); 
-	  selectedTranscripts.load('melanoma');
+	  transcriptTableView.load('melanoma');
   });
   
   $('#btn-mpn').click(function() { 
 	  console.log('MPN'); 
-	  selectedTranscripts.load('mpn');
+	  transcriptTableView.load('mpn');
   });
   
   $('#btn-ovarian').click(function() { 
 	  console.log('OVARIAN'); 
-	  selectedTranscripts.load('ovarian');
+	  transcriptTableView.load('ovarian');
   });
   
   $('#btn-pancreatic').click(function() { 
 	  console.log('PANCREATIC'); 
-	  selectedTranscripts.load('pancreatic');
+	  transcriptTableView.load('pancreatic');
   });
   
   $('#btn-prostate').click(function() { 
 	  console.log('PROSTATE'); 
-	  selectedTranscripts.load('prostate');
+	  transcriptTableView.load('prostate');
   });
   
   $('#btn-skeletal_muscle').click(function() { 
 	  console.log('SKELETAL_MUSCLE'); 
-	  selectedTranscripts.load('skeletal_muscle');
+	  transcriptTableView.load('skeletal_muscle');
   });
   
   $('#btn-stomach').click(function() { 
 	  console.log('STOMACH'); 
-	  selectedTranscripts.load('stomach');
+	  transcriptTableView.load('stomach');
   });
   
   $('#btn-thyroid').click(function() { 
 	  console.log('THYROID'); 
-	  selectedTranscripts.load('thyroid');
+	  transcriptTableView.load('thyroid');
   });
   
   $('#btn-uterine').click(function() { 
 	  console.log('UTERINE'); 
-	  selectedTranscripts.load('uterine');
+	  transcriptTableView.load('uterine');
   });
   
   $('#btn-hiclinc').click(function() { 
 	  console.log('HICLINC'); 
-	  selectedTranscripts.load('hiclinc');
+	  transcriptTableView.load('hiclinc');
   });
 
 })

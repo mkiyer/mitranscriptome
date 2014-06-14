@@ -5,10 +5,11 @@ define([
   'text!jstemplates/transcript_table.html',
   'collections/transcripts',
   'tablesorter',
+  'jqueryspin'
 ], function($, _, Backbone,
   TranscriptTableTemplate,
   TranscriptCollection) {
-
+  
   // define view
   var TranscriptTableView = Backbone.View.extend({
         
@@ -19,12 +20,26 @@ define([
       // register events
       // bind view to collection
       self.listenTo(self.collection, 'sync', self.render);
-      self.listenTo(self.collection, 'remove', self.render);
     },
-    
-    render: function() {
-      console.log('rendering');
+
+    load: function(func_type) {
       var self = this;
+      // show loading spinner
+      self.$el.spin();
+      // clear collection
+      self.collection.reset();
+      // update ajax parameters
+      _.extend(self.collection.ajaxParams,
+        { data: JSON.stringify({ func_type: func_type }) }
+      );
+      // trigger asynchronous load of new data (will call render() when done)
+      self.collection.fetch(self.collection.ajaxParams);
+    },
+
+    render: function() {
+      var self = this;
+      // turn off loading spinner
+      self.$el.spin(false);
       // render the collection to html
       self.$el.html(self.template({ 'transcriptCollection': self.collection }));
       // add tablesorter functionality to table
