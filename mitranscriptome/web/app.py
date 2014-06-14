@@ -4,12 +4,17 @@ MiTranscriptome web server
 @author: mkiyer
 @author: yniknafs
 
-@version: 0.0.1
+@version: 0.1.0
 '''
+# global imports
 import collections
 import os
+import hashlib
 from operator import itemgetter
-from flask import Flask, render_template, request, g, jsonify, send_file, make_response
+
+# flask imports
+from flask import Flask, render_template, request, g, jsonify, send_file, make_response, Response
+from functools import wraps
 
 # project imports
 from dbapi import DBInterfaceFile
@@ -17,7 +22,12 @@ from dbapi import DBInterfaceFile
 # create flask application
 app = Flask(__name__)
 
+# enable/disable debugging
 DEBUG = True
+
+# for authentication
+SECURE_USERNAME = '4e1b98cdd7dc28789293e67d1779acee77277b517ff3525a5e2fdf6079b65d8480d0aa02c60d772d6049e9f3583ccfae85367599c23435a414394d829be9289c'
+SECURE_PASSWORD = '491118ba32bec59bdcf53f4e4b6671c5881a2f265740337f54ea2fca3a74e53698304ca24e87765585f968f89520c0522c630b91658449812dcc40f8f6862133'
 
 # uncomment for toy data configuration
 SERVER_URL = 'http://127.0.0.1:5000'
@@ -26,6 +36,7 @@ MAIN_DIR = '/Users/mkiyer/git/mitranscriptome/mitranscriptome/web/static/toy'
 #SERVER_URL = ''
 #MAIN_DIR = '/mctp/projects/mitranscriptome/naming/mitranscriptome_data'
 
+# path to metadata files
 TRANSCRIPT_METADATA_FILE = os.path.join(MAIN_DIR, 'metadata.mitranscriptome.txt')
 TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 
                               'end', 'strand', 'tstatus', 'tgenic', 'tcat',
@@ -34,6 +45,27 @@ TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start',
 EXPRESSION_PLOT_DIR = os.path.join(MAIN_DIR, 'expr_plots')
 SSEA_PLOT_DIR = os.path.join(MAIN_DIR, 'ssea_plots')
 
+def check_auth(username, password):
+    """This function is called to check if a username /
+    password combination is valid.
+    """
+    username = hashlib.sha512(username).hexdigest()
+    password = hashlib.sha512(password).hexdigest()
+    return username == SECURE_USERNAME and password == SECURE_PASSWORD
+
+def authenticate():
+    """Sends a 401 response that enables basic auth"""
+    return Response('Could not verify your login/password', 401, 
+                    {'WWW-Authenticate': 'Basic realm="Login Required"'})
+
+def requires_auth(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth = request.authorization
+        if not auth or not check_auth(auth.username, auth.password):
+            return authenticate()
+        return f(*args, **kwargs)
+    return decorated
 
 def ssea_selector(type, cat):
     if type == 'aml':
@@ -197,8 +229,6 @@ def ssea_selector(type, cat):
         ssea_can = 'NA'
         type_name = 'Uterine Endometrial Carcinoma Associated Transcripts'
     
-    
-    
     return ssea_type, ssea_can, type_name
     
 def init_transcript_db():
@@ -218,9 +248,9 @@ def init_transcript_tables(tdb):
         ssea_type, ssea_can, type_name = ssea_selector(r['func_type'], r['func_cat'])
         # TODO: construct bigbed link
         r['ucsc_link'] = ('http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&'
-                            'hgS_otherUserName=mitranscriptome&'
-                            'hgS_otherUserSessionName=mitranscriptome&position=%s' % 
-                            (r['chrom'] + '%3A' + r['start'] + '-' + r['end']))
+                          'hgS_otherUserName=mitranscriptome&'
+                          'hgS_otherUserSessionName=mitranscriptome&position=%s' % 
+                          (r['chrom'] + '%3A' + r['start'] + '-' + r['end']))
         r['modal'] = SERVER_URL + '/modal?t_id=%s' % (r['transcript_id'])
         r['seq_request'] = SERVER_URL + '/download_seq?t_id=%s' % (r['transcript_id'])
         if r['avg_frac'] != 'NA':
@@ -230,7 +260,6 @@ def init_transcript_tables(tdb):
         ttables[k].append(r)
     for k in ttables.iterkeys():
         ttables[k] = sorted(ttables[k], key=itemgetter('avg_frac'), reverse=True)
-    
     return ttables
 
 def get_transcript_tables(tdb):
@@ -239,47 +268,38 @@ def get_transcript_tables(tdb):
     return g.transcript_tables
 
 @app.route('/get_expression_boxplot')
+@requires_auth
 def get_expression_boxplot():
     transcript_id = request.args.get('transcript_id')
     filename = os.path.join(EXPRESSION_PLOT_DIR, '%s_expr.jpeg' % (transcript_id))
-    # TODO: debugging (make sure file exists)
     return send_file(filename, mimetype='image/jpeg')
 
 @app.route('/get_ssea')
+@requires_auth
 def get_ssea():
     transcript_id = request.args.get('transcript_id')
     subdir = request.args.get('subdir')
     plot_type = request.args.get('plot_type')
-    
     filename = os.path.join(SSEA_PLOT_DIR, subdir, '%s.%s.png' % (transcript_id, plot_type))
-    # TODO: debugging (make sure file exists)
     return send_file(filename, mimetype='image/jpeg')
 
-@app.route('/transcripts', methods=['POST'])
-def request_transcripts():
-    '''
-    json request object with fields:
-        'functype': functional type of transcript (CAT, LAT, CLAT, etc)
-        'lineage': lineage / tissue type
-
-    returns json 'results' with list of objects each with attributes:
-        'transcript_id': transcript_id
-        custom fields specified in configuration
-    '''
-    # get transcript metadata
-    ttables = get_transcript_tables(get_transcript_db())
-    # parse the incoming json request
-    d = request.get_json()
-    k = d['func_type']
-    if k not in ttables:
-        app.logger.error('Transcript table (%s) not found' % (k))
-        # TODO: handle error?
-        return jsonify(results=None)
-    app.logger.debug('Transcript table %s' % (k))
-    return jsonify(results=ttables[k])
+@app.route('/download_seq')
+@requires_auth
+def download_seq():
+    # fetch sequence from metadata
+    t_id = request.args.get('t_id')
+    meta = get_transcript_db().metadata_json_dict[t_id]
+    name = meta['func_name']
+    seq = meta['seq']
+    # construct response
+    response = make_response(seq)
+    # set response header to trigger file download
+    response.headers["Content-Disposition"] = "attachment; filename=%s_sequence.txt" % name
+    return response
 
 @app.route('/modal')
-def modal():
+@requires_auth
+def request_transcript_view():
     t_id = request.args.get('t_id')
     meta = get_transcript_db().metadata_json_dict[t_id]
     ssea_type, ssea_can, type_name = ssea_selector(meta['func_type'], meta['func_cat'])
@@ -302,9 +322,9 @@ def modal():
         meta['type_show'] = 'hide'
         meta['can_show'] = 'hide'
     if meta['avg_frac'] != 'NA':
-            meta['avg_frac'] = float(format(float(meta['avg_frac']), '.4f'))
+        meta['avg_frac'] = float(format(float(meta['avg_frac']), '.4f'))
+    # construct links to images
     meta['ssea_type_img'] = SERVER_URL + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_type)
-    
     meta['ssea_type_expr_img'] = SERVER_URL + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_type)        
     meta['ssea_can_img'] = SERVER_URL + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=eplot' % (t_id, ssea_can)
     meta['ssea_can_expr_img'] = SERVER_URL + '/get_ssea?transcript_id=%s&subdir=%s&plot_type=fpkm' % (t_id, ssea_can)
@@ -315,23 +335,33 @@ def modal():
                             (meta['chrom'] + '%3A' + meta['start'] + '-' + meta['end']))
     meta['seq_link'] = SERVER_URL + '/download_seq?t_id=%s' % t_id
     meta['type_name'] = type_name
-    
-    return render_template('modal.html', meta=meta)
+    return render_template('transcript_view.html', meta=meta)
 
-@app.route('/download_seq')
-def download_seq():
-    t_id = request.args.get('t_id')
-    meta = get_transcript_db().metadata_json_dict[t_id]
-    name = meta['func_name']
-    seq = meta['seq']
-    response = make_response(seq)
-    # This is the key: Set the right header for the response
-    # to be downloaded, instead of just printed on the browser
-    response.headers["Content-Disposition"] = "attachment; filename=%s_sequence.txt" % name
-    return response
+@app.route('/transcripts', methods=['POST'])
+@requires_auth
+def request_transcripts():
+    '''
+    json request object with fields:
+        'functype': functional type of transcript (CAT, LAT, CLAT, etc)
+        'lineage': lineage / tissue type
 
+    returns json 'results' with list of objects each with attributes:
+        'transcript_id': transcript_id
+        custom fields specified in configuration
+    '''
+    # get transcript metadata
+    ttables = get_transcript_tables(get_transcript_db())
+    # parse the incoming json request
+    d = request.get_json()
+    k = d['func_type']
+    if k not in ttables:
+        app.logger.error('Transcript table (%s) not found' % (k))
+        return jsonify(results=None)
+    app.logger.debug('Transcript table %s' % (k))
+    return jsonify(results=ttables[k])
 
 @app.route('/')
+@requires_auth
 def home():
     return render_template('home.html')
 
