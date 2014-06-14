@@ -5,6 +5,7 @@ define([
   'd3',
   'collections/transcripts',
   'views/transcript_table',
+  'selectize'
 ], function($, _, Backbone, d3,
     TranscriptCollection,
     TranscriptTableView) {
@@ -15,6 +16,17 @@ define([
   var transcriptTableView = new TranscriptTableView({ 
     el: '#div-transcript-table',
     collection: selectedTranscripts
+  });
+  
+  // selectize control for tissue/cancer type
+  $('#select-transcripts').selectize({
+    onChange: function(value) {
+      console.log(value);
+      // trigger load of transcript table
+      transcriptTableView.load(value);
+      // show transcript table
+      $('#div-selected-transcripts').show();
+    }
   });
 
   // application control logic

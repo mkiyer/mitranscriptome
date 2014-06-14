@@ -11,6 +11,7 @@ requirejs.config({
         'backbone': 'libs/backbone-min',
         'd3': 'libs/d3.v3.min',
         'bootstrap': '../bootstrap/js/bootstrap.min',
+        'selectize': 'libs/selectize.min',
         'domReady': 'libs/domReady',
         'text': 'libs/text',
         'spin': 'libs/spin.min',

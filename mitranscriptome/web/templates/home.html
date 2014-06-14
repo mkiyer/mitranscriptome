@@ -13,6 +13,10 @@
     <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='bootstrap/css/bootstrap-responsive.css') }}" rel="stylesheet">
 
+    <!-- Selectize CSS -->
+    <link href="{{ url_for('static', filename='css/selectize.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/selectize.bootstrap3.css') }}" rel="stylesheet">
+
     <!-- Custom CSS for this template-->
     <link href="{{ url_for('static', filename='css/navbar-fixed-top.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
@@ -30,42 +34,19 @@
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <a href="/"><span class="glyphicon glyphicon-home"></span><h4> MiTranscriptome lncRNA Database</h4></a>
+          <a href="/"><span class="glyphicon glyphicon-home"></span><h4> MiTranscriptome</h4></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#top" onclick="toggle_on('Select_Transcripts');toggle_off('Home')">Choose Study</a></li>
             <li><a href="http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=mitranscriptome&hgS_otherUserSessionName=mitranscriptome" 
             target = "_blank" >View lncRNAs in UCSC Browser</a></li>
             <li><a href="http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=mitranscriptome&hgS_otherUserSessionName=mitranscriptome_all" 
             target = "_blank" >View Assembly in UCSC Browser</a></li>
-            <li><a href="#" data-toggle="modal" data-target="#myModal_links">Links</a></li>
             <li><a href="#" data-toggle="modal" data-target="#myModal_About">About</a></li>
-            <li><a href="#" data-toggle="modal" data-target="#myModal_Contact">Contact</a></li>
-            
           </ul>
         </div>
       </div><!--/.container -->
     </div><!--/.navbar -->
-
-    <div class="modal fade" id="myModal_links" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_links" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel_links">Links</h4>
-          </div>
-          <div class="modal-body">
-            <ul>             
-              <li><a href="https://code.google.com/p/ssea" target = "_blank">SSEA Source Code</a></li>
-              <li><a href="https://code.google.com/p/assemblyline" target = "_blank">AssemblyLine Source Code</a></li>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
 
     <div class="modal fade" id="myModal_About" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_About" aria-hidden="true">
       <div class="modal-dialog">
@@ -75,31 +56,42 @@
             <h4 class="modal-title" id="myModalLabel_About">About</h4>
           </div>
           <div class="modal-body">
-          	The MiTranscriptome was assembled from an ab initio transcriptome construction based on 6,503 RNA-seq libraries from 
-          multiple cancer and tissue types. The lncRNAs most differentially expressed in cancers and tissues are reported in this database. 
-          A novel non-parametric tool, called Sample Set Enrichment Analysis (SSEA) was used to perform differential expression analysis. 
-            MiTranscriptome was developed at the Michigan Center for Translational Pathology at the University of Michigan.
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
-    <div class="modal fade" id="myModal_Contact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_Contact" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel_Contact">Contact</h4>
-          </div>
-          <div class="modal-body">
+            <p><h4>MiTranscriptome is currently in beta testing. Please report issues at our
+            <a target = "_blank" href="https://github.com/mkiyer/mitranscriptome/issues">github site</a>.</h4>
+            </p>
+            <p>MiTranscriptome is a large-scale <i>ab initio</i> transcriptome 
+            meta-assembly from 6,503 RNA-Seq libraries. RNA-Seq data were obtained
+            from <a target = "_blank" href="http://cancergenome.nih.gov">The Cancer Genome Atlas (TCGA)</a>,
+            the <a target = "_blank" href="http://www.genome.gov/encode">ENCODE Project</a>, the 
+            <a target = "_blank" href="http://mctp.med.umich.edu">Michigan Center for Translational Pathology</a>,
+            and other published sources. The lncRNAs most differentially expressed in cancers 
+            and tissues are reported in this portal.</p>
+            <p><h5>Methods</h5>
+            <p>Large-scale transcriptome meta-assembly was performed using AssemblyLine, which
+            rigorously filters background noise and artifacts before employing a greedy
+            dynamic programming approach to derive a consensus transcriptome from 
+            individual samples.</p>
+            <p>Expression analysis was performed using a novel non-parametric tool 
+            called Sample Set Enrichment Analysis (SSEA), which uses weighted 
+            Kolmorgorov-Smirnoff-like tests to detect cancer-specific and lineage-specific
+            patterns. SSEA adapts ideas from 
+            <a target = "_blank" href="http://www.broadinstitute.org/gsea/index.jsp">Gene Set Enrichment Analysis</a>.</p>
+            <p><h5>Contact:</h5>
             <ul>
-              <li>Arul Chinnaiyan: arul@umich.edu</a></li>
-              <li>Matthew Iyer: mkiyer@umich.edu</a></li>
-              <li>Yashar Niknafs: yniknafs@umich.edu</a></li>
-            </div>
+              <li>Arul Chinnaiyan: <i>arul@umich.edu</i></a></li>
+              <li>Matthew Iyer: <i>mkiyer@umich.edu</i></a></li>
+              <li>Yashar Niknafs: <i>yniknafs@umich.edu</i></a></li>
+            </ul></p>
+            <p><h5>Source Code:</h5>
+            <ul>   
+              <li><a href="https://code.google.com/p/ssea" target = "_blank">SSEA Source Code</a></li>
+              <li><a href="https://code.google.com/p/assemblyline" target = "_blank">AssemblyLine Source Code</a></li>
+            </ul>
+            <p><h6>
+            MiTranscriptome was developed by members of <a target = "_blank" href="http://mctp.med.umich.edu">Michigan Center for 
+            Translational Pathology</a> at the <a target = "_blank" href="http://www.umich.edu">University of Michigan</a>.
+            </h6></p>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
@@ -111,83 +103,48 @@
     <div class="container" id="top">
     
         <div id="Home" class="jumbotron">
-          <h1>Welcome to the MiTranscriptome lncRNA Database</h1>
-          <p>The MiTranscriptome was assembled from an ab initio transcriptome construction based on 6,503 RNA-seq libraries from 
-          multiple cancer and tissue types. The lncRNAs most differnetially expressed in cancers and tissues are reported in this database.</p>
+          <h2>Welcome to the MiTranscriptome lncRNA Portal</h2>
+          <p><small>MiTranscriptome is <i>ab initio</i> transcriptome 
+          reconstruction from 6,503 RNA-seq libraries spanning diverse 
+          cancer and tissue types. The MiTranscriptome contains >58,000 
+          lncRNAs, the vast majority of which are current unannotated. 
+          This portal reports the lncRNAs that are expressed in a 
+          lineage-specific or cancer-specific manner.</small></p>
           <p><a class="btn btn-lg btn-primary" href="#" role="button" onclick="toggle_off('Home');toggle_on('Select_Transcripts')">Get Started &raquo;</a></p>
         </div><!-- /Home Screen -->
 
         <div id="Select_Transcripts" class="toshow jumbotron">
-          <h3><strong>Select Transcripts</strong></h3>
-          <p>Our analysis has identified lncRNAs associated with various cancer and tissue types. Please make a selection from the dropdown menu below:</p>
-   		<p>
-   	<!-- 
-   		<select id="choose_study" class="form-control">
-                    <option value="aml">Acute Myelogenous Leukemia (AMATs)</option>
-                    <option value="bladder">Bladder Cancer (BLCATs)</option>
-                    <option value="breast">Breast Cancer (BRCATs)</option>
-                    <option value="cervical">Cervical Cancer (CVATs)</option>
-                    <option value="cml">Chronic Myelogenous Leukemia (CMATs)</option>
-                    <option value="colorectal">Colorectal Cancer (CRATs)</option>
-                    <option value="gbm">Glioblastoma Multiforme (GBATs)</option>
-                    <option value="head_neck">Head and Neck Cancer (HNCATs)</option>
-                    <option value="heart">Heart Tissue (HRATs)</option>
-                    <option value="hesc">Human Embryonic Stem Cells (ESATs)</option>
-                    <option value="kich">Chromophobe Renal Cell Carcinoma (KCHCATs)</option>
-                    <option value="kirc">Renal Clear Cell Carcinoma (KCCATs)</option>
-                    <option value="kirp">Renal Papillary Cell Carcinoma (KPCATs)</option>
-                    <option value="lgg">Low Grade Glioma (LGATs)</option>
-                    <option value="liver">Liver Cancer (LVCATs)</option>
-                    <option value="luad">Lung Adenocarcinoma (LACATs)</option>
-                    <option value="lusc">Lung Squamous Cell Carcinoma (LSCATs)</option>
-                    <option value="medulloblastoma">Medulloblastoma (MBATs)</option>
-                    <option value="melanoma">Melanoma (MEATs)</option>
-                    <option value="mpn">Myeloproliferative Neoplasia (MPATs)</option>
-                    <option value="ovarian">Ovarian Cancer (OVATs)</option>
-                    <option value="pancreatic">Pancreatic Cancer (PNATs)</option>
-                    <option value="prostate">Prostate Cancer (PCATs)</option>
-                    <option value="skeletal_muscle">Skeletal Muscle Tissue (SMATs)</option>
-                    <option value="stomach">Stomach Cancer (STCATs)</option>
-                    <option value="thyroid">Thyroid Cancer (THCATs)</option>
-                    <option value="uterine">Uterine Endometrial Carcinoma (UTATs)</option>
-                </ul>
-           </div><!-- Selectize Option -->
-	
-   		<div class="btn-group">
-		  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Choose Study <span class="caret"></span></button>
-                <ul class="dropdown-menu scrollable-menu" role="menu">
-                    <li><a  role="button" id="btn-aml" onclick="toggle_on('div-selected-transcripts')">Acute Myelogenous Leukemia (AMATs)</a></li>
-                    <li><a  role="button" id="btn-bladder" onclick="toggle_on('div-selected-transcripts')">Bladder Cancer (BLCATs)</a></li>
-                    <li><a  role="button" id="btn-breast" onclick="toggle_on('div-selected-transcripts')">Breast Cancer (BRCATs)</a></li>
-                    <li><a  role="button" id="btn-cervical" onclick="toggle_on('div-selected-transcripts')">Cervical Cancer (CVATs)</a></li>
-                    <li><a  role="button" id="btn-cml" onclick="toggle_on('div-selected-transcripts')">Chronic Myelogenous Leukemia (CMATs)</a></li>
-                    <li><a  role="button" id="btn-colorectal" onclick="toggle_on('div-selected-transcripts')">Colorectal Cancer (CRATs)</a></li>
-                    <li><a  role="button" id="btn-gbm" onclick="toggle_on('div-selected-transcripts')">Glioblastoma Multiforme (GBATs)</a></li>
-                    <li><a  role="button" id="btn-head_neck" onclick="toggle_on('div-selected-transcripts')">Head and Neck Cancer (HNCATs)</a></li>
-                    <li><a  role="button" id="btn-heart" onclick="toggle_on('div-selected-transcripts')">Heart Tissue (HRATs)</a></li>
-                    <li><a  role="button" id="btn-hesc" onclick="toggle_on('div-selected-transcripts')">Human Embryonic Stem Cells (ESATs)</a></li>
-                    <li><a  role="button" id="btn-kich" onclick="toggle_on('div-selected-transcripts')">Chromophobe Renal Cell Carcinoma (KCHCATs)</a></li>
-                    <li><a  role="button" id="btn-kirc" onclick="toggle_on('div-selected-transcripts')">Renal Clear Cell Carcinoma (KCCATs)</a></li>
-                    <li><a  role="button" id="btn-kirp" onclick="toggle_on('div-selected-transcripts')">Renal Papillary Cell Carcinoma (KPCATs)</a></li>
-                    <li><a  role="button" id="btn-lgg" onclick="toggle_on('div-selected-transcripts')">Low Grade Glioma (LGATs)</a></li>
-                    <li><a  role="button" id="btn-liver" onclick="toggle_on('div-selected-transcripts')">Liver Cancer (LVCATs)</a></li>
-                    <li><a  role="button" id="btn-luad" onclick="toggle_on('div-selected-transcripts')">Lung Adenocarcinoma (LACATs)</a></li>
-                    <li><a  role="button" id="btn-lusc" onclick="toggle_on('div-selected-transcripts')">Lung Squamous Cell Carcinoma (LSCATs)</a></li>
-                    <li><a  role="button" id="btn-medulloblastoma" onclick="toggle_on('div-selected-transcripts')">Medulloblastoma (MBATs)</a></li>
-                    <li><a  role="button" id="btn-melanoma" onclick="toggle_on('div-selected-transcripts')">Melanoma (MEATs)</a></li>
-                    <li><a  role="button" id="btn-mpn" onclick="toggle_on('div-selected-transcripts')">Myeloproliferative Neoplasia (MPATs)</a></li>
-                    <li><a  role="button" id="btn-ovarian" onclick="toggle_on('div-selected-transcripts')">Ovarian Cancer (OVATs)</a></li>
-                    <li><a  role="button" id="btn-pancreatic" onclick="toggle_on('div-selected-transcripts')">Pancreatic Cancer (PNATs)</a></li>
-                    <li><a  role="button" id="btn-prostate" onclick="toggle_on('div-selected-transcripts')">Prostate Cancer (PCATs)</a></li>
-                    <li><a  role="button" id="btn-skeletal_muscle" onclick="toggle_on('div-selected-transcripts')">Skeletal Muscle Tissue (SMATs)</a></li>
-                    <li><a  role="button" id="btn-stomach" onclick="toggle_on('div-selected-transcripts')">Stomach Cancer (STCATs)</a></li>
-                    <li><a  role="button" id="btn-thyroid" onclick="toggle_on('div-selected-transcripts')">Thyroid Cancer (THCATs)</a></li>
-                    <li><a  role="button" id="btn-uterine" onclick="toggle_on('div-selected-transcripts')">Uterine Endometrial Carcinoma (UTATs)</a></li>
-                    <li class="divider"></li>
-    				<li><a href="#div-selected-transcripts" role="button" id="btn-hiclinc" onclick="toggle_on('div-selected-transcripts')">Highly Conserved Long Intergenic Non-Coding RNAs (HICLINCs)</a></li>
-                </ul>
-           </div><!-- Dropdown Buttons -->
-           </p>
+   		  <label for="select-transcripts"><h4>Select Tissue/Cancer Type:</h4></label>
+   		  <select id="select-transcripts">
+            <option value="aml">Acute Myelogenous Leukemia (AMATs)</option>
+            <option value="bladder">Bladder Cancer (BLCATs)</option>
+            <option value="breast">Breast Cancer (BRCATs)</option>
+            <option value="cervical">Cervical Cancer (CVATs)</option>
+            <option value="cml">Chronic Myelogenous Leukemia (CMATs)</option>
+            <option value="colorectal">Colorectal Cancer (CRATs)</option>
+            <option value="gbm">Glioblastoma Multiforme (GBATs)</option>
+            <option value="head_neck">Head and Neck Cancer (HNCATs)</option>
+            <option value="heart">Heart Tissue (HRATs)</option>
+            <option value="hesc">Human Embryonic Stem Cells (ESATs)</option>
+            <option value="kich">Chromophobe Renal Cell Carcinoma (KCHCATs)</option>
+            <option value="kirc">Renal Clear Cell Carcinoma (KCCATs)</option>
+            <option value="kirp">Renal Papillary Cell Carcinoma (KPCATs)</option>
+            <option value="lgg">Low Grade Glioma (LGATs)</option>
+            <option value="liver">Liver Cancer (LVCATs)</option>
+            <option value="luad">Lung Adenocarcinoma (LACATs)</option>
+            <option value="lusc">Lung Squamous Cell Carcinoma (LSCATs)</option>
+            <option value="medulloblastoma">Medulloblastoma (MBATs)</option>
+            <option value="melanoma">Melanoma (MEATs)</option>
+            <option value="mpn">Myeloproliferative Neoplasia (MPATs)</option>
+            <option value="ovarian">Ovarian Cancer (OVATs)</option>
+            <option value="pancreatic">Pancreatic Cancer (PNATs)</option>
+            <option value="prostate">Prostate Cancer (PCATs)</option>
+            <option value="skeletal_muscle">Skeletal Muscle Tissue (SMATs)</option>
+            <option value="stomach">Stomach Cancer (STCATs)</option>
+            <option value="thyroid">Thyroid Cancer (THCATs)</option>
+            <option value="uterine">Uterine Endometrial Carcinoma (UTATs)</option>
+            <option value="hiclinc">Highly Conserved Long Intergenic Non-Coding RNAs (HICLINCs)</option>
+   		  </select>
         </div><!-- /Select Transcripts --> 
 
         <div id="div-selected-transcripts" class="toshow jumbotron">
