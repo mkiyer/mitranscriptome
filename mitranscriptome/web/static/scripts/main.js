@@ -15,8 +15,7 @@ requirejs.config({
         'text': 'libs/text',
         'spin': 'libs/spin.min',
         'jqueryspin': 'libs/jquery.spin',
-        'tablesorter': 'libs/jquery.tablesorter.min',
-        'tablesorter.scroller': 'libs/jquery.tablesorter.scroller'
+        'tablesorter': 'libs/jquery.tablesorter.min'
     },
     
     shim: {
@@ -39,10 +38,6 @@ requirejs.config({
         'tablesorter': {
             deps: ['jquery'],
             exports: '$.fn.tablesorter'
-        },
-        'tablesorter.scroller': {
-          deps: ['jquery'],
-          exports: '$.fn.hasScrollBar'        
         },
         'jqueryspin': {
           deps: ['spin', 'jquery'],
