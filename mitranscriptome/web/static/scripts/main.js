@@ -9,13 +9,14 @@ requirejs.config({
         'jquery': 'libs/jquery-1.10.2.min',
         'underscore': 'libs/underscore-min',
         'backbone': 'libs/backbone-min',
-        'tablesorter': 'libs/jquery.tablesorter.min',
         'd3': 'libs/d3.v3.min',
         'bootstrap': '../bootstrap/js/bootstrap.min',
         'domReady': 'libs/domReady',
         'text': 'libs/text',
         'spin': 'libs/spin.min',
-        'jqueryspin': 'libs/jquery.spin'
+        'jqueryspin': 'libs/jquery.spin',
+        'tablesorter': 'libs/jquery.tablesorter.min',
+        'tablesorter.scroller': 'libs/jquery.tablesorter.scroller'
     },
     
     shim: {
@@ -38,6 +39,10 @@ requirejs.config({
         'tablesorter': {
             deps: ['jquery'],
             exports: '$.fn.tablesorter'
+        },
+        'tablesorter.scroller': {
+          deps: ['jquery'],
+          exports: '$.fn.hasScrollBar'        
         },
         'jqueryspin': {
           deps: ['spin', 'jquery'],

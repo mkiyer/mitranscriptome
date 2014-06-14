@@ -5,6 +5,7 @@ define([
   'text!jstemplates/transcript_table.html',
   'collections/transcripts',
   'tablesorter',
+  'tablesorter.scroller',
   'jqueryspin'
 ], function($, _, Backbone,
   TranscriptTableTemplate,
@@ -12,7 +13,7 @@ define([
   
   // define view
   var TranscriptTableView = Backbone.View.extend({
-        
+
     initialize: function(options) {
       var self = this;
       // attributes
@@ -43,7 +44,10 @@ define([
       // render the collection to html
       self.$el.html(self.template({ 'transcriptCollection': self.collection }));
       // add tablesorter functionality to table
-      $('#transcripts_table').tablesorter();
+      $('#transcripts_table').tablesorter({
+        scrollHeight: 640,
+        widgets: ['scroller']
+      });
       return self;
     }
 
