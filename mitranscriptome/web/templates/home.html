@@ -30,6 +30,7 @@
      
      <!-- anirban toggle functions -->
      <script src="{{ url_for('static', filename='scripts/custom.js') }}"></script>
+
   </head>
   <body>
 
@@ -156,8 +157,7 @@
    		  </select>
         </div><!-- /Select Transcripts --> 
 
-        <div id="div-selected-transcripts" class="toshow jumbotron">
-          <a type="button" class="close" onclick="toggle_off('div-selected-transcripts');toggle_on('Select_Transcripts')">&times;</a>
+        <div id="div-selected-transcripts" class="toshow">
           <div id="div-transcript-table"></div>
           <p></p>
         </div><!-- /Display table of transcripts -->

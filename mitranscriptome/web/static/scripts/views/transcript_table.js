@@ -68,7 +68,7 @@ define([
         theme: 'bootstrap',
         widthFixed: true,
         headerTemplate : '{content} {icon}',
-        widgets : ["uitheme"]
+        widgets : ["uitheme"],
       });
       return self;
     }
@@ -77,3 +77,4 @@ define([
 
   return TranscriptTableView;
 });
+
