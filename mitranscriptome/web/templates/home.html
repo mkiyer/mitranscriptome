@@ -40,12 +40,17 @@
         <div class="navbar-header">
           <a href="/"><span class="glyphicon glyphicon-home"></span><h4> MiTranscriptome</h4></a>
         </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=mitranscriptome&hgS_otherUserSessionName=mitranscriptome" 
-            target = "_blank" >View lncRNAs in UCSC Browser</a></li>
-            <li><a href="http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=mitranscriptome&hgS_otherUserSessionName=mitranscriptome_all" 
-            target = "_blank" >View Assembly in UCSC Browser</a></li>
+		<div class="navbar-collapse collapse">
+		  <ul class="nav navbar-nav navbar-right">
+	      	<li class="dropdown">
+	          <a class="dropdown-toggle" data-toggle="dropdown">UCSC Browser Links <b class="caret"></b></a>
+		          <ul class="dropdown-menu">
+		          <li><a href="http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=mitranscriptome&hgS_otherUserSessionName=mitranscriptome" 
+		          target = "_blank" >View MiTranscriptome lncRNAs</a></li>
+		          <li><a href="http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=mitranscriptome&hgS_otherUserSessionName=mitranscriptome_all" 
+		          target = "_blank" >View Entire Assembly</a></li>
+		          </ul>
+		    </li>    
             <li><a href="#" data-toggle="modal" data-target="#myModal_About">About</a></li>
           </ul>
         </div>
@@ -119,46 +124,81 @@
           lncRNAs, the vast majority of which are currently unannotated. 
           This portal reports the lncRNAs that are expressed in a 
           lineage-specific or cancer-specific manner.</small></p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button" onclick="toggle_off('Home');toggle_on('Select_Transcripts')">Get Started &raquo;</a></p>
+          <div id="Select_Transcripts" class="jumbotron">
+	   		  <label for="select-transcripts"><h4>Select Tissue/Cancer Type:</h4></label>
+	   		  <select id="select-transcripts">
+	   		    <option value="">Cancer Type/Tissue Type</option>
+	            <option value="aml">Acute Myelogenous Leukemia (AMATs)</option>
+	            <option value="bladder">Bladder Cancer (BLCATs)</option>
+	            <option value="breast">Breast Cancer (BRCATs)</option>
+	            <option value="cervical">Cervical Cancer (CVATs)</option>
+	            <option value="cml">Chronic Myelogenous Leukemia (CMATs)</option>
+	            <option value="colorectal">Colorectal Cancer (CRATs)</option>
+	            <option value="gbm">Glioblastoma Multiforme (GBATs)</option>
+	            <option value="head_neck">Head and Neck Cancer (HNCATs)</option>
+	            <option value="heart">Heart Tissue (HRATs)</option>
+	            <option value="hesc">Human Embryonic Stem Cells (ESATs)</option>
+	            <option value="kich">Chromophobe Renal Cell Carcinoma (KCHCATs)</option>
+	            <option value="kirc">Renal Clear Cell Carcinoma (KCCATs)</option>
+	            <option value="kirp">Renal Papillary Cell Carcinoma (KPCATs)</option>
+	            <option value="lgg">Low Grade Glioma (LGATs)</option>
+	            <option value="liver">Liver Cancer (LVCATs)</option>
+	            <option value="luad">Lung Adenocarcinoma (LACATs)</option>
+	            <option value="lusc">Lung Squamous Cell Carcinoma (LSCATs)</option>
+	            <option value="medulloblastoma">Medulloblastoma (MBATs)</option>
+	            <option value="melanoma">Melanoma (MEATs)</option>
+	            <option value="mpn">Myeloproliferative Neoplasia (MPATs)</option>
+	            <option value="ovarian">Ovarian Cancer (OVATs)</option>
+	            <option value="pancreatic">Pancreatic Cancer (PNATs)</option>
+	            <option value="prostate">Prostate Cancer (PCATs)</option>
+	            <option value="skeletal_muscle">Skeletal Muscle Tissue (SMATs)</option>
+	            <option value="stomach">Stomach Cancer (STCATs)</option>
+	            <option value="thyroid">Thyroid Cancer (THCATs)</option>
+	            <option value="uterine">Uterine Endometrial Carcinoma (UTATs)</option>
+	            <option value="hiclinc">Highly Conserved Long Intergenic Non-Coding RNAs (HICLINCs)</option>
+	   		  </select>
+   		  </div><!-- /Select Transcripts --> 
         </div><!-- /Home Screen -->
 
-        <div id="Select_Transcripts" class="toshow jumbotron">
-   		  <label for="select-transcripts"><h4>Select Tissue/Cancer Type:</h4></label>
-   		  <select id="select-transcripts">
-   		    <option value="">Cancer Type/Tissue Type</option>
-            <option value="aml">Acute Myelogenous Leukemia (AMATs)</option>
-            <option value="bladder">Bladder Cancer (BLCATs)</option>
-            <option value="breast">Breast Cancer (BRCATs)</option>
-            <option value="cervical">Cervical Cancer (CVATs)</option>
-            <option value="cml">Chronic Myelogenous Leukemia (CMATs)</option>
-            <option value="colorectal">Colorectal Cancer (CRATs)</option>
-            <option value="gbm">Glioblastoma Multiforme (GBATs)</option>
-            <option value="head_neck">Head and Neck Cancer (HNCATs)</option>
-            <option value="heart">Heart Tissue (HRATs)</option>
-            <option value="hesc">Human Embryonic Stem Cells (ESATs)</option>
-            <option value="kich">Chromophobe Renal Cell Carcinoma (KCHCATs)</option>
-            <option value="kirc">Renal Clear Cell Carcinoma (KCCATs)</option>
-            <option value="kirp">Renal Papillary Cell Carcinoma (KPCATs)</option>
-            <option value="lgg">Low Grade Glioma (LGATs)</option>
-            <option value="liver">Liver Cancer (LVCATs)</option>
-            <option value="luad">Lung Adenocarcinoma (LACATs)</option>
-            <option value="lusc">Lung Squamous Cell Carcinoma (LSCATs)</option>
-            <option value="medulloblastoma">Medulloblastoma (MBATs)</option>
-            <option value="melanoma">Melanoma (MEATs)</option>
-            <option value="mpn">Myeloproliferative Neoplasia (MPATs)</option>
-            <option value="ovarian">Ovarian Cancer (OVATs)</option>
-            <option value="pancreatic">Pancreatic Cancer (PNATs)</option>
-            <option value="prostate">Prostate Cancer (PCATs)</option>
-            <option value="skeletal_muscle">Skeletal Muscle Tissue (SMATs)</option>
-            <option value="stomach">Stomach Cancer (STCATs)</option>
-            <option value="thyroid">Thyroid Cancer (THCATs)</option>
-            <option value="uterine">Uterine Endometrial Carcinoma (UTATs)</option>
-            <option value="hiclinc">Highly Conserved Long Intergenic Non-Coding RNAs (HICLINCs)</option>
-   		  </select>
-        </div><!-- /Select Transcripts --> 
+        
 
         <div id="div-selected-transcripts" class="toshow">
-          <div id="div-transcript-table"></div>
+		  
+          <div id="Select_Transcripts" class = "row jumbotron jumbothin">
+		  <label for="select-transcripts2"><h4>Select Tissue/Cancer Type:</h4></label>
+		  <select id="select-transcripts2">
+		    <option value="">Cancer Type/Tissue Type</option>
+		    <option value="aml">Acute Myelogenous Leukemia (AMATs)</option>
+		    <option value="bladder">Bladder Cancer (BLCATs)</option>
+		    <option value="breast">Breast Cancer (BRCATs)</option>
+		    <option value="cervical">Cervical Cancer (CVATs)</option>
+		    <option value="cml">Chronic Myelogenous Leukemia (CMATs)</option>
+		    <option value="colorectal">Colorectal Cancer (CRATs)</option>
+		    <option value="gbm">Glioblastoma Multiforme (GBATs)</option>
+		    <option value="head_neck">Head and Neck Cancer (HNCATs)</option>
+		    <option value="heart">Heart Tissue (HRATs)</option>
+		    <option value="hesc">Human Embryonic Stem Cells (ESATs)</option>
+		    <option value="kich">Chromophobe Renal Cell Carcinoma (KCHCATs)</option>
+		    <option value="kirc">Renal Clear Cell Carcinoma (KCCATs)</option>
+		    <option value="kirp">Renal Papillary Cell Carcinoma (KPCATs)</option>
+		    <option value="lgg">Low Grade Glioma (LGATs)</option>
+		    <option value="liver">Liver Cancer (LVCATs)</option>
+		    <option value="luad">Lung Adenocarcinoma (LACATs)</option>
+		    <option value="lusc">Lung Squamous Cell Carcinoma (LSCATs)</option>
+		    <option value="medulloblastoma">Medulloblastoma (MBATs)</option>
+		    <option value="melanoma">Melanoma (MEATs)</option>
+		    <option value="mpn">Myeloproliferative Neoplasia (MPATs)</option>
+		    <option value="ovarian">Ovarian Cancer (OVATs)</option>
+		    <option value="pancreatic">Pancreatic Cancer (PNATs)</option>
+		    <option value="prostate">Prostate Cancer (PCATs)</option>
+		    <option value="skeletal_muscle">Skeletal Muscle Tissue (SMATs)</option>
+		    <option value="stomach">Stomach Cancer (STCATs)</option>
+		    <option value="thyroid">Thyroid Cancer (THCATs)</option>
+		    <option value="uterine">Uterine Endometrial Carcinoma (UTATs)</option>
+		    <option value="hiclinc">Highly Conserved Long Intergenic Non-Coding RNAs (HICLINCs)</option>
+		  </select>
+		</div><!-- /Select Transcripts --> 
+          <div id="div-transcript-table" class = "row"></div>
           <p></p>
         </div><!-- /Display table of transcripts -->
 

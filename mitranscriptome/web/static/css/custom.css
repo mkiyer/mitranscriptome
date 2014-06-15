@@ -106,6 +106,13 @@ div #fix {
   font-size: 1.5em;
   }
 
+.jumbothin {
+	  padding: 15px;
+	  margin-bottom: 15px;
+	  color: inherit;
+	  background-color: #fafafa;
+	}
+
 .navbar-header {
   border-top: 10px solid transparent;
 }

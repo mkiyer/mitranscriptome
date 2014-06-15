@@ -28,10 +28,22 @@ define([
       // trigger load of transcript table
       transcriptTableView.load(value);
       // show transcript table
+      toggle_off('Home')
       $('#div-selected-transcripts').show();
     }
   });
-
+  
+  $('#select-transcripts2').selectize({
+	    onChange: function(value) {
+	      console.log(value);
+	      // trigger load of transcript table
+	      transcriptTableView.load(value);
+	      // show transcript table
+	      toggle_off('Home')
+	      $('#div-selected-transcripts').show();
+	    }
+	  });
+  
   // application control logic
   $('#btn-aml').click(function() { 
 	  console.log('AML'); 
