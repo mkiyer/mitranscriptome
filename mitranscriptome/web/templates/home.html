@@ -122,9 +122,9 @@
           reconstruction from 6,503 RNA-seq libraries spanning diverse 
           cancer and tissue types. The MiTranscriptome contains >58,000 
           lncRNAs, the vast majority of which are currently unannotated. 
-          This portal reports the lncRNAs that are expressed in a 
+          This portal reports the long non-coding RNAs (lncRNAs) that are expressed in a 
           lineage-specific or cancer-specific manner.</small></p>
-          <div id="Select_Transcripts" class="jumbotron">
+          <div id="Select_Transcripts" class="jumbotron jumbothin">
 	   		  <label for="select-transcripts"><h4>Select Tissue/Cancer Type:</h4></label>
 	   		  <select id="select-transcripts">
 	   		    <option value="">Cancer Type/Tissue Type</option>
@@ -158,12 +158,21 @@
 	            <option value="hiclinc">Highly Conserved Long Intergenic Non-Coding RNAs (HICLINCs)</option>
 	   		  </select>
    		  </div><!-- /Select Transcripts --> 
+   		  <div id="supported-browsers" class="jumbotron jumbothin text-right">
+   		  <p>Supported Browsers:</p>
+   		  <img src="{{ url_for('static', filename='images/chrome.png') }}" height="42" width="42">
+   		  <img src="{{ url_for('static', filename='images/firefox.png') }}" height="42" width="42">
+   		  <img src="{{ url_for('static', filename='images/safari.png') }}" height="42" width="42">
+   		  <img src="{{ url_for('static', filename='images/no-ie.png') }}" height="42" width="42">
+   		  </div>
+   		  
+   		  <link rel="shortcut icon" href="{{ url_for('static', filename='BlockM.ico') }}">
+   		  
         </div><!-- /Home Screen -->
 
         
 
         <div id="div-selected-transcripts" class="toshow">
-		  
           <div id="Select_Transcripts" class = "row jumbotron jumbothin">
 		  <label for="select-transcripts2"><h4>Select Tissue/Cancer Type:</h4></label>
 		  <select id="select-transcripts2">
@@ -198,8 +207,7 @@
 		    <option value="hiclinc">Highly Conserved Long Intergenic Non-Coding RNAs (HICLINCs)</option>
 		  </select>
 		</div><!-- /Select Transcripts --> 
-          <div id="div-transcript-table" class = "row"></div>
-          <p></p>
+          <div id="div-transcript-table"></div>
         </div><!-- /Display table of transcripts -->
 
       </div><!-- /container -->

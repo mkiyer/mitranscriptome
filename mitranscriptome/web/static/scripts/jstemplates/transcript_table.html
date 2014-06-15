@@ -1,37 +1,22 @@
 <% var t = transcriptCollection.at(1); %>
-<h3><%= t.get('type_name') %>  <small>(hold shift to sort multiple columns)</small></h3>
-<table id="transcripts_table" class="table table-hover tablesorter">
-<thead>
+<h3><%= t.get('type_name') %> <small>(hold shift to sort multiple columns)</small></h3>
+<table id="table-transcripts" class="table table-hover">
+<thead id="table-thead-transcripts">
 <tr>
-<th data-sorter='false' class="text-center">Info</th>
-<th data-sorter='false' class="text-center">Seq</th>
-<th>Name</th>
-<th>Location</th>
-<!-- <th data-sorter='false'>Tissue/ Cancer</th> -->
+<th class="text-center" data-sorter='false'>
+  <a href="#" data-toggle="tooltip" title="Click to open transcript details page" data-html="true">Info</a>
+</th>
+<th data-sorter='false' class="text-center">
+  <a href="#" data-toggle="tooltip" title="Click to view/download exon sequence">Seq</a>
+</th>
+<th data-sorter='true' class="text-center">Name</th>
+<th data-sorter='true' class="text-center">Location</th>
 <th data-sorter='true' class="text-center">SSEA Percentile</th>
 <th data-sorter='true' class="text-center">Unannotated?</th>
 <th data-sorter='true' class="text-center">Intergenic?</th>
-<th data-sorter='true' class="text-center tooltipper">Association Type
-<div class="modal fade" id="association-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-     <div class="modal-dialog modal-sm">
-       <div class="modal-content">
-         <div class="modal-header">
-           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-           <h4 class="modal-title" id="myModalLabel_Help">Association Type Legend:</h4>
-         </div>
-         <div class="modal-body text-left">
-		    <span class="glyphicon glyphicon-leaf green"></span> = Lineage Association
-		    <br>
-		    <span class="glyphicon glyphicon-flash yellow"></span> = Cancer Association
-		    <br>
-		    <span class="glyphicon glyphicon-fire orange"></span> = Cancer And Lineage Association
-         </div>
-         <div class="modal-footer">
-           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-         </div>
-       </div><!-- /.modal-content -->
-     </div><!-- /.modal-dialog -->
-   </div><!-- /.modal -->
+<th data-sorter='true' class="text-center">
+<a href="#" data-toggle="tooltip" title=" <span class='glyphicon glyphicon-leaf green'></span> = Lineage Association<br>
+		<span class='glyphicon glyphicon-fire orange'></span> = Cancer Association" data-html="true">Enrichment</a>
 
 </th>
 <th data-sorter='true' class="text-center">TUCP?</th>
@@ -60,7 +45,7 @@
             '-' + t.get('end') + '[' + t.get('strand') + ']' %></a>
             </h4>
           </div>
-          <div class="modal-body">
+          <div class="modal-body text-left">
             Exon junctions represented "<->".<br>
             <br>
             <a href="<%= t.get('seq_request') %>"> Download</a>
