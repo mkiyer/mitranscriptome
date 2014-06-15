@@ -22,6 +22,11 @@ from dbapi import DBInterfaceFile
 # create flask application
 app = Flask(__name__)
 
+#run on server or run local
+SERVER = True
+YNIKNAFS = False
+MKIYER = False
+
 # enable/disable debugging
 DEBUG = True
 
@@ -30,7 +35,13 @@ SECURE_USERNAME = '4e1b98cdd7dc28789293e67d1779acee77277b517ff3525a5e2fdf6079b65
 SECURE_PASSWORD = '491118ba32bec59bdcf53f4e4b6671c5881a2f265740337f54ea2fca3a74e53698304ca24e87765585f968f89520c0522c630b91658449812dcc40f8f6862133'
 
 # location of static files on server
-MAIN_DIR = '/Users/yniknafs/git/mitranscriptome/mitranscriptome/web/static/toy'
+if SERVER: 
+    MAIN_DIR = '/var/www/html/mitranscriptome/mitranscriptome/web/static/full_data/'
+if YNIKNAFS: 
+    MAIN_DIR = '/Users/yniknafs/git/mitranscriptome/mitranscriptome/web/static/toy'
+if MKIYER: 
+    MAIN_DIR = '/Users/mkiyer/git/mitranscriptome/mitranscriptome/web/static/toy'
+
 # path to metadata files
 TRANSCRIPT_METADATA_FILE = os.path.join(MAIN_DIR, 'metadata.mitranscriptome.txt')
 TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 
@@ -84,7 +95,7 @@ def ssea_selector(type, cat):
             ssea_can = 'cancer_versus_normal_breast'
         type_name = 'Breast Cancer Associated Transcripts'
     if type == 'cervical':
-        ssea_type = 'cancer_type_cervical_carcinoTranscriptsma'
+        ssea_type = 'cancer_type_cervical_carcinoma'
         ssea_can = 'NA'
         type_name = 'Cervical Cancer Associated Transcripts'
     if type == 'cml':
