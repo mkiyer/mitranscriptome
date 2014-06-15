@@ -9,7 +9,7 @@ define([
   var Transcript = Backbone.Model.extend({
     idAttribute: 'transcript_id',
     initialize: function() {
-      console.log("Transcript Model created");
+      //console.log("Transcript Model created");
   	}
   });
   

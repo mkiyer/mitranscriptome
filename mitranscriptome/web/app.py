@@ -37,9 +37,9 @@ SECURE_PASSWORD = '491118ba32bec59bdcf53f4e4b6671c5881a2f265740337f54ea2fca3a74e
 # location of static files on server
 if SERVER: 
     MAIN_DIR = '/var/www/html/mitranscriptome/mitranscriptome/web/static/full_data/'
-if YNIKNAFS: 
+elif YNIKNAFS: 
     MAIN_DIR = '/Users/yniknafs/git/mitranscriptome/mitranscriptome/web/static/toy'
-if MKIYER: 
+elif MKIYER: 
     MAIN_DIR = '/Users/mkiyer/git/mitranscriptome/mitranscriptome/web/static/toy'
 
 # path to metadata files
