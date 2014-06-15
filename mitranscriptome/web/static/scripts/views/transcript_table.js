@@ -4,6 +4,7 @@ define([
   'backbone',
   'text!jstemplates/transcript_table.html',
   'collections/transcripts',
+  'bootstrap',
   'tablesorter',
   'tablesorter.widgets',
   'jqueryspin'
@@ -51,8 +52,7 @@ define([
       self.collection.reset();
       // update ajax parameters
       _.extend(self.collection.ajaxParams,
-        { data: JSON.stringify({ func_type: func_type }) }
-      );
+        { data: JSON.stringify({ func_type: func_type }) });
       // trigger asynchronous load of new data (will call render() when done)
       self.collection.fetch(self.collection.ajaxParams);
     },
@@ -63,12 +63,18 @@ define([
       self.$el.spin(false);
       // render the collection to html
       self.$el.html(self.template({ 'transcriptCollection': self.collection }));
+      // add tooltip functionality
+      $('#table-thead-transcripts').tooltip({ 
+        delay: { show: 100, hide: 100 },
+        selector:"[data-toggle=tooltip]",
+        container:"body"      
+      });
       // add tablesorter functionality to table
-      $('#transcripts_table').tablesorter({
+      $('#table-transcripts').tablesorter({
         theme: 'bootstrap',
         widthFixed: true,
         headerTemplate : '{content} {icon}',
-        widgets : ["uitheme"]
+        widgets : ["uitheme"],
       });
       return self;
     }
@@ -77,3 +83,4 @@ define([
 
   return TranscriptTableView;
 });
+

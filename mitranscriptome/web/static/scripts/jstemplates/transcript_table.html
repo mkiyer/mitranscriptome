@@ -1,55 +1,32 @@
 <% var t = transcriptCollection.at(1); %>
-<h3><%= t.get('type_name') %>:</h3>
-<table id="transcripts_table" class="table table-hover tablesorter">
-<thead>
+<h3><%= t.get('type_name') %> <small>(hold shift to sort multiple columns)</small></h3>
+<table id="table-transcripts" class="table table-hover">
+<thead id="table-thead-transcripts">
 <tr>
-<th data-sorter='false'>Info</th>
-<th data-sorter='false'>Seq</th>
-<th>Name</th>
-<th>Location</th>
-<th data-sorter='false'>Tissue/ Cancer</th>
-<th data-sorter='false' class="text-center">Unannotated?</th>
-<th data-sorter='false' class="text-center">Intergenic?</th>
-<th data-sorter='false' class="text-center">Association Type 
-   <span class="glyphicon glyphicon-question-sign btn" data-toggle="modal" data-target="#association-modal"></span>
-
-   <div class="modal fade" id="association-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-     <div class="modal-dialog modal-sm">
-       <div class="modal-content">
-         <div class="modal-header">
-           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-           <h4 class="modal-title" id="myModalLabel_Help">Association Type Legend:</h4>
-         </div>
-         <div class="modal-body text-left">
-		    <span class="glyphicon glyphicon-leaf green"></span> = Lineage Association
-		    <br>
-		    <span class="glyphicon glyphicon-flash yellow"></span> = Cancer Association
-		    <br>
-		    <span class="glyphicon glyphicon-fire orange"></span> = Cancer And Lineage Association
-         </div>
-         <div class="modal-footer">
-           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-         </div>
-       </div><!-- /.modal-content -->
-     </div><!-- /.modal-dialog -->
-   </div><!-- /.modal -->
-
+<th class="text-center" data-sorter='false'>
+  <a href="#" data-toggle="tooltip" title="Click to open transcript details page">Info</a>
 </th>
-<th data-sorter='false' class="text-center">TUCP?</th>
-<th data-sorter='false' class="text-center">Ultraconserved Element?</th>
-<th data-sorter='false' class="text-center">Conserved Bases?</th>
-<th class="text-center">SSEA Percentile</th>
+<th data-sorter='false' class="text-center">Seq</th>
+<th data-sorter='true' class="text-center">Name</th>
+<th data-sorter='true' class="text-center">Location</th>
+<th data-sorter='true' class="text-center">SSEA Percentile</th>
+<th data-sorter='true' class="text-center">Unannotated?</th>
+<th data-sorter='true' class="text-center">Intergenic?</th>
+<th data-sorter='true' class="text-center">Enrichment</th>
+<th data-sorter='true' class="text-center">TUCP?</th>
+<th data-sorter='true' class="text-center">Ultraconserved Element?</th>
+<th data-sorter='true' class="text-center">Conserved Bases?</th>
 </tr>
 </thead>
 <tbody>
 <% for(var i=0; i < transcriptCollection.length; i++) { %>
 <% var t = transcriptCollection.at(i); %>
 <tr>
-  <td>
-    <a class="btn btn-default btn-xs"  href='<%= t.get('modal') %>' target="_blank">
-     <span class="glyphicon glyphicon-th text-center" ></span></a>
+  <td class="text-center">
+    <a class="btn btn-default btn-xs "  href='<%= t.get('modal') %>' target="_blank">
+     <span class="glyphicon glyphicon-plus text-center" ></span></a>
   </td>
-  <td>
+  <td class="text-center">
     <a class="btn btn-default btn-xs"  data-toggle="modal" data-target="#<%= t.get('transcript_id') %>seq-modal" target="_blank">
      <span class="glyphicon glyphicon-save text-center" ></span></a>
 	<div class="modal fade" id="<%= t.get('transcript_id') %>seq-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -80,67 +57,81 @@
   </td>
   <td><%= t.get('func_name') %></td>
   <td><a href="<%= t.get('ucsc_link') %>" target="_blank"><%= t.get('chrom') + ':' + t.get('start') + '-' + t.get('end') + '[' + t.get('strand') + ']' %></a></td>
-  <td><%= t.get('func_type') %></td>  
+  <!-- <td><%= t.get('func_type') %></td> -->
+  <td class="text-center">
+  <% if(t.get('func_dir')=="up") { %>
+   <span class="glyphicon glyphicon-arrow-up red"></span><%= t.get('avg_frac')%>
+  <% } %>
+  <% if(t.get('func_dir')=="dn") { %>
+   <span class="glyphicon glyphicon-arrow-down blue"></span><%= t.get('avg_frac')%>
+  <% } %>
+  </td>
   <td class="text-center">
     <% if(t.get('tstatus')=="unannotated") { %>
+     <span class="hidden">1</span>
      <span class="glyphicon glyphicon-ok green"></span>
     <% } %>
     <% if(t.get('tstatus')=="annotated") { %>
+     <span class="hidden">2</span>
      <span class="glyphicon glyphicon-remove"></span>
     <% } %>
   </td>
   <td class="text-center">
     <% if(t.get('tgenic')=="intergenic") { %>
+     <span class="hidden">1</span>
      <span class="glyphicon glyphicon-ok green"></span>
     <% } %>
     <% if(t.get('tgenic')=="intragenic") { %>
+     <span class="hidden">2</span>
      <span class="glyphicon glyphicon-remove"></span>
     <% } %>
   </td>
   <td class="text-center">
     <% if(t.get('func_cat')=="at") { %>
+     <span class="hidden">1</span>
      <span class="glyphicon glyphicon-leaf green"></span>
     <% } %>
     <% if(t.get('func_cat')=="cat") { %>
-     <span class="glyphicon glyphicon-flash yellow"></span>
+     <span class="hidden">1</span>
+     <span class="glyphicon glyphicon-fire orange"></span>
     <% } %>
     <% if(t.get('func_cat')=="clat") { %>
+     <span class="hidden">2</span>
+     <span class="glyphicon glyphicon-leaf green"></span>
      <span class="glyphicon glyphicon-fire orange"></span>
     <% } %>
   </td>
   <td class="text-center">
     <% if(t.get('tcat')=="tucp") { %>
+     <span class="hidden">1</span>
      <span class="glyphicon glyphicon-ok green"></span>
     <% } %>
     <% if(t.get('tcat')=="lncrna") { %>
+     <span class="hidden">2</span>
      <span class="glyphicon glyphicon-remove"></span>
     <% } %>
   </td>
   <td class="text-center">
     <% if(t.get('uce')=="TRUE") { %>
+     <span class="hidden">1</span>
      <span class="glyphicon glyphicon-ok green"></span>
     <% } %>
     <% if(t.get('uce')=="FALSE") { %>
+     <span class="hidden">2</span>
      <span class="glyphicon glyphicon-remove"></span>
     <% } %>
   </td>
   <td class="text-center">
     <% if(t.get('cons')=="TRUE") { %>
+     <span class="hidden">1</span>
      <span class="glyphicon glyphicon-ok green"></span>
     <% } %>
     <% if(t.get('cons')=="FALSE") { %>
+     <span class="hidden">2</span>
      <span class="glyphicon glyphicon-remove"></span>
     <% } %>
   </td>
-  <td class="text-center">
-    <% if(t.get('func_dir')=="up") { %>
-     <span><span class="glyphicon glyphicon-arrow-up red"></span><%= t.get('avg_frac')%></span>
-    <% } %>
-    <% if(t.get('func_dir')=="dn") { %>
-     <span class="glyphicon glyphicon-arrow-down blue"></span><%= t.get('avg_frac')%>
-    <% } %>
-    
-  </td>
+
   
 </tr>
 <% } %>

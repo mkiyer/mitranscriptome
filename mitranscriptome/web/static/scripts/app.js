@@ -17,7 +17,7 @@ define([
     el: '#div-transcript-table',
     collection: selectedTranscripts
   });
-  
+
   // selectize control for tissue/cancer type
   $('#select-transcripts').selectize({
     onChange: function(value) {
