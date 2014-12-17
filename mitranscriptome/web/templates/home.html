@@ -127,23 +127,24 @@
 
 	    <!-- Transcript Table -->
 	    <div id="div-transcript-browser" class="toshow container">
-	      <table id="table-transcripts" class="table table-striped table-bordered">
+	      <table id="table-transcripts" class="table table-condensed table-striped table-bordered table-responsive">
+	      <!-- <caption>Transcript Browser</caption> -->
 			  <thead>
 				<tr>
 				<th></th>
 		    <th>Name</th>
 		    <th><a href="#" data-toggle="tooltip" data-html="true" title="UCSC GRCh37/hg19">Location</a></th>
-		    <th>Unannotated</th>
-		    <th>Intergenic</th>
-		    <th><a href="#" data-toggle="tooltip" data-html="true" title="Transcript of Unknown Coding Potential (TUCP)">TUCP</a></th>
-		    <th><a href="#" data-toggle="tooltip" data-html="true" title="Highly Conserved lncRNA (HICLNC)">HICLNC</a></th>
-		    <th>Tissue</th>
+		    <th><a href="#" data-toggle="tooltip" data-html="true" title="Considered annotated if transcript has same-strand exonic overlap with UCSC, RefSeq, or GENCODE 19">Annotated?</a></th>
+		    <th><a href="#" data-toggle="tooltip" data-html="true" title="Intergenic if transcript has no overlap with any annotated transcripts or their introns">Intergenic?</a></th>
+		    <th><a href="#" data-toggle="tooltip" data-html="true" title="Transcripts of Unknown Coding Potential (TUCPs) possess putative coding regions">TUCP?</a></th>
+		    <th><a href="#" data-toggle="tooltip" data-html="true" title="Highly Conserved lncRNAs (HICLNCs) possess ultraconserved elements">HICLNC?</a></th>
 		    <th><a href="#" data-toggle="tooltip" data-html="true" 
-		         title="Cancer (<img src='static/images/cancer_ribbon.png' width='16' height='16'/>)
-		         <br/>Lineage (<img src='static/images/human_body.png' width='24' height='24'/>)">
+		         title="Cancer-Specific&nbsp;<span class='label label-success'>C</span>
+		         <br/>Lineage-Specific&nbsp;<span class='label label-warning'>L</span>">
 		         Association
 		         </a>
 		    </th>
+		    <th>Tissue</th>
 		    <th><a href="#" data-toggle="tooltip" data-html="true"
 		         title="<span class='glyphicon glyphicon-plus red'/>Over-expression
 		         <br/><span class='glyphicon glyphicon-minus blue'/>Under-expression">
@@ -157,33 +158,6 @@
 			  </thead>
 			  <tbody>
 			  </tbody>
-			  <tfoot>
-				<tr>
-				<th></th>
-		    <th>Name</th>
-		    <th><a href="#" data-toggle="tooltip" data-html="true" title="UCSC GRCh37/hg19">Location</a></th>
-		    <th>Unannotated</th>
-		    <th>Intergenic</th>
-		    <th><a href="#" data-toggle="tooltip" data-html="true" title="Transcript of Unknown Coding Potential (TUCP)">TUCP</a></th>
-		    <th><a href="#" data-toggle="tooltip" data-html="true" title="Highly Conserved lncRNA (HICLNC)">HICLNC</a></th>
-		    <th>Tissue</th>
-		    <th><a href="#" data-toggle="tooltip" data-html="true" 
-		         title="Cancer (<img src='static/images/cancer_ribbon.png' width='16' height='16'/>)
-		         <br/>Lineage (<img src='static/images/human_body.png' width='24' height='24'/>)">
-		         Association
-		         </a>
-		    </th>
-		    <th><a href="#" data-toggle="tooltip" data-html="true"
-		         title="<span class='glyphicon glyphicon-plus red'/>Over-expression
-		         <br/><span class='glyphicon glyphicon-minus blue'/>Under-expression">
-		         SSEA Percentile
-		         </a>
-		    </th>
-		    <th>FPKM mean</th>
-		    <th>FPKM 95%</th>
-		    <th>FPKM 99%</th>
-				</tr>
-			  </tfoot>
 			  </table>
 			</div><!-- /div-table -->
 

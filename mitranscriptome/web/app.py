@@ -45,7 +45,7 @@ elif MKIYER:
 EXPRESSION_PLOT_DIR = os.path.join(MAIN_DIR, 'plots', 'expr_plots')
 SSEA_PLOT_DIR = os.path.join(MAIN_DIR, 'plots', 'ssea_plots')
 # path to data
-TRANSCRIPT_METADATA_FILE = os.path.join(MAIN_DIR, 'metadata.manuscript.v2.tissue_expr.txt')
+TRANSCRIPT_METADATA_FILE = os.path.join(MAIN_DIR, 'metadata.manuscript.v3.txt')
 TRANSCRIPT_SEQUENCE_FILE = os.path.join(MAIN_DIR, 'seqs.txt')
 # metadata fields used by online portal
 TRANSCRIPT_TABLE_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 'end', 'strand', 

@@ -19,7 +19,7 @@ define([
   var TranscriptDetailsTemplate = _.template(TranscriptDetailsTemplateText);
   
   // function to render binary data as ok / error glyphicons
-  function binaryRender(data, type, row, meta, trueValue) {
+  function binaryRender(data, type, trueValue) {
     if (type == 'display') {
       return data == trueValue ?
           '<span class="glyphicon glyphicon-ok-circle green"/>' :
@@ -28,22 +28,22 @@ define([
       return data;
     }
   }
-  function associationRender(data,type,row,meta) {
+  function associationRender(data,type) {
     if (type == 'display') {
-      if (data == 'Cancer Association') {
-        // not sure how best to do this
-        return '<span class="label label-success">Cancer</span>'
-      } else if (data == 'Lineage Associaiton') {
-        return '<span class="label label-warning">Lineage</span>'
-      } else if (data == 'Cancer and Lineage Associaiton') {
-        return '<span class="label label-success">Cancer</span>&nbsp;<span class="label label-warning">Lineage</span>'
+      if (data == 'c') {
+        return '<span class="label label-success">C</span>'
+      } else if (data == 'l') {
+        return '<span class="label label-warning">L</span>'
+      } else if (data == 'CL') {
+        return '<span class="label label-success">C</span>&nbsp;<span class="label label-warning">L</span>'
       } else {
-        return data;
+        return '<span class="label label-default">NA</span>'
       }
     } else {
       return data;
     }
   }
+
   
 //  <div id="Select_Transcripts" class="jumbotron jumbothin">
 //  <label for="select-transcripts"><h4>Select Tissue/Cancer Type:</h4></label>
@@ -79,6 +79,16 @@ define([
 //    <option value="hiclinc">Highly Conserved Long Intergenic Non-Coding RNAs (HICLINCs)</option>
 //  </select>
 //</div><!-- /Select Transcripts -->
+  
+//  {
+//    // unannotated/annotated
+//    targets: 3,
+//    orderable: false,
+//    data: 'tstatus',
+//    render: function(data, type, row, meta) {
+//      return binaryRender(data, type, 'unannotated');
+//    }
+//  }, 
 
   // transcript table (DataTable)
   var table = $('#table-transcripts').DataTable({
@@ -96,46 +106,14 @@ define([
         return UCSCLinkTemplate({row: row});
       }
     }, {
-      // unannotated/annotated
-      targets: 3,
-      orderable: false,
-      data: 'tstatus',
-      render: function(data, type, row, meta) {
-        return binaryRender(data, type, row, meta, 'unannotated');
-      }
-    }, {
-      // intergenic/genic
-      targets: 4,
-      orderable: false,
-      data: 'tgenic',
-      render: function(data, type, row, meta) {
-        return binaryRender(data, type, row, meta, 'intergenic');
-      }
-    }, {
-      // TUCP
-      targets: 5,
-      orderable: false,
-      data: 'tcat',
-      render: function(data, type, row, meta) {
-        return binaryRender(data, type, row, meta, 'tucp');
-      }
-    }, {
-      // HICLNC
-      targets: 6,
-      orderable: false,
-      data: 'uce',
-      render: function(data, type, row, meta) {
-        return binaryRender(data, type, row, meta, 'TRUE');
-      }
-    }, {
       // Association Type
-      targets: 8,
+      targets: 7,
       orderable: false,
       data: 'association_type',
       render: function(data, type, row, meta) {
-        return associationRender(data, type, row, meta);
+        return associationRender(data, type);
       }
-    }],        
+    }],
     columns: [
       {
         "className": 'details-control',
@@ -145,19 +123,57 @@ define([
       },
       { data: "func_name_final" },
       { data: null },
-      { data: "tstatus" },
-      { data: "tgenic" },
-      { data: "tcat" },
-      { data: "uce" },
+      { 
+        // tstatus (annotated / unannotated)
+        orderable: false,
+        data: function(row, type, val, meta) {
+          return row.tstatus == 'annotated' ? 'YES' : 'NO';
+        },
+        render: function(data, type, row, meta) {
+          return binaryRender(data, type, 'YES');
+        }
+      },
+      { 
+        // tgenic (intergenic / intragenic)
+        orderable: false,
+        data: function(row, type, val, meta) {
+          return row.tgenic == 'intergenic' ? 'YES' : 'NO';
+        },
+        render: function(data, type, row, meta) {
+          return binaryRender(data, type, 'YES');
+        }
+      },
+      { 
+        // tcat (lncrna / tucp)
+        orderable: false,
+        data: function(row, type, val, meta) {
+          return row.tcat == 'tucp' ? 'TUCP' : 'lncRNA';
+        }
+      },
+      {
+        // uce (FALSE / TRUE)
+        orderable: false,
+        data: function(row, type, val, meta) {
+          return row.uce == 'TRUE' ? 'YES' : 'NO';
+        },
+        render: function(data, type, row, meta) {
+          return binaryRender(data, type, 'YES');
+        }
+      }, 
+      { data: "association_type" },
       { 
         data: "tissue",
         orderable: false
       },
-      { data: "association_type" },
-      { data: "ssea_percentile" },
-      { data: "tissue_expr_mean" },
-      { data: "tissue_expr_95" },
-      { data: "tissue_expr_99" }
+      { 
+        // ssea_percentile
+        data: function(row, type, val, meta) {
+          return row.ssea_percentile == 'NA' ? 0.0 : parseFloat(row.ssea_percentile);
+        }
+      },
+      { data: function(row, type, val, meta) { return parseFloat(row.tissue_expr_mean); } },
+      { data: function(row, type, val, meta) { return parseFloat(row.tissue_expr_95); } },
+      { data: function(row, type, val, meta) { return parseFloat(row.tissue_expr_99); } }
     ],
     initComplete: function () {
       var api = this.api();
@@ -167,8 +183,9 @@ define([
       selectColumns.forEach(function(i) {
       //api.columns().indexes().flatten().each( function ( i ) {
         var column = api.column( i );
-        var select = $('<select><option value=""></option></select>')
-          .appendTo( $(column.footer()).empty() )
+        var select = $('<br/><select><option value=""></option></select>')
+          .appendTo( $(column.header()) )
+        //.appendTo( $(column.footer()).empty() )
           .on('change', function () {
             var val = $.fn.dataTable.util.escapeRegex( $(this).val() );
             column
@@ -179,6 +196,8 @@ define([
             select.append( '<option value="'+d+'">'+d+'</option>' )
           });
       });
+      // recalculate column widths
+      api.columns.adjust().draw();
     }
   });
   
