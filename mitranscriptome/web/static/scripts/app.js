@@ -34,7 +34,7 @@ define([
         return '<span class="label label-success">C</span>'
       } else if (data == 'l') {
         return '<span class="label label-warning">L</span>'
-      } else if (data == 'CL') {
+      } else if (data == 'cl') {
         return '<span class="label label-success">C</span>&nbsp;<span class="label label-warning">L</span>'
       } else {
         return '<span class="label label-default">NA</span>'
