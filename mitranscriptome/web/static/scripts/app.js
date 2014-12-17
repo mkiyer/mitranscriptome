@@ -32,11 +32,11 @@ define([
     if (type == 'display') {
       if (data == 'Cancer Association') {
         // not sure how best to do this
-        return '<img src="static/images/cancer_ribbon.png" alt="Cancer" width="16" height="16"/>'
-      } else if (data == 'Cancer and Lineage Association') {
-        return '<img src="static/images/cancer_ribbon.png" alt="Cancer" width="16" height="16"/><img src="static/images/human_body.png" alt="Lineage" width="32" height="32"/>'        
-      } else if (data == 'Lineage Association') {
-        return '<img src="static/images/human_body.png" alt="Lineage" width="32" height="32"/>';
+        return '<span class="label label-success">Cancer</span>'
+      } else if (data == 'Lineage Associaiton') {
+        return '<span class="label label-warning">Lineage</span>'
+      } else if (data == 'Cancer and Lineage Associaiton') {
+        return '<span class="label label-success">Cancer</span>&nbsp;<span class="label label-warning">Lineage</span>'
       } else {
         return data;
       }
@@ -154,7 +154,10 @@ define([
         orderable: false
       },
       { data: "association_type" },
-      { data: "ssea_percentile" }
+      { data: "ssea_percentile" },
+      { data: "tissue_expr_mean" },
+      { data: "tissue_expr_95" },
+      { data: "tissue_expr_99" }
     ],
     initComplete: function () {
       var api = this.api();

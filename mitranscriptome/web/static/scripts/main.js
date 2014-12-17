@@ -2,7 +2,7 @@ requirejs.config({
     urlArgs: "bust=" +  (new Date()).getTime(), 
     baseUrl: "/static/scripts",
     waitSeconds: 200,     
-	enforceDefine: true,
+	  enforceDefine: true,
 
     paths: {
         'jquery': 'libs/jquery-1.11.1.min',

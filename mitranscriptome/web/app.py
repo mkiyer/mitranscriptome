@@ -42,10 +42,11 @@ elif MKIYER:
     MAIN_DIR = '/Users/mkiyer/git/mitranscriptome/mitranscriptome/web/static/data'
 
 # subdirectories
-EXPRESSION_PLOT_DIR = os.path.join(MAIN_DIR, 'expr_plots')
-SSEA_PLOT_DIR = os.path.join(MAIN_DIR, 'ssea_plots')
-# path to metadata
+EXPRESSION_PLOT_DIR = os.path.join(MAIN_DIR, 'plots', 'expr_plots')
+SSEA_PLOT_DIR = os.path.join(MAIN_DIR, 'plots', 'ssea_plots')
+# path to data
 TRANSCRIPT_METADATA_FILE = os.path.join(MAIN_DIR, 'metadata.manuscript.v2.tissue_expr.txt')
+TRANSCRIPT_SEQUENCE_FILE = os.path.join(MAIN_DIR, 'seqs.txt')
 # metadata fields used by online portal
 TRANSCRIPT_TABLE_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 'end', 'strand', 
                            'tstatus', 'tgenic', 'tcat', 'uce', 
@@ -64,7 +65,6 @@ def init_transcript_metadata():
             fields = line.strip().split('\t')
             d = dict((header_fields[x], fields[x]) for x in header_indexes)
             rows.append(d)
-            app.logger.debug(d['transcript_id'])
     return rows
 
 def get_transcript_metadata():
@@ -72,42 +72,22 @@ def get_transcript_metadata():
         g.transcript_metadata = init_transcript_metadata()
     return g.transcript_metadata
 
-def init_transcript_db():
-    return DBInterfaceFile.open(TRANSCRIPT_METADATA_FILE)
+def init_transcript_sequences():
+    # read transcript sequences
+    d = {}
+    with open(TRANSCRIPT_SEQUENCE_FILE) as f:
+        header_fields = f.next().strip().split('\t')
+        for line in f:
+            fields = line.strip().split('\t')
+            d[fields[0]] = fields[1:]
+        app.logger.debug('Loaded transcript metadata')
+    return d
 
-def get_transcript_db():
-    if not hasattr(g, 'transcript_db'):
-        g.transcript_db = init_transcript_db()
-    return g.transcript_db
-
-def init_transcript_tables(tdb):
-    results = tdb.get_transcript_metadata(transcript_ids=None, 
-                                          fields=TRANSCRIPT_METADATA_FIELDS)
-    ttables = collections.defaultdict(lambda: [])
-    for r in results:
-        k = r['func_type']
-        ssea_type, ssea_can, type_name = ssea_selector(r['func_type'], r['func_cat'])
-        # TODO: construct bigbed link
-        r['ucsc_link'] = ('http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&'
-                          'hgS_otherUserName=mitranscriptome&'
-                          'hgS_otherUserSessionName=mitranscriptome&position=%s' % 
-                          (r['chrom'] + '%3A' + r['start'] + '-' + r['end']))
-        r['modal'] = '/modal?t_id=%s' % (r['transcript_id'])
-        r['seq_request'] = '/download_seq?t_id=%s' % (r['transcript_id'])
-        if r['avg_frac'] != 'NA':
-            r['avg_frac'] = float(format(float(r['avg_frac']), '.4f'))
-        r['type_name'] = type_name
-        app.logger.debug(r['tcat'])
-        ttables[k].append(r)
-    for k in ttables.iterkeys():
-        ttables[k] = sorted(ttables[k], key=itemgetter('avg_frac'), reverse=True)
-    return ttables
-
-def get_transcript_tables(tdb):
-    if not hasattr(g, 'transcript_tables'):
-        g.transcript_tables = init_transcript_tables(tdb)
-    return g.transcript_tables
-
+def get_sequence_dict():
+    if not (hasattr(g, 'transcript_sequence_dict')):
+        g.transcript_sequence_dict = init_transcript_sequences()
+        app.logger.debug('Loaded transcript sequences')
+    return g.transcript_sequence_dict
 
 def check_auth(username, password):
     """This function is called to check if a username /
@@ -295,36 +275,6 @@ def ssea_selector(type, cat):
     
     return ssea_type, ssea_can, type_name
 
-@app.route('/get_expression_boxplot')
-@requires_auth
-def get_expression_boxplot():
-    transcript_id = request.args.get('transcript_id')
-    filename = os.path.join(EXPRESSION_PLOT_DIR, '%s_expr.jpeg' % (transcript_id))
-    return send_file(filename, mimetype='image/jpeg')
-
-@app.route('/get_ssea')
-@requires_auth
-def get_ssea():
-    transcript_id = request.args.get('transcript_id')
-    subdir = request.args.get('subdir')
-    plot_type = request.args.get('plot_type')
-    filename = os.path.join(SSEA_PLOT_DIR, subdir, '%s.%s.png' % (transcript_id, plot_type))
-    return send_file(filename, mimetype='image/jpeg')
-
-@app.route('/download_seq')
-@requires_auth
-def download_seq():
-    # fetch sequence from metadata
-    t_id = request.args.get('t_id')
-    meta = get_transcript_db().metadata_json_dict[t_id]
-    name = meta['func_name']
-    seq = meta['seq']
-    # construct response
-    response = make_response(seq)
-    # set response header to trigger file download
-    response.headers["Content-Disposition"] = "attachment; filename=%s_sequence.txt" % name
-    return response
-
 @app.route('/modal')
 @requires_auth
 def request_transcript_view():
@@ -365,41 +315,32 @@ def request_transcript_view():
     meta['type_name'] = type_name
     return render_template('transcript_view.html', meta=meta)
 
-@app.route('/transcripts', methods=['POST'])
+@app.route('/get_ssea')
 @requires_auth
-def request_transcripts():
-    '''
-    json request object with fields:
-        'functype': functional type of transcript (CAT, LAT, CLAT, etc)
-        'lineage': lineage / tissue type
+def get_ssea():
+    transcript_id = request.args.get('t_id')
+    subdir = request.args.get('subdir')
+    plot_type = request.args.get('plot_type')
+    filename = os.path.join(SSEA_PLOT_DIR, subdir, '%s.%s.png' % (transcript_id, plot_type))
+    return send_file(filename, mimetype='image/jpeg')
 
-    returns json 'results' with list of objects each with attributes:
-        'transcript_id': transcript_id
-        custom fields specified in configuration
-    '''
-    # get transcript metadata
-    ttables = get_transcript_tables(get_transcript_db())
-    # parse the incoming json request
-    d = request.get_json()
-    k = d['func_type']
-    if k not in ttables:
-        app.logger.error('Transcript table (%s) not found' % (k))
-        return jsonify(results=None)
-    app.logger.debug('Transcript table %s' % (k))
-    return jsonify(results=ttables[k])
+@app.route('/get_expression_boxplot')
+@requires_auth
+def get_expression_boxplot():
+    transcript_id = request.args.get('t_id')
+    filename = os.path.join(EXPRESSION_PLOT_DIR, '%s_expr.jpeg' % (transcript_id))
+    return send_file(filename, mimetype='image/jpeg')
 
 @app.route('/download_seq')
 @requires_auth
 def request_sequence():
     # fetch sequence from metadata
     t_id = request.args.get('t_id')
-    meta = get_transcript_db().metadata_json_dict[t_id]
-    name = meta['func_name']
-    seq = meta['seq']
+    func_name, seq = get_sequence_dict()[t_id]
     # construct response
     response = make_response(seq)
     # set response header to trigger file download
-    response.headers["Content-Disposition"] = "attachment; filename=%s_sequence.txt" % name
+    response.headers["Content-Disposition"] = "attachment; filename=%s.sequence.txt" % func_name
     return response
 
 @app.route('/transcript_metadata', methods=['GET'])
