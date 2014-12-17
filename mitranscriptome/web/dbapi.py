@@ -3,6 +3,7 @@ Created on May 9, 2014
 
 @author: mkiyer
 '''
+import json
 
 class DBInterfaceFile(object):
     def __init__(self):
@@ -43,8 +44,6 @@ class DBInterfaceFile(object):
 if __name__ == '__main__':
     import sys
     db = DBInterfaceFile.open(sys.argv[1])
-    print db.get_transcript_metadata(['T000723'], ('transcript_id', 'uce', 'prob.cons'))
-
 
     
         

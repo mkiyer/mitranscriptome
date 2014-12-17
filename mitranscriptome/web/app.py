@@ -22,13 +22,12 @@ from dbapi import DBInterfaceFile
 # create flask application
 app = Flask(__name__)
 
-#run on server or run local
-SERVER = True
+# run on server or run local (set only one)
+SERVER = False
 YNIKNAFS = False
-MKIYER = False
-
+MKIYER = True
 # enable/disable debugging
-DEBUG = True
+DEBUG = not SERVER
 
 # for authentication
 SECURE_USERNAME = '4e1b98cdd7dc28789293e67d1779acee77277b517ff3525a5e2fdf6079b65d8480d0aa02c60d772d6049e9f3583ccfae85367599c23435a414394d829be9289c'
@@ -36,20 +35,79 @@ SECURE_PASSWORD = '491118ba32bec59bdcf53f4e4b6671c5881a2f265740337f54ea2fca3a74e
 
 # location of static files on server
 if SERVER: 
-    MAIN_DIR = '/var/www/html/mitranscriptome/mitranscriptome/web/static/full_data/'
+    MAIN_DIR = '/var/www/html/mitranscriptome/mitranscriptome/web/static/data'
 elif YNIKNAFS: 
-    MAIN_DIR = '/Users/yniknafs/git/mitranscriptome/mitranscriptome/web/static/toy'
+    MAIN_DIR = '/Users/yniknafs/git/mitranscriptome/mitranscriptome/web/static/data'
 elif MKIYER: 
-    MAIN_DIR = '/Users/mkiyer/git/mitranscriptome/mitranscriptome/web/static/toy'
+    MAIN_DIR = '/Users/mkiyer/git/mitranscriptome/mitranscriptome/web/static/data'
 
-# path to metadata files
-TRANSCRIPT_METADATA_FILE = os.path.join(MAIN_DIR, 'metadata.mitranscriptome.txt')
-TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 
-                              'end', 'strand', 'tstatus', 'tgenic', 'tcat',
-                              'func_name', 'func_type', 'func_cat', 
-                              'func_dir', 'uce', 'cons', 'avg_frac', 'seq']
+# subdirectories
 EXPRESSION_PLOT_DIR = os.path.join(MAIN_DIR, 'expr_plots')
 SSEA_PLOT_DIR = os.path.join(MAIN_DIR, 'ssea_plots')
+# path to metadata
+TRANSCRIPT_METADATA_FILE = os.path.join(MAIN_DIR, 'metadata.manuscript.v2.tissue_expr.txt')
+# metadata fields used by online portal
+TRANSCRIPT_TABLE_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 'end', 'strand', 
+                           'tstatus', 'tgenic', 'tcat', 'uce', 
+                           'func_name_final', 'association_type', 'tissue', 'ssea_percentile',
+                           'transcript_length', 'num_exons', 'conf_score', 
+                           'coding_potential', 'pfam', 'orf_size',
+                           'tissue_expr_mean', 'tissue_expr_95', 'tissue_expr_99']
+
+def init_transcript_metadata():
+    # read transcript metadata
+    rows = []
+    with open(TRANSCRIPT_METADATA_FILE) as f:
+        header_fields = f.next().strip().split('\t')
+        header_indexes = [header_fields.index(x) for x in TRANSCRIPT_TABLE_FIELDS]
+        for line in f:
+            fields = line.strip().split('\t')
+            d = dict((header_fields[x], fields[x]) for x in header_indexes)
+            rows.append(d)
+            app.logger.debug(d['transcript_id'])
+    return rows
+
+def get_transcript_metadata():
+    if not hasattr(g, 'transcript_metadata'):
+        g.transcript_metadata = init_transcript_metadata()
+    return g.transcript_metadata
+
+def init_transcript_db():
+    return DBInterfaceFile.open(TRANSCRIPT_METADATA_FILE)
+
+def get_transcript_db():
+    if not hasattr(g, 'transcript_db'):
+        g.transcript_db = init_transcript_db()
+    return g.transcript_db
+
+def init_transcript_tables(tdb):
+    results = tdb.get_transcript_metadata(transcript_ids=None, 
+                                          fields=TRANSCRIPT_METADATA_FIELDS)
+    ttables = collections.defaultdict(lambda: [])
+    for r in results:
+        k = r['func_type']
+        ssea_type, ssea_can, type_name = ssea_selector(r['func_type'], r['func_cat'])
+        # TODO: construct bigbed link
+        r['ucsc_link'] = ('http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&'
+                          'hgS_otherUserName=mitranscriptome&'
+                          'hgS_otherUserSessionName=mitranscriptome&position=%s' % 
+                          (r['chrom'] + '%3A' + r['start'] + '-' + r['end']))
+        r['modal'] = '/modal?t_id=%s' % (r['transcript_id'])
+        r['seq_request'] = '/download_seq?t_id=%s' % (r['transcript_id'])
+        if r['avg_frac'] != 'NA':
+            r['avg_frac'] = float(format(float(r['avg_frac']), '.4f'))
+        r['type_name'] = type_name
+        app.logger.debug(r['tcat'])
+        ttables[k].append(r)
+    for k in ttables.iterkeys():
+        ttables[k] = sorted(ttables[k], key=itemgetter('avg_frac'), reverse=True)
+    return ttables
+
+def get_transcript_tables(tdb):
+    if not hasattr(g, 'transcript_tables'):
+        g.transcript_tables = init_transcript_tables(tdb)
+    return g.transcript_tables
+
 
 def check_auth(username, password):
     """This function is called to check if a username /
@@ -236,42 +294,6 @@ def ssea_selector(type, cat):
         type_name = 'Uterine Endometrial Carcinoma Associated Transcripts'
     
     return ssea_type, ssea_can, type_name
-    
-def init_transcript_db():
-    return DBInterfaceFile.open(TRANSCRIPT_METADATA_FILE)
-
-def get_transcript_db():
-    if not hasattr(g, 'transcript_db'):
-        g.transcript_db = init_transcript_db()
-    return g.transcript_db
-
-def init_transcript_tables(tdb):
-    results = tdb.get_transcript_metadata(transcript_ids=None, 
-                                          fields=TRANSCRIPT_METADATA_FIELDS)
-    ttables = collections.defaultdict(lambda: [])
-    for r in results:
-        k = r['func_type']
-        ssea_type, ssea_can, type_name = ssea_selector(r['func_type'], r['func_cat'])
-        # TODO: construct bigbed link
-        r['ucsc_link'] = ('http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&'
-                          'hgS_otherUserName=mitranscriptome&'
-                          'hgS_otherUserSessionName=mitranscriptome&position=%s' % 
-                          (r['chrom'] + '%3A' + r['start'] + '-' + r['end']))
-        r['modal'] = '/modal?t_id=%s' % (r['transcript_id'])
-        r['seq_request'] = '/download_seq?t_id=%s' % (r['transcript_id'])
-        if r['avg_frac'] != 'NA':
-            r['avg_frac'] = float(format(float(r['avg_frac']), '.4f'))
-        r['type_name'] = type_name
-        app.logger.debug(r['tcat'])
-        ttables[k].append(r)
-    for k in ttables.iterkeys():
-        ttables[k] = sorted(ttables[k], key=itemgetter('avg_frac'), reverse=True)
-    return ttables
-
-def get_transcript_tables(tdb):
-    if not hasattr(g, 'transcript_tables'):
-        g.transcript_tables = init_transcript_tables(tdb)
-    return g.transcript_tables
 
 @app.route('/get_expression_boxplot')
 @requires_auth
@@ -365,6 +387,27 @@ def request_transcripts():
         return jsonify(results=None)
     app.logger.debug('Transcript table %s' % (k))
     return jsonify(results=ttables[k])
+
+@app.route('/download_seq')
+@requires_auth
+def request_sequence():
+    # fetch sequence from metadata
+    t_id = request.args.get('t_id')
+    meta = get_transcript_db().metadata_json_dict[t_id]
+    name = meta['func_name']
+    seq = meta['seq']
+    # construct response
+    response = make_response(seq)
+    # set response header to trigger file download
+    response.headers["Content-Disposition"] = "attachment; filename=%s_sequence.txt" % name
+    return response
+
+@app.route('/transcript_metadata', methods=['GET'])
+@requires_auth
+def request_metadata():
+    app.logger.debug('Metadata')
+    m = get_transcript_metadata()
+    return jsonify(data=m)
 
 @app.route('/')
 @requires_auth

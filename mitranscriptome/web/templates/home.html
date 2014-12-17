@@ -6,30 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='BlockM.ico') }}">
     <title>MiTranscriptome</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/BlockM.ico') }}">
 
     <!-- Bootstrap CSS -->
-    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap-responsive.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='bootstrap/css/bootstrap-yeti.min.css') }}" rel="stylesheet">
 
-    <!-- Selectize CSS -->
-    <link href="{{ url_for('static', filename='css/selectize.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/selectize.bootstrap3.css') }}" rel="stylesheet">
-
-    <!-- tablesorter bootstrap widget theme -->
-    <link href="{{ url_for('static', filename='css/tablesorter.theme.bootstrap.css') }}" rel="stylesheet">
+    <!-- DataTables CSS -->    
+    <link href="{{ url_for('static', filename='datatables/css/dataTables.bootstrap.css') }}" rel="stylesheet">
+    <!-- DataTables Custom CSS -->    
+    <link href="{{ url_for('static', filename='css/datatables.custom.css') }}" rel="stylesheet">
 
     <!-- Custom CSS for this template-->
-    <link href="{{ url_for('static', filename='css/navbar-fixed-top.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet">
 
      <!-- data-main attribute tells require.js to load
           scripts/main.js after require.js loads. -->
      <script data-main="{{ url_for('static', filename='scripts/main') }}" src="{{ url_for('static', filename='scripts/libs/require.js') }}"></script>
-     
-     <!-- anirban toggle functions -->
-     <script src="{{ url_for('static', filename='scripts/custom.js') }}"></script>
 
   </head>
   <body>
@@ -37,24 +30,24 @@
     <!-- Fixed horizontal navbar -->
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
-        <div class="navbar-header">
-          <a href="/"><span class="glyphicon glyphicon-home"></span><h4> MiTranscriptome</h4></a>
-        </div>
-		<div class="navbar-collapse collapse">
-		  <ul class="nav navbar-nav navbar-right">
-	      	<li class="dropdown">
-	          <a class="dropdown-toggle" data-toggle="dropdown">UCSC Browser Links <b class="caret"></b></a>
+		    <div class="navbar-header">
+          <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-home"></span>&nbsp;MiTranscriptome</a>
+		    </div>
+				<div class="collapse navbar-collapse">
+				  <ul class="nav navbar-nav navbar-right">
+		      	<li class="dropdown">
+		          <a class="dropdown-toggle" data-toggle="dropdown">UCSC Browser Links <b class="caret"></b></a>
 		          <ul class="dropdown-menu">
-		          <li><a href="http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=mitranscriptome&hgS_otherUserSessionName=mitranscriptome" 
-		          target = "_blank" >View MiTranscriptome lncRNAs</a></li>
-		          <li><a href="http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=mitranscriptome&hgS_otherUserSessionName=mitranscriptome_all" 
-		          target = "_blank" >View Entire Assembly</a></li>
-		          </ul>
-		    </li>    
-            <li><a href="#" data-toggle="modal" data-target="#myModal_About">About</a></li>
-          </ul>
-        </div>
-      </div><!--/.container -->
+				        <li><a href="http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=mitranscriptome&hgS_otherUserSessionName=mitranscriptome" 
+			               target = "_blank" >View MiTranscriptome lncRNAs</a></li>
+			          <li><a href="http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=mitranscriptome&hgS_otherUserSessionName=mitranscriptome_all" 
+			               target = "_blank" >View Entire Assembly</a></li>
+			        </ul>
+			      </li>    
+	          <li><a href="#" data-toggle="modal" data-target="#myModal_About">About</a></li>
+	        </ul>
+	      </div>
+	      </div><!--/.container -->
     </div><!--/.navbar -->
 
     <div class="modal fade" id="myModal_About" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_About" aria-hidden="true">
@@ -113,105 +106,73 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <!-- Main Component -->
-    <div class="container" id="top">
-    
-        <div id="Home" class="jumbotron">
-          <h2>Welcome to the MiTranscriptome lncRNA Portal</h2>
-          <p><small>MiTranscriptome is <i>ab initio</i> transcriptome 
-          reconstruction from 6,503 RNA-seq libraries spanning diverse 
-          cancer and tissue types. The MiTranscriptome contains >58,000 
-          lncRNAs, the vast majority of which are currently unannotated. 
-          This portal reports the long non-coding RNAs (lncRNAs) that are expressed in a 
-          lineage-specific or cancer-specific manner.</small></p>
-          <div id="Select_Transcripts" class="jumbotron jumbothin">
-	   		  <label for="select-transcripts"><h4>Select Tissue/Cancer Type:</h4></label>
-	   		  <select id="select-transcripts">
-	   		    <option value="">Cancer Type/Tissue Type</option>
-	            <option value="aml">Acute Myelogenous Leukemia (AMATs)</option>
-	            <option value="bladder">Bladder Cancer (BLCATs)</option>
-	            <option value="breast">Breast Cancer (BRCATs)</option>
-	            <option value="cervical">Cervical Cancer (CVATs)</option>
-	            <option value="cml">Chronic Myelogenous Leukemia (CMATs)</option>
-	            <option value="colorectal">Colorectal Cancer (CRATs)</option>
-	            <option value="gbm">Glioblastoma Multiforme (GBATs)</option>
-	            <option value="head_neck">Head and Neck Cancer (HNCATs)</option>
-	            <option value="heart">Heart Tissue (HRATs)</option>
-	            <option value="hesc">Human Embryonic Stem Cells (ESATs)</option>
-	            <option value="kich">Chromophobe Renal Cell Carcinoma (KCHCATs)</option>
-	            <option value="kirc">Renal Clear Cell Carcinoma (KCCATs)</option>
-	            <option value="kirp">Renal Papillary Cell Carcinoma (KPCATs)</option>
-	            <option value="lgg">Low Grade Glioma (LGATs)</option>
-	            <option value="liver">Liver Cancer (LVCATs)</option>
-	            <option value="luad">Lung Adenocarcinoma (LACATs)</option>
-	            <option value="lusc">Lung Squamous Cell Carcinoma (LSCATs)</option>
-	            <option value="medulloblastoma">Medulloblastoma (MBATs)</option>
-	            <option value="melanoma">Melanoma (MEATs)</option>
-	            <option value="mpn">Myeloproliferative Neoplasia (MPATs)</option>
-	            <option value="ovarian">Ovarian Cancer (OVATs)</option>
-	            <option value="pancreatic">Pancreatic Cancer (PNATs)</option>
-	            <option value="prostate">Prostate Cancer (PCATs)</option>
-	            <option value="skeletal_muscle">Skeletal Muscle Tissue (SMATs)</option>
-	            <option value="stomach">Stomach Cancer (STCATs)</option>
-	            <option value="thyroid">Thyroid Cancer (THCATs)</option>
-	            <option value="uterine">Uterine Endometrial Carcinoma (UTATs)</option>
-	            <option value="hiclinc">Highly Conserved Long Intergenic Non-Coding RNAs (HICLINCs)</option>
-	   		  </select>
-   		  </div><!-- /Select Transcripts --> 
-   		  <div id="supported-browsers" class="jumbotron jumbothin text-right">
-   		  <p>Supported Browsers:</p>
-   		  <img src="{{ url_for('static', filename='images/chrome.png') }}" height="42" width="42">
-   		  <img src="{{ url_for('static', filename='images/firefox.png') }}" height="42" width="42">
-   		  <img src="{{ url_for('static', filename='images/safari.png') }}" height="42" width="42">
-   		  <img src="{{ url_for('static', filename='images/no-ie.png') }}" height="42" width="42">
-   		  </div>
-   		  
-   		  <link rel="shortcut icon" href="{{ url_for('static', filename='BlockM.ico') }}">
-   		  
-        </div><!-- /Home Screen -->
+    <div class="container">
+      <div id="div-welcome" class="jumbotron">
+        <h2>Welcome to the MiTranscriptome lncRNA Portal</h2>
+        <p><small>MiTranscriptome is <i>ab initio</i> transcriptome 
+        reconstruction from 6,503 RNA-seq libraries spanning diverse 
+        cancer and tissue types. The MiTranscriptome contains >58,000 
+        lncRNAs, the vast majority of which are currently unannotated. 
+        This portal reports the long non-coding RNAs (lncRNAs) that are expressed in a 
+        lineage-specific or cancer-specific manner.</small></p>
+        <p><a id='btn-get-started' class="btn btn-lg btn-primary" href="#" role="button">Browse Transcripts &raquo;</a></p>
 
-        
+		    <div class="row text-right">
+		  	  <img src="{{ url_for('static', filename='images/chrome.png') }}" height="16" width="16">
+		  		<img src="{{ url_for('static', filename='images/firefox.png') }}" height="16" width="16">
+		  		<img src="{{ url_for('static', filename='images/safari.png') }}" height="16" width="16">
+		  		<img src="{{ url_for('static', filename='images/no-ie.png') }}" height="16" width="16">
+		  	</div>
+      </div><!-- /div-welcome -->
 
-        <div id="div-selected-transcripts" class="toshow">
-          <div id="Select_Transcripts" class = "row jumbotron jumbothin">
-		  <label for="select-transcripts2"><h4>Select Tissue/Cancer Type:</h4></label>
-		  <select id="select-transcripts2">
-		    <option value="">Cancer Type/Tissue Type</option>
-		    <option value="aml">Acute Myelogenous Leukemia (AMATs)</option>
-		    <option value="bladder">Bladder Cancer (BLCATs)</option>
-		    <option value="breast">Breast Cancer (BRCATs)</option>
-		    <option value="cervical">Cervical Cancer (CVATs)</option>
-		    <option value="cml">Chronic Myelogenous Leukemia (CMATs)</option>
-		    <option value="colorectal">Colorectal Cancer (CRATs)</option>
-		    <option value="gbm">Glioblastoma Multiforme (GBATs)</option>
-		    <option value="head_neck">Head and Neck Cancer (HNCATs)</option>
-		    <option value="heart">Heart Tissue (HRATs)</option>
-		    <option value="hesc">Human Embryonic Stem Cells (ESATs)</option>
-		    <option value="kich">Chromophobe Renal Cell Carcinoma (KCHCATs)</option>
-		    <option value="kirc">Renal Clear Cell Carcinoma (KCCATs)</option>
-		    <option value="kirp">Renal Papillary Cell Carcinoma (KPCATs)</option>
-		    <option value="lgg">Low Grade Glioma (LGATs)</option>
-		    <option value="liver">Liver Cancer (LVCATs)</option>
-		    <option value="luad">Lung Adenocarcinoma (LACATs)</option>
-		    <option value="lusc">Lung Squamous Cell Carcinoma (LSCATs)</option>
-		    <option value="medulloblastoma">Medulloblastoma (MBATs)</option>
-		    <option value="melanoma">Melanoma (MEATs)</option>
-		    <option value="mpn">Myeloproliferative Neoplasia (MPATs)</option>
-		    <option value="ovarian">Ovarian Cancer (OVATs)</option>
-		    <option value="pancreatic">Pancreatic Cancer (PNATs)</option>
-		    <option value="prostate">Prostate Cancer (PCATs)</option>
-		    <option value="skeletal_muscle">Skeletal Muscle Tissue (SMATs)</option>
-		    <option value="stomach">Stomach Cancer (STCATs)</option>
-		    <option value="thyroid">Thyroid Cancer (THCATs)</option>
-		    <option value="uterine">Uterine Endometrial Carcinoma (UTATs)</option>
-		    <option value="hiclinc">Highly Conserved Long Intergenic Non-Coding RNAs (HICLINCs)</option>
-		  </select>
-		</div><!-- /Select Transcripts --> 
-          <div id="div-transcript-table"></div>
-        </div><!-- /Display table of transcripts -->
+	    <!-- Transcript Table -->
+	    <div id="div-transcript-browser" class="toshow container">
+	      <table id="table-transcripts" class="table table-striped table-bordered">
+			  <thead>
+				<tr>
+				<th></th>
+		    <th>Name</th>
+		    <th><a href="#" data-toggle="tooltip" data-html="true" title="UCSC GRCh37/hg19">Location</a></th>
+		    <th>Unannotated</th>
+		    <th>Intergenic</th>
+		    <th><a href="#" data-toggle="tooltip" data-html="true" title="Transcript of Unknown Coding Potential (TUCP)">TUCP</a></th>
+		    <th><a href="#" data-toggle="tooltip" data-html="true" title="Highly Conserved lncRNA (HICLNC)">HICLNC</a></th>
+		    <th>Tissue</th>
+		    <th><a href="#" data-toggle="tooltip" data-html="true" 
+		         title="Cancer (<img src='static/images/cancer_ribbon.png' width='16' height='16'/>)
+		         <br/>Lineage (<img src='static/images/human_body.png' width='24' height='24'/>)">
+		         Association
+		         </a>
+		    </th>
+		    <th><a href="#" data-toggle="tooltip" data-html="true"
+		         title="<span class='glyphicon glyphicon-plus red'/>Over-expression
+		         <br/><span class='glyphicon glyphicon-minus blue'/>Under-expression">
+		         SSEA Percentile
+		         </a>
+		    </th>
+				</tr>
+			  </thead>
+			  <tbody>
+			  </tbody>
+			  <tfoot>
+			    <tr>
+				<th></th>
+			    <th>Name</th>
+			    <th>Location</th>
+			    <th>Unannotated</th>
+			    <th>Intergenic</th>
+			    <th>TUCP</th>
+			    <th>HICLNC</th>
+			    <th>Tissue</th>
+			    <th>Association</th>
+			    <th>SSEA Percentile</th>
+			    </tr>
+			  </tfoot>
+			  </table>
+			</div><!-- /div-table -->
 
-      </div><!-- /container -->
-      
+    </div><!-- /container -->
+
   </body>
 </html>        
 

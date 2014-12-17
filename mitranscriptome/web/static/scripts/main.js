@@ -5,7 +5,7 @@ requirejs.config({
 	enforceDefine: true,
 
     paths: {
-        'jquery': 'libs/jquery-1.10.2.min',
+        'jquery': 'libs/jquery-1.11.1.min',
         'underscore': 'libs/underscore-min',
         'backbone': 'libs/backbone-min',
         'd3': 'libs/d3.v3.min',
@@ -16,7 +16,9 @@ requirejs.config({
         'spin': 'libs/spin.min',
         'jqueryspin': 'libs/jquery.spin',
         'tablesorter': 'libs/jquery.tablesorter.min',
-        'tablesorter.widgets': 'libs/jquery.tablesorter.widgets.min'
+        'tablesorter.widgets': 'libs/jquery.tablesorter.widgets.min',
+        'datatables': '../datatables/js/jquery.dataTables.min',
+        'datatables.bootstrap': '../datatables/js/dataTables.bootstrap.min'
     },
     
     shim: {
@@ -61,7 +63,7 @@ require(['domReady'], function (domReady) {
   });
 });
 
-define(["jquery", "underscore", "backbone", 'd3', 'bootstrap', 'tablesorter'],
+define(["jquery", "underscore", "backbone", 'd3', 'bootstrap', 'tablesorter', 'datatables', 'datatables.bootstrap'],
     function ($, _, Backbone, d3) {
         console.log("Test output");
         console.log("$: " + typeof $);

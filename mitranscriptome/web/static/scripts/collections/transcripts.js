@@ -17,7 +17,6 @@ define([
     },
 
     parse: function(response) {
-        // console.log(JSON.stringify(response.results));
         return response.results;
     },
 
