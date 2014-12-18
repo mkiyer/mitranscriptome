@@ -30,11 +30,11 @@ define([
   }
   function associationRender(data,type) {
     if (type == 'display') {
-      if (data == 'c') {
+      if (data == 'Cancer') {
         return '<span class="label label-success">C</span>'
-      } else if (data == 'l') {
+      } else if (data == 'Lineage') {
         return '<span class="label label-warning">L</span>'
-      } else if (data == 'cl') {
+      } else if (data == 'Cancer / Lineage') {
         return '<span class="label label-success">C</span>&nbsp;<span class="label label-warning">L</span>'
       } else {
         return '<span class="label label-default">NA</span>'
@@ -43,52 +43,38 @@ define([
       return data;
     }
   }
-
   
-//  <div id="Select_Transcripts" class="jumbotron jumbothin">
-//  <label for="select-transcripts"><h4>Select Tissue/Cancer Type:</h4></label>
-//  <select id="select-transcripts">
-//    <option value="">Cancer Type/Tissue Type</option>
-//    <option value="aml">Acute Myelogenous Leukemia (AMATs)</option>
-//    <option value="bladder">Bladder Cancer (BLCATs)</option>
-//    <option value="breast">Breast Cancer (BRCATs)</option>
-//    <option value="cervical">Cervical Cancer (CVATs)</option>
-//    <option value="cml">Chronic Myelogenous Leukemia (CMATs)</option>
-//    <option value="colorectal">Colorectal Cancer (CRATs)</option>
-//    <option value="gbm">Glioblastoma Multiforme (GBATs)</option>
-//    <option value="head_neck">Head and Neck Cancer (HNCATs)</option>
-//    <option value="heart">Heart Tissue (HRATs)</option>
-//    <option value="hesc">Human Embryonic Stem Cells (ESATs)</option>
-//    <option value="kich">Chromophobe Renal Cell Carcinoma (KCHCATs)</option>
-//    <option value="kirc">Renal Clear Cell Carcinoma (KCCATs)</option>
-//    <option value="kirp">Renal Papillary Cell Carcinoma (KPCATs)</option>
-//    <option value="lgg">Low Grade Glioma (LGATs)</option>
-//    <option value="liver">Liver Cancer (LVCATs)</option>
-//    <option value="luad">Lung Adenocarcinoma (LACATs)</option>
-//    <option value="lusc">Lung Squamous Cell Carcinoma (LSCATs)</option>
-//    <option value="medulloblastoma">Medulloblastoma (MBATs)</option>
-//    <option value="melanoma">Melanoma (MEATs)</option>
-//    <option value="mpn">Myeloproliferative Neoplasia (MPATs)</option>
-//    <option value="ovarian">Ovarian Cancer (OVATs)</option>
-//    <option value="pancreatic">Pancreatic Cancer (PNATs)</option>
-//    <option value="prostate">Prostate Cancer (PCATs)</option>
-//    <option value="skeletal_muscle">Skeletal Muscle Tissue (SMATs)</option>
-//    <option value="stomach">Stomach Cancer (STCATs)</option>
-//    <option value="thyroid">Thyroid Cancer (THCATs)</option>
-//    <option value="uterine">Uterine Endometrial Carcinoma (UTATs)</option>
-//    <option value="hiclinc">Highly Conserved Long Intergenic Non-Coding RNAs (HICLINCs)</option>
-//  </select>
-//</div><!-- /Select Transcripts -->
-  
-//  {
-//    // unannotated/annotated
-//    targets: 3,
-//    orderable: false,
-//    data: 'tstatus',
-//    render: function(data, type, row, meta) {
-//      return binaryRender(data, type, 'unannotated');
-//    }
-//  }, 
+  // map tissue codes to user-friendly names
+  tissueMap = d3.map({
+    aml: 'Blood / AML',
+    bladder: 'Bladder',
+    breast: 'Breast',
+    cervical: 'Cervical',
+    cml: 'Blood / CML',
+    colorectal: 'Colorectal',
+    gbm: 'Brain / Glioblastoma',
+    head_neck: 'Head/Neck',
+    heart: 'Muscle / Heart',
+    embryonic_stem_cells: 'Embryonic Stem Cells',
+    kich: 'Renal / Chromophobe',
+    kirc: 'Renal / Clear Cell',
+    kirp: 'Renal / Papillary',
+    lgg: 'Brain / Glioma',
+    liver: 'Liver',
+    luad: 'Lung Adenocarcinoma',
+    lusc: 'Lung Squamous',
+    medulloblastoma: 'Brain / Medulloblastoma',
+    melanoma: 'Melanoma',
+    mpn: 'Blood / MPN',
+    ovarian: 'Ovarian',
+    pancreatic: 'Pancreatic',
+    prostate: 'Prostate',
+    skeletal_muscle: 'Muscle / Skeletal',
+    stomach: 'Stomach',
+    thyroid: 'Thyroid',
+    uterine: 'Uterine',
+    NA: 'NA'    
+  });
 
   // transcript table (DataTable)
   var table = $('#table-transcripts').DataTable({
@@ -98,31 +84,20 @@ define([
       url: '/transcript_metadata'
     },
     "order": [[1, 'asc']],
-    columnDefs: [{
-      // genome location
-      targets: 2,
-      data: null,
-      render: function(data, type, row, meta) {
-        return UCSCLinkTemplate({row: row});
-      }
-    }, {
-      // Association Type
-      targets: 7,
-      orderable: false,
-      data: 'association_type',
-      render: function(data, type, row, meta) {
-        return associationRender(data, type);
-      }
-    }],
     columns: [
       {
-        "className": 'details-control',
-        "orderable": false,
-        "data": null,
-        "defaultContent": ''
+        className: 'details-control',
+        orderable: false,
+        data: null,
+        defaultContent: ''
       },
       { data: "func_name_final" },
-      { data: null },
+      { 
+        data: null,
+        render: function(data, type, row, meta) {
+          return UCSCLinkTemplate({row: row});
+        }
+      },
       { 
         // tstatus (annotated / unannotated)
         orderable: false,
@@ -160,20 +135,61 @@ define([
           return binaryRender(data, type, 'YES');
         }
       }, 
-      { data: "association_type" },
       { 
-        data: "tissue",
-        orderable: false
+        // association type
+        orderable: false,
+        data: function(row, type, val, meta) {
+          switch(row.association_type) {
+            case 'c': return 'Cancer'; break;
+            case 'l': return 'Lineage'; break;
+            case 'cl': return 'Cancer / Lineage'; break;
+            default: return 'NA'
+          }
+        },
+        render: function(data, type, row, meta) {
+          return associationRender(data,type);
+        }
       },
+      { 
+        // tissue
+        orderable: false,
+        data: function(row, type, val, meta) {
+          return tissueMap.get(row.tissue);
+        }
+      },      
       { 
         // ssea_percentile
         data: function(row, type, val, meta) {
-          return row.ssea_percentile == 'NA' ? 0.0 : parseFloat(row.ssea_percentile);
+          return (100 * (row.ssea_percentile == 'NA' ? 0.0 : parseFloat(row.ssea_percentile))).toFixed(2);
+        },
+        render: function(data, type, row, meta) {
+          if (data > 0) {
+            return '<span class="glyphicon glyphicon-arrow-up red"/>' + data;
+          } else if (data < 0) {
+            return '<span class="glyphicon glyphicon-arrow-down blue"/>' + data;
+          } else {
+            return data;
+          }
         }
       },
-      { data: function(row, type, val, meta) { return parseFloat(row.tissue_expr_mean); } },
-      { data: function(row, type, val, meta) { return parseFloat(row.tissue_expr_95); } },
-      { data: function(row, type, val, meta) { return parseFloat(row.tissue_expr_99); } }
+      { 
+        // tissue_expr_mean
+        data: function(row, type, val, meta) { 
+          return row.tissue_expr_mean == 'NA' ? 0.0 : parseFloat(row.tissue_expr_mean);
+        } 
+      },
+      { 
+        // tissue_expr_95
+        data: function(row, type, val, meta) { 
+          return row.tissue_expr_95 == 'NA' ? 0.0 : parseFloat(row.tissue_expr_95);
+        }
+      },
+      { 
+        // tissue_expr_99
+        data: function(row, type, val, meta) { 
+          return row.tissue_expr_99 == 'NA' ? 0.0 : parseFloat(row.tissue_expr_99);
+        }
+      }
     ],
     initComplete: function () {
       var api = this.api();
@@ -218,11 +234,9 @@ define([
       }
   });
   
-  // add tooltip functionality
-  $('#table-transcripts').tooltip({ 
-    delay: { show: 100, hide: 100 },
-    selector:"[data-toggle=tooltip]",
-    container:"body"      
+  $('#div-transcript-browser').tooltip({ 
+    delay: { show: 50, hide: 50 },
+    selector:"[data-toggle=tooltip]"
   });
 
   // get started button functionality
@@ -230,36 +244,4 @@ define([
     $('#div-welcome').hide();
     $('#div-transcript-browser').show();
   });
-
-  // collections
-  var selectedTranscripts = new TranscriptCollection;
-  // views
-  var transcriptTableView = new TranscriptTableView({ 
-    el: '#div-transcript-table',
-    collection: selectedTranscripts
-  });
-
-  // selectize control for tissue/cancer type
-  $('#select-transcripts').selectize({
-    onChange: function(value) {
-      console.log(value);
-      // trigger load of transcript table
-      transcriptTableView.load(value);
-      // show transcript table
-      toggle_off('Home')
-      $('#div-selected-transcripts').show();
-    }
-  });
-  
-  $('#select-transcripts2').selectize({
-	    onChange: function(value) {
-	      console.log(value);
-	      // trigger load of transcript table
-	      transcriptTableView.load(value);
-	      // show transcript table
-	      toggle_off('Home')
-	      $('#div-selected-transcripts').show();
-	    }
-	  });
-
 })
