@@ -91,7 +91,9 @@ define([
         data: null,
         defaultContent: ''
       },
-      { data: "func_name_final" },
+      { 
+        data: "func_name_final" 
+      },
       { 
         data: null,
         render: function(data, type, row, meta) {
