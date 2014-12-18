@@ -46,7 +46,7 @@ elif MKIYER:
 EXPRESSION_PLOT_DIR = os.path.join(MAIN_DIR, 'plots', 'expr_plots')
 SSEA_PLOT_DIR = os.path.join(MAIN_DIR, 'plots', 'ssea_plots')
 # path to data
-TRANSCRIPT_METADATA_FILE = os.path.join(MAIN_DIR, 'metadata.manuscript.v3.txt')
+TRANSCRIPT_METADATA_FILE = os.path.join(MAIN_DIR, 'metadata.manuscript.v4.txt')
 TRANSCRIPT_SEQUENCE_FILE = os.path.join(MAIN_DIR, 'seqs.txt')
 # metadata fields used by online portal
 TRANSCRIPT_TABLE_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 'end', 'strand', 
@@ -319,11 +319,15 @@ def request_transcript_view():
 @app.route('/get_ssea')
 @requires_auth
 def get_ssea():
+    app.logger.debug('get ssea')
     transcript_id = request.args.get('t_id')
-    subdir = request.args.get('subdir')
+    tissue = request.args.get('tissue')
+    association_type = request.args.get('association_type')
     plot_type = request.args.get('plot_type')
-    filename = os.path.join(SSEA_PLOT_DIR, subdir, '%s.%s.png' % (transcript_id, plot_type))
-    return send_file(filename, mimetype='image/jpeg')
+    filename = '%s.%s.%s.%s.png' % (tissue, association_type, transcript_id, plot_type)
+    filename = os.path.join(SSEA_PLOT_DIR, filename)
+    app.logger.debug('get ssea ' + filename)
+    return send_file(filename, mimetype='image/png')
 
 @app.route('/get_expression_boxplot')
 @requires_auth
@@ -347,7 +351,7 @@ def request_sequence():
 @app.route('/transcript_metadata', methods=['GET'])
 @requires_auth
 def request_metadata():
-    app.logger.debug('Metadata')
+    app.logger.debug('Metadata requested')
     m = get_transcript_metadata()
     return jsonify(data=m)
 

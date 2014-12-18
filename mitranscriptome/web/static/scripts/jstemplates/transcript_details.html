@@ -1,35 +1,68 @@
-<table cellpadding="5" cellspacing="0" border="0" style="width:50%" class="table table-striped">
-  <thead>
-  </thead>
-  <tbody>
-  <tr><td>Assembly Transcript ID</td><td><%= transcript_id %></td></tr>
-  <tr><td>Assembly Gene ID</td><td><%= gene_id %></td></tr>
-  <tr><td>Length (bp)</td><td><%= transcript_length %></td></tr>
-  <tr><td>Number of exons</td><td><%= num_exons %></td></tr>
-  
-  <tr>
-  <td>Location (<a href="http://genome.ucsc.edu/cgi-bin/hgGateway?clade=mammal&org=Human&db=hg19">UCSC GRCh37/hg19</a>)</td>
-  <td>
-  <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=mitranscriptome&hgS_otherUserSessionName=mitranscriptome&position=<%= chrom %>:<%= start %>-<%= end %>" target="_blank"><%= chrom %>:<%= start %>-<%= end %>[<%= strand %>]</a>
-  </td>
-  </tr>
-
-  <% if (tstatus == 'unannotated') { %>
-  <tr><td>Confidence Score (Unannotated Transcripts)</td><td><%= conf_score %></td></tr>
+<div class="container-fluid">
+	<div class="row">
+		<h4>Properties</h4>
+		<table class="table table-striped">
+		  <thead>
+		  </thead>
+		  <tbody>
+		  <tr><td>Assembly Transcript ID</td><td><%= transcript_id %></td></tr>
+		  <tr><td>Assembly Gene ID</td><td><%= gene_id %></td></tr>
+		  <tr><td>Length (bp)</td><td><%= transcript_length %></td></tr>
+		  <tr><td>Number of exons</td><td><%= num_exons %></td></tr>
+		  
+		  <tr>
+		  <td>Location (<a href="http://genome.ucsc.edu/cgi-bin/hgGateway?clade=mammal&org=Human&db=hg19">UCSC GRCh37/hg19</a>)</td>
+		  <td>
+		  <a href="http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=mitranscriptome&hgS_otherUserSessionName=mitranscriptome&position=<%= chrom %>:<%= start %>-<%= end %>" target="_blank"><%= chrom %>:<%= start %>-<%= end %>[<%= strand %>]</a>
+		  </td>
+		  </tr>
+		
+		  <% if (tstatus == 'unannotated') { %>
+		  <tr><td>Confidence Score (Unannotated Transcripts)</td><td><%= conf_score %></td></tr>
+		  <% } %>
+		
+		  <% if (tcat == 'tucp') { %>
+		  <tr><td>TUCP ORF size</td><td><%= orf_size %></td></tr>
+		  <tr><td>TUCP coding potential probability</td><td><%= coding_potential %></td></tr>
+		  <tr><td>TUCP PFAM domains</td><td><%= pfam %></td></tr>
+		  <% } %>
+		  
+		  <tr>
+		  <td>Sequence</td>
+		  <td><a href="/download_seq?t_id=<%= transcript_id %>" target="_blank">Download</a></td>
+		  </tr>
+		  </tbody>
+		</table>
+	</div>
+	<div class="row">
+    <h4>Expression <small>across all samples</small></h4>
+	  <img class="img-responsive thumbnail" src="/get_expression_boxplot?t_id=<%= transcript_id %>"/>
+	</div>
+	<% if (association_type == 'c' || association_type == 'cl') { %>
+  <div class="row">
+	  <div class="col-lg-6 col-md-6 portfolio-item">
+			<h4>SSEA Plot <small>Cancer</small></h4>
+      <img class="img-responsive thumbnail" src="/get_ssea?t_id=<%= transcript_id %>&tissue=<%= tissue %>&association_type=cancer&plot_type=ssea"/>
+    </div>
+	  <div class="col-lg-6 col-md-6 portfolio-item">
+			<h4>Expression Plot <small>Cancer</small></h4>
+      <img class="img-responsive thumbnail" src="/get_ssea?t_id=<%= transcript_id %>&tissue=<%= tissue %>&association_type=cancer&plot_type=expr"/>
+      <p>Color Code: <span class="red"> Cancer (Left)</span>; <span class="blue"> Normal (Right)</span></p>
+    </div>
+  </div>
   <% } %>
-
-  <% if (tcat == 'tucp') { %>
-  <tr><td>TUCP ORF size</td><td><%= orf_size %></td></tr>
-  <tr><td>TUCP coding potential probability</td><td><%= coding_potential %></td></tr>
-  <tr><td>TUCP PFAM domains</td><td><%= pfam %></td></tr>
+	<% if (association_type == 'l' || association_type == 'cl') { %>
+  <div class="row">
+	  <div class="col-lg-6 col-md-6 portfolio-item">
+			<h4>SSEA Plot <small>Lineage</small></h4>
+      <img class="img-responsive thumbnail" src="/get_ssea?t_id=<%= transcript_id %>&tissue=<%= tissue %>&association_type=lineage&plot_type=ssea"/>
+    </div>
+	  <div class="col-lg-6 col-md-6 portfolio-item">
+			<h4>Expression Plot <small>Lineage</small></h4>
+      <img class="img-responsive thumbnail" src="/get_ssea?t_id=<%= transcript_id %>&tissue=<%= tissue %>&association_type=lineage&plot_type=expr"/>
+      <p>Color Code: <span class="red"> Selected Tissue/Cancer (Left)</span>; <span class="blue"> All Other Samples (Right)</span></p>
+    </div>
+  </div>
   <% } %>
-  
-  <tr>
-  <td>Sequence</td>
-  <td><a href="/download_seq?t_id=<%= transcript_id %>" target="_blank">Download</a></td>
-  </tr>
-
-  <img class="img_responsive" src="/get_expression_boxplot?t_id=<%= transcript_id %>"/>
-
-  </tbody>
-</table>
+</div>			
+			

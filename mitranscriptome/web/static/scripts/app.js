@@ -223,14 +223,14 @@ define([
       var row = table.row( tr );
 
       if ( row.child.isShown() ) {
-          // This row is already open - close it
-          row.child.hide();
-          tr.removeClass('shown');
+        // This row is already open - close it
+        row.child.hide();
+        tr.removeClass('shown');
       }
       else {
-          // Open this row
-          row.child( TranscriptDetailsTemplate(row.data()) ).show();
-          tr.addClass('shown');
+        // Open this row
+        row.child( TranscriptDetailsTemplate(row.data()) ).show();
+        tr.addClass('shown');
       }
   });
   
