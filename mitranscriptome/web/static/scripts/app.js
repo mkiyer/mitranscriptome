@@ -241,6 +241,21 @@ define([
     selector:"[data-toggle=tooltip]"
   });
 
+  // home button functionality
+  $('#btn-home').click(function() {
+    $('#div-welcome').show();
+    $('#div-transcript-browser').hide();
+//    // this is unfortunately hard-coded due to nature of DataTables
+//    table.rows().indexes().flatten().each( function ( i ) {
+//      var row = table.row( i );
+//      if ( row.child.isShown() ) {
+//        // This row is already open - close it
+//        row.child.hide();
+//        row.nodes().to$().removeClass('shown');
+//      }
+//    });
+  });
+  
   // get started button functionality
   $('#btn-get-started').click(function() {
     $('#div-welcome').hide();
