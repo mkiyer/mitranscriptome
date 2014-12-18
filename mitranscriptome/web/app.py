@@ -23,8 +23,8 @@ from dbapi import DBInterfaceFile
 app = Flask(__name__)
 
 # run on server or run local (set only one)
-SERVER = True
-YNIKNAFS = False
+SERVER = False
+YNIKNAFS = True
 MKIYER = False
 # enable/disable debugging
 DEBUG = not SERVER
