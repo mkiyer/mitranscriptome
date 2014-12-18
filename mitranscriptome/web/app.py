@@ -22,10 +22,14 @@ from dbapi import DBInterfaceFile
 # create flask application
 app = Flask(__name__)
 
+# VERSION
+VERSION = 'v1'
+
 # run on server or run local (set only one)
 SERVER = False
 YNIKNAFS = True
 MKIYER = False
+
 # enable/disable debugging
 DEBUG = not SERVER
 
