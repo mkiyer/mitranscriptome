@@ -27,8 +27,9 @@ VERSION = 'v1'
 
 # run on server or run local (set only one)
 SERVER = False
-YNIKNAFS = False
-MKIYER = True
+YNIKNAFS = True
+MKIYER = False
+
 # enable/disable debugging
 DEBUG = not SERVER
 
