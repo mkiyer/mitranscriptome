@@ -26,8 +26,8 @@ app = Flask(__name__)
 VERSION = 'v1'
 
 # run on server or run local (set only one)
-SERVER = False
-YNIKNAFS = True
+SERVER = True
+YNIKNAFS = False
 MKIYER = False
 
 # enable/disable debugging
