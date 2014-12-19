@@ -5,14 +5,10 @@ define([
   'd3',
   'text!jstemplates/ucsc_link.html',
   'text!jstemplates/transcript_details.html',
-  'collections/transcripts',
-  'views/transcript_table',
-  'selectize'
+  'jqueryspin'
 ], function($, _, Backbone, d3,
     UCSCLinkTemplateText,
-    TranscriptDetailsTemplateText,
-    TranscriptCollection,
-    TranscriptTableView) {
+    TranscriptDetailsTemplateText) {
 
   // templates
   var UCSCLinkTemplate = _.template(UCSCLinkTemplateText);
@@ -75,10 +71,18 @@ define([
     uterine: 'Uterine',
     NA: 'NA'    
   });
-
+  
   // transcript table (DataTable)
-  var table = $('#table-transcripts').DataTable({
-    processing: true,
+  var table = $('#table-transcripts')
+    .on('preXhr.dt', function(e, settings, data) {
+      $('#div-welcome').spin({ top: '50%' });
+    })
+    .on('xhr.dt', function(e, settings, json) {
+      $('#div-welcome').spin(false);
+      $('#btn-get-started').show();
+    })
+    .DataTable({
+    processing: false,
     deferRender: true,
     ajax: {
       url: '/transcript_metadata'
