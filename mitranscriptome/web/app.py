@@ -26,8 +26,8 @@ app = Flask(__name__)
 VERSION = 'v1'
 
 # run on server or run local (set only one)
-SERVER = False
-YNIKNAFS = True
+SERVER = True
+YNIKNAFS = False
 MKIYER = False
 
 # enable/disable debugging
@@ -117,7 +117,7 @@ def requires_auth(f):
     return decorated
 
 @app.route('/get_ssea')
-@requires_auth
+#@requires_auth
 def get_ssea():
     app.logger.debug('get ssea')
     transcript_id = request.args.get('t_id')
@@ -130,14 +130,14 @@ def get_ssea():
     return send_file(filename, mimetype='image/png')
 
 @app.route('/get_expression_boxplot')
-@requires_auth
+#@requires_auth
 def get_expression_boxplot():
     transcript_id = request.args.get('t_id')
     filename = os.path.join(EXPRESSION_PLOT_DIR, '%s_expr.jpeg' % (transcript_id))
     return send_file(filename, mimetype='image/jpeg')
 
 @app.route('/download_seq')
-@requires_auth
+#@requires_auth
 def request_sequence():
     # fetch sequence from metadata
     t_id = request.args.get('t_id')
@@ -149,14 +149,14 @@ def request_sequence():
     return response
 
 @app.route('/transcript_metadata', methods=['GET'])
-@requires_auth
+#@requires_auth
 def request_metadata():
     app.logger.debug('Metadata requested')
     m = get_transcript_metadata()
     return jsonify(data=m)
 
 @app.route('/')
-@requires_auth
+#@requires_auth
 def home():
     return render_template('home.html')
 
