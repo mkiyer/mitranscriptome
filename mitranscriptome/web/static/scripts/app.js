@@ -80,6 +80,7 @@ define([
     .on('xhr.dt', function(e, settings, json) {
       $('#div-welcome').spin(false);
       $('#btn-get-started').show();
+      $('#wait-msg').hide();
     })
     .DataTable({
     processing: false,
