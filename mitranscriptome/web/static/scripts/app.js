@@ -79,6 +79,7 @@ define([
     })
     .on('xhr.dt', function(e, settings, json) {
       $('#div-welcome').spin(false);
+      $('#txt-please-wait').hide();
       $('#btn-get-started').show();
     })
     .DataTable({
