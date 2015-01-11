@@ -30,7 +30,7 @@
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
 		    <div class="navbar-header">
-          <a id="btn-home" href="#" class="navbar-brand"><span><img src="{{ url_for('static', filename='images/block_m_white.png') }}" height="20" width="28"></span>&nbsp;MiTranscriptome</a>
+          <a id="btn-home" href="#" class="navbar-brand"><span><img src="{{ url_for('static', filename='images/block_m_white.png') }}" height="20" width="28"></span>&nbsp;MiTranscriptome <i>(alpha)</i></a>
 		    </div>
 				<div class="collapse navbar-collapse">
 				  <ul class="nav navbar-nav navbar-right">
@@ -43,23 +43,21 @@
 			               target = "_blank" >View Entire Assembly</a></li>
 			        </ul>
 			      </li>    
-	          <li><a href="#" data-toggle="modal" data-target="#myModal_About">About</a></li>
+	          <li><a href="#" data-toggle="modal" data-target="#modal-about">About</a></li>
+	          <li><a href="#" data-toggle="modal" data-target="#modal-help">Help</a></li>
 	        </ul>
 	      </div>
 	      </div><!--/.container -->
     </div><!--/.navbar -->
 
-    <div class="modal fade" id="myModal_About" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_About" aria-hidden="true">
+    <div class="modal fade" id="modal-about" tabindex="-1" role="dialog" aria-labelledby="modal-label-about" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel_About">About</h4>
+            <h4 class="modal-title" id="modal-label-about">About</h4>
           </div>
           <div class="modal-body">
-            <p><h4>MiTranscriptome is currently in beta testing. Please report issues at our
-            <a target = "_blank" href="https://github.com/mkiyer/mitranscriptome/issues">github site</a>.</h4>
-            </p>
             <p>MiTranscriptome is a large-scale <i>ab initio</i> transcriptome 
             meta-assembly from 6,503 RNA-Seq libraries. RNA-Seq data were obtained
             from <a target = "_blank" href="http://cancergenome.nih.gov">The Cancer Genome Atlas (TCGA)</a>,
@@ -77,21 +75,21 @@
             Kolmorgorov-Smirnoff-like tests to detect cancer-specific and lineage-specific
             patterns. SSEA adapts ideas from 
             <a target = "_blank" href="http://www.broadinstitute.org/gsea/index.jsp">Gene Set Enrichment Analysis</a>.</p>
-            <p><h5>Contact:</h5>
-            <ul>
-              <li>Arul M. Chinnaiyan, M.D., Ph.D. (Principal Investigator): <i>arul@umich.edu</i></li>
-              <li>Matthew K. Iyer (MD/PhD Student): <i>mkiyer@umich.edu</i></li>
-              <li>Yashar S. Niknafs (MD/PhD Student): <i>yniknafs@umich.edu</i></li>
-            </ul></p>
             <p><h5>Source Code:</h5>
             <ul>   
               <li><a href="https://code.google.com/p/ssea" target = "_blank">SSEA Source Code</a></li>
               <li><a href="https://code.google.com/p/assemblyline" target = "_blank">AssemblyLine Source Code</a></li>
             </ul>
-            <p><h5>Acknowledgements:</h5>
+            <p><h5>Contributors</h5>
+            <ul>
+              <li>Matthew K. Iyer (MD/PhD Student)</li>
+              <li>Yashar S. Niknafs (MD/PhD Student)</li>
+              <li>Arul M. Chinnaiyan, M.D., Ph.D. (Principal Investigator)</li>
+            </ul></p>
+            <p><h5>Acknowledgements</h5>
             <p><ul>
-              <li>Anirban Sahu (Web Design): <i>asahu@umich.edu</i></li>
-              <li>Terry Barrette (System Administration): <i>trbarret@med.umich.edu</i></li>
+              <li>Anirban Sahu (Web Design)</li>
+              <li>Terry Barrette (System Administration)</li>
             </ul></p>
             <p><h6>
             MiTranscriptome was developed by members of <a target = "_blank" href="http://mctp.med.umich.edu">Michigan Center for 
@@ -105,6 +103,29 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+    <div class="modal fade" id="modal-help" tabindex="-1" role="dialog" aria-labelledby="modal-label-help" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id=""modal-label-help"">Help</h4>
+          </div>
+          <div class="modal-body">
+            <p><h4>MiTranscriptome is undergoing active development. Please report issues and recommend 
+            features using our
+            <a target = "_blank" href="https://groups.google.com/d/forum/mitranscriptome">User Group</a>.</p></h4>
+            <p><h6>
+            MiTranscriptome was developed by members of <a target = "_blank" href="http://mctp.med.umich.edu">Michigan Center for 
+            Translational Pathology</a> at the <a target = "_blank" href="http://www.umich.edu">University of Michigan</a>.
+            </h6></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->    
+    
     <div class="container-fluid">
       <div id="div-welcome" class="jumbotron">
         <h2>Welcome to the MiTranscriptome lncRNA Portal</h2>
@@ -148,12 +169,12 @@
 		    <th><a href="#" data-toggle="tooltip" data-html="true"
 		         title="<span class='glyphicon glyphicon-arrow-up red'/>Over-expression
 		         <br/><span class='glyphicon glyphicon-arrow-down blue'/>Under-expression">
-		         SSEA Percentile
+		         Percentile
 		         </a>
 		    </th>
-		    <th>FPKM mean</th>
-		    <th>FPKM 95%</th>
-		    <th>FPKM 99%</th>
+		    <th><a href="#" data-toggle="tooltip" data-html="true" title="Fragments per kilobase per million (FPKM)">Expression Mean</a></th>
+		    <th><a href="#" data-toggle="tooltip" data-html="true" title="Fragments per kilobase per million (FPKM)">Expression 95%</a></th>
+		    <th><a href="#" data-toggle="tooltip" data-html="true" title="Fragments per kilobase per million (FPKM)">Expression 99%</a></th>
 				</tr>
 			  </thead>
 			  <tbody>
