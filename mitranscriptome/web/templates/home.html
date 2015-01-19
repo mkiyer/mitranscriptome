@@ -49,9 +49,9 @@
 		          <a class="dropdown-toggle" data-toggle="dropdown">UCSC Browser Links <b class="caret"></b></a>
 		          <ul class="dropdown-menu">
 				        <li><a href="http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=mitranscriptome&hgS_otherUserSessionName=mitranscriptome" 
-			               target = "_blank" >View MiTranscriptome lncRNAs</a></li>
+			               target = "_blank" >Cancer & Lineage specific lncRNAs</a></li>
 			          <li><a href="http://genome.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=mitranscriptome&hgS_otherUserSessionName=mitranscriptome_all" 
-			               target = "_blank" >View Entire Assembly</a></li>
+			               target = "_blank" >Entire MiTranscriptome</a></li>
 			        </ul>
 			      </li>    
 	          <li><a href="#" data-toggle="modal" data-target="#modal-about">About</a></li>
@@ -69,16 +69,16 @@
             <h4 class="modal-title" id="modal-label-about">About</h4>
           </div>
           <div class="modal-body">
+
             <p>MiTranscriptome is a large-scale <i>ab initio</i> transcriptome 
             meta-assembly from 6,503 RNA-Seq libraries. RNA-Seq data were obtained
             from <a target = "_blank" href="http://cancergenome.nih.gov">The Cancer Genome Atlas (TCGA)</a>,
             the <a target = "_blank" href="http://www.genome.gov/encode">ENCODE Project</a>, the 
             <a target = "_blank" href="http://mctp.med.umich.edu">Michigan Center for Translational Pathology</a>,
-            and other published sources. The lncRNAs most differentially expressed in cancers 
-            and tissues are reported in this portal.</p>
-            <p>
+            and other published sources.</p>
+
             <h5>Methods</h5>
-            Large-scale transcriptome meta-assembly was performed using AssemblyLine, which
+            <p>Large-scale transcriptome meta-assembly was performed using AssemblyLine, which
             rigorously filters background noise and artifacts before employing a greedy
             dynamic programming approach to derive a consensus transcriptome from 
             individual samples.</p>
@@ -88,27 +88,30 @@
             patterns. SSEA adapts ideas from 
             <a target = "_blank" href="http://www.broadinstitute.org/gsea/index.jsp">Gene Set Enrichment Analysis</a>.
             </p>
-            <p>
+            
             <h5>Source Code:</h5>
-            <ul>   
+            <p><ul>   
               <li><a href="https://code.google.com/p/ssea" target = "_blank">SSEA Source Code</a></li>
               <li><a href="https://code.google.com/p/assemblyline" target = "_blank">AssemblyLine Source Code</a></li>
-            </ul>
-            </p>
-            <p>
+            </ul></p>
+
             <h5>Contributors</h5>
+            <p>
             <ul>
               <li>Matthew K. Iyer (MD/PhD Student)</li>
               <li>Yashar S. Niknafs (MD/PhD Student)</li>
               <li>Arul M. Chinnaiyan, M.D., Ph.D. (Principal Investigator)</li>
             </ul>
             </p>
-            <p><h5>Acknowledgements</h5>
+
+            <h5>Acknowledgements</h5>
+            <p>
             <ul>
               <li>Anirban Sahu (Web Design)</li>
               <li>Terry Barrette (System Administration)</li>
             </ul>
             </p>
+            
             <p><h6>
             MiTranscriptome is developed by members of <a target = "_blank" href="http://mctp.med.umich.edu">Michigan Center for 
             Translational Pathology</a> at the <a target = "_blank" href="http://www.umich.edu">University of Michigan</a>.
@@ -211,11 +214,11 @@
         <div class="page-header">
           <h3>Transcript Browser</h3>
         </div>
+        
         <div class="alert alert-danger" role="alert">
-          <strong>In this <code>beta</code> version we provide access to a limited set of 
-          transcripts that includes the ~8,000 most highly over-expressed and 
-          under-expressed long noncoding RNAs (lncRNAs) in each cancer type and 
-          tissue type. In a future release we will provide the full set of 
+          <strong>This <code>beta</code> version provides access to ~8,000 of the 
+          most differentially expressed long noncoding RNAs (lncRNAs) within each cancer 
+          type and/or tissue type. A future release will provide the full set of 
           MiTranscriptome transcripts, including protein coding genes.</strong>
         </div>
 
