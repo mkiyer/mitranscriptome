@@ -41,7 +41,7 @@
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container-fluid">
 		    <div class="navbar-header">
-          <a id="btn-home" href="#" class="navbar-brand"><span><img src="{{ url_for('static', filename='images/block_m_white.png') }}" height="20" width="28"></span>&nbsp;MiTranscriptome <i>(beta)</i></a>
+          <a id="btn-home" href="#" class="navbar-brand"><span><img src="{{ url_for('static', filename='images/block_m_white.png') }}" height="20" width="28"></span>&nbsp;MiTranscriptome (<em>beta</em>)</a>
 		    </div>
 				<div class="collapse navbar-collapse">
 				  <ul class="nav navbar-nav navbar-right">
@@ -76,8 +76,9 @@
             <a target = "_blank" href="http://mctp.med.umich.edu">Michigan Center for Translational Pathology</a>,
             and other published sources. The lncRNAs most differentially expressed in cancers 
             and tissues are reported in this portal.</p>
-            <p><h5>Methods</h5>
-            <p>Large-scale transcriptome meta-assembly was performed using AssemblyLine, which
+            <p>
+            <h5>Methods</h5>
+            Large-scale transcriptome meta-assembly was performed using AssemblyLine, which
             rigorously filters background noise and artifacts before employing a greedy
             dynamic programming approach to derive a consensus transcriptome from 
             individual samples.</p>
@@ -85,23 +86,29 @@
             called Sample Set Enrichment Analysis (SSEA), which uses weighted 
             Kolmorgorov-Smirnoff-like tests to detect cancer-specific and lineage-specific
             patterns. SSEA adapts ideas from 
-            <a target = "_blank" href="http://www.broadinstitute.org/gsea/index.jsp">Gene Set Enrichment Analysis</a>.</p>
-            <p><h5>Source Code:</h5>
+            <a target = "_blank" href="http://www.broadinstitute.org/gsea/index.jsp">Gene Set Enrichment Analysis</a>.
+            </p>
+            <p>
+            <h5>Source Code:</h5>
             <ul>   
               <li><a href="https://code.google.com/p/ssea" target = "_blank">SSEA Source Code</a></li>
               <li><a href="https://code.google.com/p/assemblyline" target = "_blank">AssemblyLine Source Code</a></li>
             </ul>
-            <p><h5>Contributors</h5>
+            </p>
+            <p>
+            <h5>Contributors</h5>
             <ul>
               <li>Matthew K. Iyer (MD/PhD Student)</li>
               <li>Yashar S. Niknafs (MD/PhD Student)</li>
               <li>Arul M. Chinnaiyan, M.D., Ph.D. (Principal Investigator)</li>
-            </ul></p>
+            </ul>
+            </p>
             <p><h5>Acknowledgements</h5>
-            <p><ul>
+            <ul>
               <li>Anirban Sahu (Web Design)</li>
               <li>Terry Barrette (System Administration)</li>
-            </ul></p>
+            </ul>
+            </p>
             <p><h6>
             MiTranscriptome was developed by members of <a target = "_blank" href="http://mctp.med.umich.edu">Michigan Center for 
             Translational Pathology</a> at the <a target = "_blank" href="http://www.umich.edu">University of Michigan</a>.
@@ -122,9 +129,9 @@
             <h4 class="modal-title" id=""modal-label-help"">Help</h4>
           </div>
           <div class="modal-body">
-            <p><h4>MiTranscriptome is undergoing active development. Please report issues and recommend 
-            features here:
-            <a target = "_blank" href="https://groups.google.com/d/forum/mitranscriptome">User Group</a>.</p></h4>
+            <p>MiTranscriptome is undergoing active development. 
+            Please report issues and recommend features at our
+            <a target = "_blank" href="https://groups.google.com/d/forum/mitranscriptome">user group</a>.</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -135,28 +142,84 @@
     
     <div class="container-fluid">
       <div id="div-welcome" class="jumbotron">
-        <h2>Welcome to the MiTranscriptome lncRNA Portal</h2>
-        <p><small>MiTranscriptome is <i>ab initio</i> transcriptome 
-        reconstruction from 6,503 RNA-seq libraries spanning diverse 
-        cancer and tissue types. The MiTranscriptome contains >58,000 
-        lncRNAs, the vast majority of which are currently unannotated. 
-        This portal reports the long non-coding RNAs (lncRNAs) that are expressed in a 
-        lineage-specific or cancer-specific manner.</small></p>
-        <br>
-        <p id='wait-msg'>Please wait while the transcript browser loads...</p>
-        <p><a id='btn-get-started' class="toshow btn btn-lg btn-primary" href="#" role="button">Get Started &raquo;</a></p>
-		    <div class="row text-right">
-		  	  <img src="{{ url_for('static', filename='images/chrome.png') }}" height="16" width="16">
-		  		<img src="{{ url_for('static', filename='images/firefox.png') }}" height="16" width="16">
-		  		<img src="{{ url_for('static', filename='images/safari.png') }}" height="16" width="16">
-		  		<img src="{{ url_for('static', filename='images/no-ie.png') }}" height="16" width="16">
-		  	</div>
-      </div><!-- /div-welcome -->
+        <div class="page-header">
+          <h2>MiTranscriptome (<em>beta</em>)<br/><small>A computationally reconstructed landscape of human transcription</small></h2>
+        </div>
+
+        <div id="div-panel-load" class="panel panel-default">
+          <ul class="list-group">
+          <li class="list-group-item">
+            <button id="btn-get-started" type="button" class="btn btn-primary btn-lg btn-block" disabled="disabled">
+            Please wait while the transcript browser loads...
+            </button>
+          </li>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3>Welcome</h3>
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-primary">
+            MiTranscriptome is a catalog of human long 
+            poly-adenylated RNA transcripts derived from computational analysis 
+            of high-throughput RNA sequencing (RNA-Seq) data from over 6,500 samples 
+            spanning diverse cancer and tissue types. The complete catalog contains 
+            over 91,000 genes, the majority of which are previously uncharacterized
+            long RNAs. Gene expression analysis of the transcripts revealed numerous 
+            cancer-specific and lineage-specific RNAs. We aim to enable the scientific
+            community to investigate these intriguing transcripts in further detail.
+            </li>
+            <li class="list-group-item">
+            MiTranscriptome was developed by members of 
+            <a target = "_blank" href="http://mctp.med.umich.edu">Michigan Center for 
+            Translational Pathology</a> at the 
+            <a target = "_blank" href="http://www.med.umich.edu">University of Michigan Health System</a>.
+            Please provide comments and feature requests at our 
+            <a target = "_blank" href="https://groups.google.com/d/forum/mitranscriptome">user forum</a>.
+            </li>
+          </ul>
+        </div><!-- /panel -->
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3>News</h3>
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-danger">
+            <strong>Initial <em>beta</em> release providing access to ~10,000 of the most 
+            differentially expressed lncRNAs in cancers and lineages</strong>
+            <span class="badge">JANUARY 18, 2015</span>
+            </li>
+            <li class="list-group-item">
+            Manuscript in press at Nature Genetics
+            <span class="badge">DECEMBER 18, 2014</span>
+            </li>
+          </ul>
+        </div> <!-- /panel -->
+
+  		  <div class="row text-right">
+	  	    <img src="{{ url_for('static', filename='images/chrome.png') }}" height="16" width="16">
+		      <img src="{{ url_for('static', filename='images/firefox.png') }}" height="16" width="16">
+		      <img src="{{ url_for('static', filename='images/safari.png') }}" height="16" width="16">
+		      <img src="{{ url_for('static', filename='images/no-ie.png') }}" height="16" width="16">
+	  	  </div>
+      </div> <!-- /div-welcome -->
 
 	    <!-- Transcript Table -->
 	    <div id="div-transcript-browser" class="toshow container-fluid">
+        <div class="page-header">
+          <h3>Transcript Browser</h3>
+        </div>
+        <div class="alert alert-danger" role="alert">
+          <strong>In this <em>beta</em> version we provide access to a limited set of 
+          transcripts that includes the ~8,000 most highly over-expressed and 
+          under-expressed long noncoding RNAs (lncRNAs) in each cancer type and 
+          tissue type. In a future release we will provide the full set of 
+          MiTranscriptome transcripts, including protein-coding genes.</strong>
+        </div>
+
 	      <table id="table-transcripts" class="table table-condensed table-striped text-center">
-	      <!-- <caption>Transcript Browser</caption> -->
 			  <thead>
 				<tr>
 				<th></th>
