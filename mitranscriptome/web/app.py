@@ -23,7 +23,7 @@ from dbapi import DBInterfaceFile
 app = Flask(__name__)
 
 # VERSION
-VERSION = 'v'
+VERSION = 'v0.1.0'
 
 # run on server or run local (set only one)
 SERVER = True
