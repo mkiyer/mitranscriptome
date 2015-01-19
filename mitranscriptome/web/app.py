@@ -30,6 +30,9 @@ SERVER = True
 YNIKNAFS = False
 MKIYER = False
 
+# number of processes to use on server
+PROCESSES = 4
+
 # enable/disable debugging
 DEBUG = not SERVER
 
@@ -162,4 +165,4 @@ def home():
 
 
 if __name__ == '__main__':
-    app.run(debug=DEBUG)
+    app.run(processes=PROCESSES, debug=DEBUG)
