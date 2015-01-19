@@ -143,19 +143,13 @@
     <div class="container-fluid">
       <div id="div-welcome" class="jumbotron">
 
-        <div class="page-header">
+        <div id="div-welcome-header" class="page-header">
           <h2>MiTranscriptome (<em>beta</em>)<br/>
           <small>A computationally reconstructed landscape of human transcription</small>
           </h2>
-        </div>
-
-        <div id="div-panel-load" class="panel panel-default text-center">
-          <ul class="list-group">
-          <li class="list-group-item">
-            <button id="btn-get-started" type="button" class="btn btn-warning btn-lg" disabled="disabled">
-            Please wait while the transcript browser loads...
-            </button>
-          </li>
+          <button id="btn-get-started" type="button" class="btn btn-warning" disabled="disabled">
+          Please wait while the transcript browser loads...
+          </button>
         </div>
 
         <div class="panel panel-primary">
@@ -219,7 +213,7 @@
           transcripts that includes the ~8,000 most highly over-expressed and 
           under-expressed long noncoding RNAs (lncRNAs) in each cancer type and 
           tissue type. In a future release we will provide the full set of 
-          MiTranscriptome transcripts, including protein-coding genes.</strong>
+          MiTranscriptome transcripts, including protein coding genes.</strong>
         </div>
 
 	      <table id="table-transcripts" class="table table-condensed table-striped text-center">
