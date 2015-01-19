@@ -75,10 +75,10 @@ define([
   // transcript table (DataTable)
   var table = $('#table-transcripts')
     .on('preXhr.dt', function(e, settings, data) {
-      $('#div-panel-load').spin();
+      $('#div-welcome').spin();
     })
     .on('xhr.dt', function(e, settings, json) {
-      $('#div-panel-load').spin(false);
+      $('#div-welcome').spin(false);
       $('#btn-get-started').text('Click to browse transcripts');
       $('#btn-get-started').prop('disabled', false);
     })
