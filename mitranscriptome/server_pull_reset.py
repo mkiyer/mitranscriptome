@@ -33,15 +33,15 @@ def main():
     
     search = 'YNIKNAFS = True'
     replace = 'YNIKNAFS = False' 
-    tex_edit(search, replace, app_file)
+    text_edit(search, replace, app_file)
     
     search = 'MKIYER = True'
     replace = 'MKIYER = False' 
-    tex_edit(search, replace, app_file)
+    text_edit(search, replace, app_file)
     
     search = 'SERVER = False'
     replace = 'SERVER = True' 
-    tex_edit(search, replace, app_file)
+    text_edit(search, replace, app_file)
     
     
     return 0
