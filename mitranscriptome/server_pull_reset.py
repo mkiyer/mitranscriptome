@@ -21,10 +21,10 @@ def main():
     SERVER_RESET = 'service httpd restart'
     
     logging.debug('Fetching...')
-    subprocess.call(GIT_FETCH, shell=True)
-    subprocess.call(GIT_RESET, shell=True)
+    subprocess.call(GIT_FETCH, shell=True, cwd='/root/mitranscriptome')
+    subprocess.call(GIT_RESET, shell=True, cwd='/root/mitranscriptome')
     logging.debug('Reseting server...')
-    subprocess.call(SERVER_RESET, shell=True)
+    subprocess.call(SERVER_RESET, shell=True, cwd='/root/mitranscriptome')
     
     
     return 0
