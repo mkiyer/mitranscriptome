@@ -8,7 +8,10 @@
 
       <div class="modal-body">      
         <ul>
-          <li>Assembly GTF file: <a href="{{ url_for('static', filename='data/download/assembly.gtf.gz') }}">assembly.gtf.gz</a></li>
+          <li><a href="{{ url_for('static', filename='data/download/assembly.gtf.gz') }}">Assembly GTF File</a></li>
+          <li><a href="{{ url_for('static', filename='data/download/library_info.txt.gz') }}">Library Information</a></li>
+          <li><a href="{{ url_for('static', filename='data/download/mitranscriptome.expr.fpkm.tsv.gz') }}">LncRNA Expression (FPKM)</a></li>
+          <li><a href="{{ url_for('static', filename='data/download/mitranscriptome.expr.counts.tsv.gz') }}">LncRNA Expression (Normalized Counts)</a></li>		  
         </ul>
       </div>
       

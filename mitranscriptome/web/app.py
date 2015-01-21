@@ -26,8 +26,8 @@ app = Flask(__name__)
 VERSION = 'v0.1.0'
 
 # run on server or run local (set only one)
-SERVER = True
-YNIKNAFS = False
+SERVER = False
+YNIKNAFS = True
 MKIYER = False
 
 # number of processes to use on server
@@ -45,7 +45,7 @@ if SERVER:
     MAIN_DIR = '/var/www/html/mitranscriptome/mitranscriptome/web/static/data'
 elif YNIKNAFS: 
 #     MAIN_DIR = '/Users/yniknafs/git/mitranscriptome/mitranscriptome/web/static/data'
-    MAIN_DIR = '/mctp/users/yniknafs/scripts/workspace_laptop/mitranscriptome/mitranscriptome/web/static/data'
+    MAIN_DIR = '/mctp/users/yniknafs/scripts/git/mitranscriptome/mitranscriptome/web/static/data'
 elif MKIYER: 
     MAIN_DIR = '/Users/mkiyer/git/mitranscriptome/mitranscriptome/web/static/data'
 
