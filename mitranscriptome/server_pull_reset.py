@@ -6,10 +6,12 @@ Created on Dec 22, 2014
 import sys
 import logging
 import subprocess
+import fileinput
 
 
-
-
+def text_edit(search, replace, app_file):    
+    for line in fileinput.input(app_file, inplace=True):
+        print line.replace(search, replace).strip()
 
     
 def main():
@@ -25,6 +27,21 @@ def main():
     subprocess.call(GIT_RESET, shell=True, cwd='/root/mitranscriptome')
     logging.debug('Reseting server...')
     subprocess.call(SERVER_RESET, shell=True, cwd='/root/mitranscriptome')
+    
+      
+    app_file = '/root/mitranscriptome/web/app.py'
+    
+    search = 'YNIKNAFS = True'
+    replace = 'YNIKNAFS = False' 
+    tex_edit(search, replace, app_file)
+    
+    search = 'MKIYER = True'
+    replace = 'MKIYER = False' 
+    tex_edit(search, replace, app_file)
+    
+    search = 'SERVER = False'
+    replace = 'SERVER = True' 
+    tex_edit(search, replace, app_file)
     
     
     return 0
