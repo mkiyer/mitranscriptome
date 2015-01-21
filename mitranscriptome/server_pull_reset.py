@@ -27,17 +27,8 @@ def main():
     subprocess.call(SERVER_RESET, shell=True, cwd='/root/mitranscriptome')
     
       
-    APP_FILE = '/root/mitranscriptome/web/app.py'
-    
-
-
-    
-def main():
-    logging.basicConfig(level=logging.DEBUG,
-                      format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-    
       
-    APP_FILE = '/root/mitranscriptome/web'
+    APP_FILE = '/root/mitranscriptome/web/app.py'
     TMP_FILE = 'server_bool_reset.tmp'    
 
     with open(TMP_FILE, 'w') as f:
