@@ -26,9 +26,9 @@ app = Flask(__name__)
 VERSION = 'v0.1.0'
 
 # run on server or run local (set only one)
-SERVER = True
+SERVER = False
 YNIKNAFS = False
-MKIYER = False
+MKIYER = True
 
 # number of processes to use on server
 PROCESSES = 4
@@ -154,7 +154,6 @@ def request_sequence():
 @app.route('/transcript_metadata', methods=['GET'])
 #@requires_auth
 def request_metadata():
-    app.logger.debug('Metadata requested')
     m = get_transcript_metadata()
     return jsonify(data=m)
 

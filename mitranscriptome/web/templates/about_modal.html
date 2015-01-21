@@ -1,0 +1,62 @@
+<div class="modal fade" id="modal-about" tabindex="-1" role="dialog" aria-labelledby="modal-label-about" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="modal-label-about">About</h4>
+      </div>
+      <div class="modal-body">
+
+        <p>MiTranscriptome is a large-scale <i>ab initio</i> transcriptome 
+        meta-assembly from 6,503 RNA-Seq libraries. RNA-Seq data were obtained
+        from <a target = "_blank" href="http://cancergenome.nih.gov">The Cancer Genome Atlas (TCGA)</a>,
+        the <a target = "_blank" href="http://www.genome.gov/encode">ENCODE Project</a>, the 
+        <a target = "_blank" href="http://mctp.med.umich.edu">Michigan Center for Translational Pathology</a>,
+        and other published sources.</p>
+
+        <h5>Methods</h5>
+        <p>Large-scale transcriptome meta-assembly was performed using AssemblyLine, which
+        rigorously filters background noise and artifacts before employing a greedy
+        dynamic programming approach to derive a consensus transcriptome from 
+        individual samples.</p>
+        <p>Expression analysis was performed using a novel non-parametric tool 
+        called Sample Set Enrichment Analysis (SSEA), which uses weighted 
+        Kolmorgorov-Smirnoff-like tests to detect cancer-specific and lineage-specific
+        patterns. SSEA adapts ideas from 
+        <a target = "_blank" href="http://www.broadinstitute.org/gsea/index.jsp">Gene Set Enrichment Analysis</a>.
+        </p>
+        
+        <h5>Source Code:</h5>
+        <p><ul>   
+          <li><a href="https://code.google.com/p/ssea" target = "_blank">SSEA Source Code</a></li>
+          <li><a href="https://code.google.com/p/assemblyline" target = "_blank">AssemblyLine Source Code</a></li>
+        </ul></p>
+
+        <h5>Contributors</h5>
+        <p>
+        <ul>
+          <li>Matthew K. Iyer (MD/PhD Student)</li>
+          <li>Yashar S. Niknafs (MD/PhD Student)</li>
+          <li>Arul M. Chinnaiyan, M.D., Ph.D. (Principal Investigator)</li>
+        </ul>
+        </p>
+
+        <h5>Acknowledgements</h5>
+        <p>
+        <ul>
+          <li>Anirban Sahu (Web Design)</li>
+          <li>Terry Barrette (System Administration)</li>
+        </ul>
+        </p>
+        
+        <p><h6>
+        MiTranscriptome is developed by members of <a target = "_blank" href="http://mctp.med.umich.edu">Michigan Center for 
+        Translational Pathology</a> at the <a target = "_blank" href="http://www.umich.edu">University of Michigan</a>.
+        </h6></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+ </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

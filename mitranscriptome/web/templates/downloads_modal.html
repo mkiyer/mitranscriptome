@@ -1,0 +1,20 @@
+<div class="modal fade" id="modal-downloads" tabindex="-1" role="dialog" aria-labelledby="modal-label-downloads" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="modal-label-downloads">Downloads</h4>
+      </div>
+
+      <div class="modal-body">      
+        <ul>
+          <li>Assembly GTF file: <a href="{{ url_for('static', filename='data/download/assembly.gtf.gz') }}">assembly.gtf.gz</a></li>
+        </ul>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
