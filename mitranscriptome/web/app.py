@@ -26,8 +26,8 @@ app = Flask(__name__)
 VERSION = 'v0.1.0'
 
 # run on server or run local (set only one)
-SERVER = False
-YNIKNAFS = True
+SERVER = True
+YNIKNAFS = False
 MKIYER = False
 
 # number of processes to use on server
