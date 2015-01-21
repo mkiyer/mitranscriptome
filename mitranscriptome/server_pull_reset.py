@@ -11,7 +11,7 @@ import fileinput
 
 def text_edit(search, replace, app_file):    
     for line in fileinput.input(app_file, inplace=True):
-        print line.replace(search, replace).strip()
+        print line.replace(search, replace).replace('\n', '')
 
     
 def main():
