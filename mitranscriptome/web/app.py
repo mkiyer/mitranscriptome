@@ -9,12 +9,10 @@ MiTranscriptome web server
 # global imports
 import collections
 import os
-import hashlib
-from operator import itemgetter
+import cStringIO
 
 # flask imports
-from flask import Flask, render_template, request, g, jsonify, send_file, make_response, Response
-from functools import wraps
+from flask import Flask, render_template, request, g, jsonify, send_file, make_response
 
 # code version
 VERSION = 'v0.1.0'
@@ -24,6 +22,9 @@ EXPR_PLOT_DIR = os.path.join('plots', 'expr_plots')
 SSEA_PLOT_DIR = os.path.join('plots', 'ssea_plots')
 TRANSCRIPT_SEQUENCE_FILE = 'seqs.txt'
 TRANSCRIPT_METADATA_FILE = 'metadata.manuscript.v4.txt'
+LIBRARY_INFO_FILE = 'library_info.txt'
+EXPR_FPKM_MATRIX_FILE = 'lncrna.expr.fpkm.tsv'
+
 # metadata fields used by online portal
 TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 'end', 'strand', 
                               'tstatus', 'tgenic', 'tcat', 'uce', 
@@ -34,68 +35,62 @@ TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 'end
 
 # default configuration
 class Config(object):
-    # logging mode
-    DEBUG = False
     # number of processes to use
     processes = 4
-    # location of server data
-    DATA_DIR = '/var/www/html/documents'
-
-class DevelopmentConfig(Config):
+    # logging mode
+    #DEBUG = False
     DEBUG = True
-
-class MatthewConfig(Config):
-    DEBUG = False
-    processes = 1
+    # location of server data
+    #DATA_DIR = '/var/www/html/documents'
     DATA_DIR = '/Users/mkiyer/Documents/mitranscriptome/web_data'
 
 # create flask application
 app = Flask(__name__)
 app.config.from_object(Config)
 
+def init_transcript_metadata():
+    # function to load sequences
+    path = os.path.join(app.config['DATA_DIR'], TRANSCRIPT_METADATA_FILE)
+    app.logger.debug(path)
+    # read transcript metadata
+    rows = []
+    with open(path) as f:
+        header_fields = f.next().strip().split('\t')
+        header_indexes = [header_fields.index(x) for x in TRANSCRIPT_METADATA_FIELDS]
+        for line in f:
+            fields = line.strip().split('\t')
+            d = dict((header_fields[x], fields[x]) for x in header_indexes)
+            rows.append(d)
+    return rows
 
-def get_transcript_metadata():
+def init_transcript_sequences():
     # function to load the sequences
-    def init_transcript_metadata():
-        path = os.path.join(app.config['DATA_DIR'], TRANSCRIPT_METADATA_FILE)
-        app.logger.debug(path)
-        # read transcript metadata
-        rows = []
-        with open(path) as f:
-            header_fields = f.next().strip().split('\t')
-            header_indexes = [header_fields.index(x) for x in TRANSCRIPT_METADATA_FIELDS]
-            for line in f:
-                fields = line.strip().split('\t')
-                d = dict((header_fields[x], fields[x]) for x in header_indexes)
-                rows.append(d)
-        return rows
+    path = os.path.join(app.config['DATA_DIR'], TRANSCRIPT_SEQUENCE_FILE)
+    # read transcript sequences
+    d = {}
+    with open(path) as f:
+        header_fields = f.next().strip().split('\t')
+        for line in f:
+            fields = line.strip().split('\t')
+            d[fields[0]] = fields[1:]
+    app.logger.debug('Loaded transcript sequences')
+    return d
 
-    if not hasattr(g, 'transcript_metadata'):
-        g.transcript_metadata = init_transcript_metadata()
-    return g.transcript_metadata
+def init_expr_fpkm():
+    # function to load expression data
+    path = os.path.join(app.config['DATA_DIR'], EXPR_FPKM_MATRIX_FILE)
+    # read matrix data
+    d = {}
+    with open(path) as f:
+        header_fields = f.next().strip().split('\t')
+        for line in f:
+            fields = line.strip().split('\t')
+            d[fields[0]] = map(float, fields[1:])
+    app.logger.debug('Loaded FPKM matrix')
+    return header_fields[1:], d
 
-def get_sequence_dict():    
-    # function to load the sequences
-    def init_transcript_sequences():
-        path = os.path.join(app.config['DATA_DIR'], TRANSCRIPT_SEQUENCE_FILE)
-        # read transcript sequences
-        d = {}
-        with open(path) as f:
-            header_fields = f.next().strip().split('\t')
-            for line in f:
-                fields = line.strip().split('\t')
-                d[fields[0]] = fields[1:]
-            app.logger.debug('Loaded transcript sequences')
-        return d
-
-    if not (hasattr(g, 'transcript_sequence_dict')):
-        g.transcript_sequence_dict = init_transcript_sequences()
-        app.logger.debug('Loaded transcript sequences')
-    return g.transcript_sequence_dict
-
-@app.route('/get_ssea')
-def get_ssea():
-    app.logger.debug('get ssea')
+@app.route('/get_ssea_plot')
+def get_ssea_plot():
     transcript_id = request.args.get('t_id')
     tissue = request.args.get('tissue')
     association_type = request.args.get('association_type')
@@ -115,26 +110,44 @@ def get_expression_boxplot():
 def request_sequence():
     # fetch sequence from metadata
     t_id = request.args.get('t_id')
-    func_name, seq = get_sequence_dict()[t_id]
+    func_name, seq = app.config['sequence_dict'][t_id]
     # construct response
     response = make_response(seq)
     # set response header to trigger file download
     response.headers["Content-Disposition"] = "attachment; filename=%s.sequence.txt" % func_name
     return response
 
+@app.route('/get_expr_fpkm')
+def get_expr_fpkm():
+    app.logger.debug('get_expr_fpkm')
+    transcript_id = request.args.get('t_id')
+    colnames = app.config['expr_fpkm_libs']
+    rowvals = app.config['expr_fpkm_dict'][transcript_id]
+    # output as string
+    output = cStringIO.StringIO()
+    print >>output, '\t'.join(['transcript_id', 'FPKM'])
+    for i in xrange(len(colnames)):
+        print >>output, '%s\t%f' % (colnames[i], rowvals[i])
+    output.seek(0)
+    return send_file(output,
+                     attachment_filename='expr_fpkm_%s.tsv' % (transcript_id),
+                     as_attachment=True)
+
 @app.route('/transcript_metadata', methods=['GET'])
 def request_metadata():
-    m = get_transcript_metadata()
-    return jsonify(data=m)
+    return jsonify(data=app.config['transcript_metadata'])
 
 @app.route('/')
 def home():
     return render_template('home.html')
 
+# initialize application
+app.logger.debug('Loading metadata')
+app.config['transcript_metadata'] = init_transcript_metadata()
+app.logger.debug('Loading sequences')
+app.config['sequence_dict'] = init_transcript_sequences()
+app.logger.debug('Loading expression data')
+app.config['expr_fpkm_libs'], app.config['expr_fpkm_dict'] = init_expr_fpkm()
+
 if __name__ == '__main__':
-    # load config
-    import sys
-    config = 'app.' + sys.argv[1]
-    app.config.from_object(config)
-    # run
     app.run()
