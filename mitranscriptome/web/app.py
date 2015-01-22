@@ -23,7 +23,7 @@ SSEA_PLOT_DIR = os.path.join('plots', 'ssea_plots')
 TRANSCRIPT_SEQUENCE_FILE = 'seqs.txt'
 TRANSCRIPT_METADATA_FILE = 'metadata.manuscript.v4.txt'
 LIBRARY_INFO_FILE = 'library_info.txt'
-EXPR_FPKM_MATRIX_FILE = 'lncrna.expr.fpkm.tsv'
+EXPR_FPKM_MATRIX_FILE = 'mitranscriptome.expr.fpkm.tsv'
 
 # metadata fields used by online portal
 TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 'end', 'strand', 
