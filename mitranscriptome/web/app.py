@@ -76,6 +76,19 @@ def init_transcript_sequences():
     app.logger.debug('Loaded transcript sequences')
     return d
 
+def init_library_info():
+    # function to load expression data
+    path = os.path.join(app.config['DATA_DIR'], LIBRARY_INFO_FILE)
+    # read file
+    rows = []
+    with open(path) as f:
+        header_fields = f.next().strip().split('\t')
+        for line in f:
+            fields = line.strip().split('\t')
+            rows.append(fields)
+    app.logger.debug('Loaded library info')
+    return header_fields, rows    
+
 def init_expr_fpkm():
     # function to load expression data
     path = os.path.join(app.config['DATA_DIR'], EXPR_FPKM_MATRIX_FILE)
@@ -120,14 +133,27 @@ def request_sequence():
 @app.route('/get_expr_fpkm')
 def get_expr_fpkm():
     app.logger.debug('get_expr_fpkm')
+    # get expression data from matrix
     transcript_id = request.args.get('t_id')
     colnames = app.config['expr_fpkm_libs']
     rowvals = app.config['expr_fpkm_dict'][transcript_id]
+    expr_dict = dict(zip(colnames, rowvals))
     # output as string
     output = cStringIO.StringIO()
-    print >>output, '\t'.join(['transcript_id', 'FPKM'])
-    for i in xrange(len(colnames)):
-        print >>output, '%s\t%f' % (colnames[i], rowvals[i])
+    # header
+    header_fields = list(app.config['library_info_header'])
+    header_fields.append('FPKM')
+    print >>output, '\t'.join(header_fields)
+    # rows
+    for lib_info_row in app.config['library_info_rows']:
+        lib_id = lib_info_row[0]
+        if lib_id not in expr_dict:
+            app.logger.debug(lib_id)
+            continue
+        fields = []
+        fields.extend(lib_info_row)
+        fields.append(str(expr_dict[lib_info_row[0]]))        
+        print >>output, '\t'.join(fields)
     output.seek(0)
     return send_file(output,
                      attachment_filename='expr_fpkm_%s.tsv' % (transcript_id),
@@ -148,6 +174,8 @@ app.logger.debug('Loading sequences')
 app.config['sequence_dict'] = init_transcript_sequences()
 app.logger.debug('Loading expression data')
 app.config['expr_fpkm_libs'], app.config['expr_fpkm_dict'] = init_expr_fpkm()
+app.config['library_info_header'], app.config['library_info_rows'] = init_library_info()
+app.logger.debug('Initialization complete')
 
 if __name__ == '__main__':
     app.run()
