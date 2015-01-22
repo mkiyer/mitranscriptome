@@ -32,9 +32,6 @@ TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 'end
                               'coding_potential', 'pfam', 'orf_size',
                               'tissue_expr_mean', 'tissue_expr_95', 'tissue_expr_99']
 
-# create flask application
-app = Flask(__name__)
-
 # default configuration
 class Config(object):
     # logging mode
@@ -51,6 +48,11 @@ class MatthewConfig(Config):
     DEBUG = False
     processes = 1
     DATA_DIR = '/Users/mkiyer/Documents/mitranscriptome/web_data'
+
+# create flask application
+app = Flask(__name__)
+app.config.from_object(Config)
+
 
 def get_transcript_metadata():
     # function to load the sequences
@@ -134,6 +136,5 @@ if __name__ == '__main__':
     import sys
     config = 'app.' + sys.argv[1]
     app.config.from_object(config)
-    app.config.fr
     # run
     app.run()
