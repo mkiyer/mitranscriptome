@@ -38,11 +38,11 @@ class Config(object):
     # number of processes to use
     processes = 4
     # logging mode
-    DEBUG = False
-    #DEBUG = True
+    #DEBUG = False
+    DEBUG = True
     # location of server data
-    DATA_DIR = '/var/www/html/documents'
-    #DATA_DIR = '/Users/mkiyer/Documents/mitranscriptome/web_data'
+    #DATA_DIR = '/var/www/html/documents'
+    DATA_DIR = '/Users/mkiyer/Documents/mitranscriptome/web_data'
 
 # create flask application
 app = Flask(__name__)
