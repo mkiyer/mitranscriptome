@@ -9,7 +9,7 @@ def application(environ, start_response):
     # pass WSGI environment variables to os.environ
     vars = ['MITRANSCRIPTOME_CONFIG']
     for var in vars:
-        os.environ[var] = environ.get(var, 'config.Config')
+        os.environ[var] = environ.get(var, 'web.config.Config')
 
     # load application module
     from web.app import app as _application
