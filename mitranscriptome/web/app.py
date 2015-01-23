@@ -34,21 +34,10 @@ TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 'end
                               'coding_potential', 'pfam', 'orf_size',
                               'tissue_expr_mean', 'tissue_expr_95', 'tissue_expr_99']
 
-# default configuration
-class Config(object):
-    # number of processes to use
-    processes = 4
-    # logging mode
-    DEBUG = False
-    #DEBUG = True
-    # location of server data
-    DATA_DIR = '/var/www/html/documents'
-    #DATA_DIR = '/mctp/projects/mitranscriptome/web/documents'
-    #DATA_DIR = '/Users/mkiyer/Documents/mitranscriptome/web_data'
-
 # create flask application
 app = Flask(__name__)
-app.config.from_object(Config)
+# load configuration settings from config.py module
+app.config.from_object(os.environ['MITRANSCRIPTOME_CONFIG'])
 
 def init_transcript_metadata():
     # function to load sequences
