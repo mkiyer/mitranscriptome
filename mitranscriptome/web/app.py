@@ -14,6 +14,9 @@ import cStringIO
 # flask imports
 from flask import Flask, render_template, request, g, jsonify, send_file, make_response
 
+# local imports
+import config
+
 # code version
 VERSION = 'v0.1.0'
 
