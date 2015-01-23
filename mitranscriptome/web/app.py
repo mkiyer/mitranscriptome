@@ -42,8 +42,8 @@ class Config(object):
     DEBUG = False
     #DEBUG = True
     # location of server data
-    DATA_DIR = '/var/www/html/documents'
-    #DATA_DIR = '/mctp/projects/mitranscriptome/web/documents'
+    #DATA_DIR = '/var/www/html/documents'
+    DATA_DIR = '/mctp/projects/mitranscriptome/web/documents'
     #DATA_DIR = '/Users/mkiyer/Documents/mitranscriptome/web_data'
 
 # create flask application
@@ -150,7 +150,7 @@ def get_expr_fpkm():
     output = cStringIO.StringIO()
     # header
     header_fields = list(app.config['library_info_header'])
-    header_fields.append('FPKM')
+    header_fields = ['%s_FPKM' % transcript_id] + header_fields
     print >>output, '\t'.join(header_fields)
     # rows
     for lib_info_row in app.config['library_info_rows']:
@@ -159,8 +159,8 @@ def get_expr_fpkm():
             app.logger.debug(lib_id)
             continue
         fields = []
-        fields.extend(lib_info_row)
         fields.append(str(expr_dict[lib_info_row[0]]))        
+        fields.extend(lib_info_row)
         print >>output, '\t'.join(fields)
     output.seek(0)
     return send_file(output,
