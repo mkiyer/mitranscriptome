@@ -19,6 +19,7 @@ VERSION = 'v0.1.0'
 
 # paths to data
 EXPR_PLOT_DIR = os.path.join('plots', 'expr_plots')
+EXPR_PLOT_PDF_DIR = os.path.join('plots', 'expr_plots_pdf')
 SSEA_PLOT_DIR = os.path.join('plots', 'ssea_plots')
 TRANSCRIPT_SEQUENCE_FILE = 'seqs.txt'
 TRANSCRIPT_METADATA_FILE = 'metadata.manuscript.v4.txt'
@@ -41,8 +42,9 @@ class Config(object):
     #DEBUG = False
     DEBUG = True
     # location of server data
-    #DATA_DIR = '/var/www/html/documents'
-    DATA_DIR = '/Users/mkiyer/Documents/mitranscriptome/web_data'
+    DATA_DIR = '/var/www/html/documents'
+    #DATA_DIR = '/mctp/projects/mitranscriptome/web/documents'
+    #DATA_DIR = '/Users/mkiyer/Documents/mitranscriptome/web_data'
 
 # create flask application
 app = Flask(__name__)
@@ -105,6 +107,12 @@ def get_expression_boxplot():
     transcript_id = request.args.get('t_id')
     filename = os.path.join(app.config['DATA_DIR'], EXPR_PLOT_DIR, '%s_expr.jpeg' % (transcript_id))
     return send_file(filename, mimetype='image/jpeg')
+
+@app.route('/get_expression_boxplot_pdf')
+def get_expression_boxplot_pdf():
+    transcript_id = request.args.get('t_id')
+    filename = os.path.join(app.config['DATA_DIR'], EXPR_PLOT_PDF_DIR, '%s_expr.pdf' % (transcript_id))
+    return send_file(filename, as_attachment=True)
 
 @app.route('/download_seq')
 def request_sequence():
