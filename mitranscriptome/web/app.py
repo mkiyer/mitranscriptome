@@ -42,8 +42,8 @@ class Config(object):
     DEBUG = False
     #DEBUG = True
     # location of server data
-    #DATA_DIR = '/var/www/html/documents'
-    DATA_DIR = '/mctp/projects/mitranscriptome/web/documents'
+    DATA_DIR = '/var/www/html/documents'
+    #DATA_DIR = '/mctp/projects/mitranscriptome/web/documents'
     #DATA_DIR = '/Users/mkiyer/Documents/mitranscriptome/web_data'
 
 # create flask application
