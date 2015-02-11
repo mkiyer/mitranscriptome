@@ -12,6 +12,6 @@ def application(environ, start_response):
         os.environ[var] = environ.get(var, 'web.config.Config')
 
     # load application module
-    from web import app as _application
+    from web.app import app as _application
 
     return _application(environ, start_response)
