@@ -14,15 +14,11 @@ import cStringIO
 # flask imports
 from flask import Flask, render_template, request, g, jsonify, send_file, make_response
 
-# local imports
-import config
-
 # code version
 VERSION = 'v0.1.0'
 
 # paths to data
 EXPR_PLOT_DIR = os.path.join('plots', 'expr_plots')
-EXPR_PLOT_PDF_DIR = os.path.join('plots', 'expr_plots_pdf')
 SSEA_PLOT_DIR = os.path.join('plots', 'ssea_plots')
 TRANSCRIPT_SEQUENCE_FILE = 'seqs.txt'
 TRANSCRIPT_METADATA_FILE = 'metadata.manuscript.v4.txt'
@@ -37,10 +33,20 @@ TRANSCRIPT_METADATA_FIELDS = ['transcript_id', 'gene_id', 'chrom', 'start', 'end
                               'coding_potential', 'pfam', 'orf_size',
                               'tissue_expr_mean', 'tissue_expr_95', 'tissue_expr_99']
 
+# default configuration
+class Config(object):
+    # number of processes to use
+    processes = 4
+    # logging mode
+    DEBUG = False
+    #DEBUG = True
+    # location of server data
+    DATA_DIR = '/var/www/html/documents'
+    #DATA_DIR = '/Users/mkiyer/Documents/mitranscriptome/web_data'
+
 # create flask application
 app = Flask(__name__)
-# load configuration settings from config.py module
-app.config.from_object(os.environ['MITRANSCRIPTOME_CONFIG'])
+app.config.from_object(Config)
 
 def init_transcript_metadata():
     # function to load sequences
@@ -113,12 +119,6 @@ def get_expression_boxplot():
     filename = os.path.join(app.config['DATA_DIR'], EXPR_PLOT_DIR, '%s_expr.jpeg' % (transcript_id))
     return send_file(filename, mimetype='image/jpeg')
 
-@app.route('/get_expression_boxplot_pdf')
-def get_expression_boxplot_pdf():
-    transcript_id = request.args.get('t_id')
-    filename = os.path.join(app.config['DATA_DIR'], EXPR_PLOT_PDF_DIR, '%s_expr.pdf' % (transcript_id))
-    return send_file(filename, as_attachment=True)
-
 @app.route('/download_seq')
 def request_sequence():
     # fetch sequence from metadata
@@ -142,7 +142,7 @@ def get_expr_fpkm():
     output = cStringIO.StringIO()
     # header
     header_fields = list(app.config['library_info_header'])
-    header_fields = ['%s_FPKM' % transcript_id] + header_fields
+    header_fields.append('FPKM')
     print >>output, '\t'.join(header_fields)
     # rows
     for lib_info_row in app.config['library_info_rows']:
@@ -151,8 +151,8 @@ def get_expr_fpkm():
             app.logger.debug(lib_id)
             continue
         fields = []
-        fields.append(str(expr_dict[lib_info_row[0]]))        
         fields.extend(lib_info_row)
+        fields.append(str(expr_dict[lib_info_row[0]]))        
         print >>output, '\t'.join(fields)
     output.seek(0)
     return send_file(output,
